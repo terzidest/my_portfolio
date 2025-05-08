@@ -7,13 +7,13 @@ const Home = () => {
     {
       title: "Cross-Platform mobile Development with React Native",
       description:
-        "Create seamless mobile experiences using Expo for both iOS and Android platforms with a single codebase, leveraging powerful native components and simplified deployment.",
+        "Build sleek, native-feeling mobile apps for iOS and Android from a single codebase. Leverage React Native's performance benefits while maintaining rapid development cycles and code reusability across platforms.",
       icon: "mobile",
     },
     {
       title: "Web Development with React",
       description:
-        "Build lightning-fast web applications with Vite, creating dynamic, responsive user interfaces that efficiently update when your data changes while enjoying an optimized development experience.",
+        "Create dynamic, responsive web applications with the leading web library, utilizing component based architecture to build interactive UIs that are both maintainable and optimized for performance.",
       icon: "web",
     },
     {
