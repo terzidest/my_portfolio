@@ -1,6 +1,7 @@
 import Hero from "../components/home/Hero";
 import FeatureCard from "../components/home/FeatureCard";
 import SkillsSection from "../components/skills/SkillsSection";
+import Button from "../components/common/Button";
 
 const Home = () => {
   const features = [
@@ -51,10 +52,16 @@ const Home = () => {
               />
             ))}
           </div>
+          <div className="text-center mt-16">
+          <Button to="/about" variant="primary" size="md">
+            Learn More About Me →
+          </Button>
+          </div>
+
         </div>
       </section>
 
-      <SkillsSection />
+      {/*<SkillsSection />*/}
     </div>
   );
 };
