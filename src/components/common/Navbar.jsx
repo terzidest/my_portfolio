@@ -29,13 +29,17 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className={`fixed w-full z-10 transition-all duration-300 ${
-      isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${
+      location.pathname === '/' 
+        ? (isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4')
+        : (isScrolled ? 'bg-blue-600 py-2' : 'bg-white shadow-md py-2')
     }`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
         <Link to="/" className="flex items-center">
           <span className={`text-xl font-bold transition-colors duration-300 ${
-            isScrolled || location.pathname !== '/' ? 'text-primary' : 'text-white'
+            location.pathname === '/' 
+              ? (isScrolled ? 'text-primary' : 'text-white')
+              : (isScrolled ? 'text-white' : 'text-primary')
           }`}>
             Triantaphilos Terzides
           </span>
@@ -48,11 +52,21 @@ const Navbar = () => {
               key={link.path} 
               to={link.path}
               className={`transition-colors duration-300 ${
-                isActive(link.path) 
-                  ? 'text-primary font-medium' 
-                  : isScrolled || location.pathname !== '/'
-                    ? 'text-gray-600 hover:text-primary'
-                    : 'text-white hover:text-gray-200'
+                location.pathname === '/' 
+                  ? (
+                      isActive(link.path) 
+                        ? 'text-primary font-medium' 
+                        : isScrolled
+                          ? 'text-gray-600 hover:text-primary'
+                          : 'text-white hover:text-gray-200'
+                    )
+                  : (
+                      isActive(link.path) 
+                        ? (isScrolled ? 'text-blue-200 font-medium' : 'text-primary font-medium')
+                        : isScrolled
+                          ? 'text-white hover:text-blue-200'
+                          : 'text-gray-600 hover:text-primary'
+                    )
               }`}
             >
               {link.label}
@@ -65,7 +79,9 @@ const Navbar = () => {
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className={`focus:outline-none transition-colors duration-300 ${
-              isScrolled || location.pathname !== '/' ? 'text-gray-500 hover:text-primary' : 'text-white hover:text-gray-200'
+              location.pathname === '/' 
+                ? (isScrolled ? 'text-gray-500 hover:text-primary' : 'text-white hover:text-gray-200')
+                : (isScrolled ? 'text-white hover:text-blue-200' : 'text-gray-500 hover:text-primary')
             }`}
             aria-label="Toggle menu"
           >
@@ -89,8 +105,12 @@ const Navbar = () => {
       
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-blue-600 border-t border-blue-700 py-2 shadow-md">
-          <div className="container mx-auto px-6 flex flex-col space-y-3">
+        <div className={`md:hidden border-t border-blue-700 py-2 shadow-md fixed top-[60px] inset-x-0 z-50 ${
+          location.pathname === '/' 
+            ? 'bg-gradient-to-r from-blue-600 to-indigo-800' 
+            : 'bg-blue-600'
+        }`}>
+          <div className="container mx-auto px-6 flex flex-col space-y-3 pt-1">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
@@ -100,7 +120,7 @@ const Navbar = () => {
                   isActive(link.path) 
                     ? 'text-blue-200 font-medium' 
                     : 'text-white hover:text-blue-200'
-                } py-2`}
+                } py-3 block w-full text-base`}
               >
                 {link.label}
               </Link>
