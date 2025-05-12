@@ -89,7 +89,7 @@ const Navbar = () => {
       
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white border-t py-2 shadow-md">
+        <div className="md:hidden bg-blue-600 border-t border-blue-700 py-2 shadow-md">
           <div className="container mx-auto px-6 flex flex-col space-y-3">
             {navLinks.map((link) => (
               <Link
@@ -98,8 +98,8 @@ const Navbar = () => {
                 onClick={() => setIsMenuOpen(false)}
                 className={`${
                   isActive(link.path) 
-                    ? 'text-primary font-medium' 
-                    : 'text-gray-600'
+                    ? 'text-blue-200 font-medium' 
+                    : 'text-white hover:text-blue-200'
                 } py-2`}
               >
                 {link.label}

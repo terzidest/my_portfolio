@@ -53,11 +53,10 @@ const Home = () => {
             ))}
           </div>
           <div className="text-center mt-16">
-          <Button to="/about" variant="primary" size="md">
-            Learn More About Me →
-          </Button>
+            <Button to="/about" variant="primary" size="md">
+              Learn More About Me →
+            </Button>
           </div>
-
         </div>
       </section>
 

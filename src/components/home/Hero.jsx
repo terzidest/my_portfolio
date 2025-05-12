@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
+import Button from '../common/Button';
 
 const Hero = () => {
   return (
     <section className="relative bg-gradient-to-r from-blue-600 to-indigo-800 text-white pt-32 pb-20 overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col md:flex-row items-center">
-          <div className="md:w-1/2 flex flex-col mb-16 md:mb-0 md:items-start md:text-left">
+          <div className="md:w-1/2 flex flex-col mb-16 md:mb-0 md:items-start items-center text-center md:text-left">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-fade-in-up">
               React &
               <br />
@@ -18,18 +19,22 @@ const Hero = () => {
             backed by Firebase for real-time data and secure authentication.
             </p>
             <div className="flex flex-col sm:flex-row animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-              <Link 
+              <Button 
                 to="/projects" 
-                className="inline-flex text-blue-800 bg-white border-0 py-3 px-8 focus:outline-none hover:bg-gray-100 rounded-lg text-lg font-medium transition-colors duration-300 mb-4 sm:mb-0 sm:mr-4"
+                variant="secondary"
+                size="lg"
+                className="text-blue-800 bg-white hover:bg-gray-100 mb-4 sm:mb-0 sm:mr-4"
               >
                 View Projects
-              </Link>
-              <Link 
+              </Button>
+              <Button 
                 to="/contact" 
-                className="inline-flex text-white bg-transparent border-2 border-white py-3 px-8 focus:outline-none hover:bg-blue-700 rounded-lg text-lg transition-colors duration-300"
+                variant="outline"
+                size="lg"
+                className="text-white border-2 border-white hover:bg-blue-700"
               >
                 Contact Me
-              </Link>
+              </Button>
             </div>
           </div>
           <div className="md:w-1/2 relative animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
