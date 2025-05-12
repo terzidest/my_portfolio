@@ -13,7 +13,7 @@ const Footer = () => {
               Triantaphilos Terzides
             </Link>
             <p className="text-gray-400 mb-6 mx-auto md:mx-0 text-center md:text-left max-w-xs">
-              React Native Developer specializing in building high-quality mobile applications for iOS and Android.
+              React/React Native Developer specializing in building high-quality mobile and web applications.
             </p>
             <div className="flex space-x-4 justify-center md:justify-start">
               <a 
@@ -70,14 +70,6 @@ const Footer = () => {
                 </svg>
                 <a href="mailto:terzidest@gmail.com" className="text-gray-400 hover:text-white transition-colors duration-300">
                   terzidest@gmail.com
-                </a>
-              </li>
-              <li className="flex items-start justify-center md:justify-start">
-                <svg className="h-6 w-6 text-gray-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                </svg>
-                <a href="tel:+306940970111" className="text-gray-400 hover:text-white transition-colors duration-300">
-                  +30 6940970111
                 </a>
               </li>
               <li className="flex items-start justify-center md:justify-start">
