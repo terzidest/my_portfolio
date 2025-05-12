@@ -115,7 +115,10 @@ const Navbar = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                onClick={() => setIsMenuOpen(false)}
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  window.scrollTo(0, 0);
+                }}
                 className={`${
                   isActive(link.path) 
                     ? 'text-blue-200 font-medium' 
