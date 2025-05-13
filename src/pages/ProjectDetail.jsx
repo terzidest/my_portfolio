@@ -76,34 +76,73 @@ const ProjectDetail = () => {
       },
       'ethereal-nature': {
         title: 'EtherealNature',
-        description: 'An e-commerce app for essential oils with Firebase backend and React Native frontend.',
+        description: 'A cross-platform e-commerce solution with shared Firebase backend for web, mobile and admin panel.',
         longDescription: `
-          EtherealNature is a full-featured e-commerce application specialized for an essential oils business.
+          EtherealNature is a full-featured e-commerce ecosystem specialized for an essential oils business,
+          encompassing web, mobile, and admin interfaces with a shared Firebase backend.
           
-          The app combines a clean, appealing interface with powerful e-commerce functionality, all built with React Native
-          for the frontend and Firebase for backend services.
+          The platform combines clean, appealing interfaces with powerful e-commerce functionality across 
+          all touchpoints. The mobile app is built with React Native, the web interface with React, and 
+          everything is unified through a common Firebase backend with a monorepo workspace structure.
           
-          This project demonstrates my ability to create complete, production-ready mobile applications
-          with complex business logic and integrations.
+          This project demonstrates my ability to architect and build complex, production-ready 
+          cross-platform applications with shared business logic and consistent user experiences.
         `,
         image: '/assets/images/projects/ethereal-nature.jpg',
-        techStack: ['React Native', 'Firebase', 'Firestore', 'Authentication', 'Cloud Functions', 'Payment Processing'],
+        techStack: ['React Native', 'React', 'Firebase', 'Firestore', 'Authentication', 'Cloud Functions', 'Payment Processing', 'Monorepo'],
         features: [
-          'User authentication and profiles',
-          'Product catalog with categories',
-          'Advanced search and filtering',
-          'Shopping cart and checkout process',
-          'Payment integration',
-          'Order tracking',
+          'Unified user authentication across platforms',
+          'Shared product catalog with categories',
+          'Platform-optimized interfaces',
+          'Shopping cart synchronization across devices',
+          'Responsive web design with mobile-first approach',
+          'Admin dashboard for inventory and order management',
+          'Real-time data synchronization',
           'Push notifications'
         ],
         challenges: [
-          'Creating an optimized product browsing experience',
+          'Creating consistent experiences across platforms',
+          'Structuring a maintainable monorepo architecture',
           'Implementing secure payment processing',
-          'Building a reliable cart synchronization system',
-          'Optimizing Firebase usage for cost and performance'
+          'Optimizing shared code while respecting platform differences',
+          'Maintaining type safety across the codebase'
         ],
         github: 'https://github.com/terzidest/etherealNature'
+      },
+      'portfolio': {
+        title: 'Personal Portfolio',
+        description: 'This responsive portfolio website showcasing my projects and skills as a developer.',
+        longDescription: `
+          My personal portfolio website is built using modern web technologies to showcase my projects and skills 
+          as a React and React Native developer. The site itself serves as a demonstration of my web development 
+          capabilities and design sensibilities.
+          
+          Built with React, Vite, and TailwindCSS, the portfolio features a clean, responsive design that works 
+          seamlessly across all devices. The site is structured to provide an optimal user experience, with smooth 
+          navigation and transitions between sections.
+          
+          This project was an opportunity to apply best practices in web development and to create a platform 
+          that effectively communicates my professional identity and technical expertise.
+        `,
+        image: '/assets/images/projects/portfolio.jpg',
+        techStack: ['React', 'Vite', 'TailwindCSS', 'React Router', 'Responsive Design'],
+        features: [
+          'Responsive design for all device sizes',
+          'Modern UI with subtle animations',
+          'Project showcase with detailed case studies',
+          'Skills and expertise highlighting',
+          'Contact form for easy communication',
+          'Optimized performance and accessibility',
+          'Clean, maintainable code structure'
+        ],
+        challenges: [
+          'Creating an elegant, professional design that stands out',
+          'Implementing responsive layouts that work across all devices',
+          'Optimizing image assets for performance',
+          'Balancing visual appeal with fast load times',
+          'Structuring project data for easy maintenance'
+        ],
+        github: 'https://github.com/terzidest/portfolio'
       }
     };
     
