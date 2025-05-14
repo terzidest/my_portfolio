@@ -10,12 +10,17 @@ const Projects = () => {
       title: "Little Lemon",
       description:
         "A mobile app fetching data from APIs, storing locally, and filtering effectively.",
-      image: "/assets/images/projects/little-lemon.jpg",
+      image: "/assets/images/projects/little-lemon.png",
       techStack: [
-        "React Native",
         "JavaScript",
-        "API Integration",
-        "Local Storage",
+        "React Native",
+        "Expo",
+        "React Navigation",
+        "Context API",
+        "Axios",
+        "SQLite",
+        "Expo Image Picker",
+        "Async Storage"
       ],
       categories: ["mobile"],
       github: "https://github.com/terzidest/little-lemon",
@@ -25,8 +30,18 @@ const Projects = () => {
       id: "infovault",
       title: "InfoVault",
       description: "A password manager with secure local authentication.",
-      image: "/assets/images/projects/infovault.jpg",
-      techStack: ["React Native", "Expo", "Secure Store", "Authentication"],
+      image: "/assets/images/projects/info-vault.png",
+      techStack: [
+        "JavaScript",
+        "React Native", 
+        "Expo",
+        "React Navigation",
+        "Zustand",
+        "Nativewind", 
+        "Expo Secure Store", 
+        "Expo Local Authentication",
+        "Lottie"
+        ],
       categories: ["mobile"],
       github: "https://github.com/terzidest/InfoVault",
       featured: true,
@@ -36,8 +51,20 @@ const Projects = () => {
       title: "EtherealNature",
       description:
         "A cross-platform e-commerce solution with shared Firebase backend for web, mobile and admin panel.",
-      image: "/assets/images/projects/ethereal-nature.jpg",
-      techStack: ["React Native", "React", "Firebase", "E-commerce", "State Management"],
+      image: "/assets/images/projects/ethnature.png",
+      techStack: [
+        "JavaScript",
+        "React",
+        "React Native", 
+        "Expo",
+        "Vite",
+        "React Navigation",
+        "React Router",
+        "Zustand",
+        "TailwindCSS",
+        "Nativewind",
+        "Firebase"
+      ],
       categories: ["mobile", "web"],
       github: "https://github.com/terzidest/etherealNature",
       featured: true,
@@ -47,7 +74,13 @@ const Projects = () => {
       title: "Personal Portfolio",
       description: "This responsive portfolio website showcasing my projects and skills as a developer.",
       image: "/assets/images/projects/portfolio.jpg",
-      techStack: ["React", "Vite", "TailwindCSS", "React Router"],
+      techStack: [
+        "JavaScript",
+        "React", 
+        "Vite", 
+        "TailwindCSS", 
+        "React Router"
+      ],
       categories: ["web"],
       github: "https://github.com/terzidest/portfolio",
       featured: true,
@@ -89,7 +122,7 @@ const Projects = () => {
         <h1 className="text-4xl font-bold text-center text-gray-800 mb-3">My Projects</h1>
         <p className="text-center text-gray-600 mb-10 max-w-2xl mx-auto">
           Below are some of the projects I've worked on. Each showcases different aspects of my skills
-          in both React and React Native development, demonstrating my expertise in creating seamless web and mobile experiences with modern JavaScript frameworks.
+          in both React and React Native development.
         </p>
         
         <div className="flex justify-center mb-10">

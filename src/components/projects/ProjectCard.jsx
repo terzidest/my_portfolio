@@ -1,17 +1,29 @@
 import { Link } from 'react-router-dom';
 import Button from '../common/Button';
+import { useState } from 'react';
 
 const ProjectCard = ({ project }) => {
   const { id, title, description, image, techStack, github } = project;
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageIsPortrait, setImageIsPortrait] = useState(false);
+  
+  const handleImageLoad = (e) => {
+    const img = e.target;
+    setImageIsPortrait(img.naturalWidth < img.naturalHeight);
+    setImageLoaded(true);
+  };
   
   return (
     <div className="bg-white rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:shadow-xl hover:translate-y-[-5px]">
-      <div className="relative">
-        <img 
-          src={image || '/assets/images/placeholder.jpg'} 
-          alt={title} 
-          className="w-full h-64 object-cover"
-        />
+      <div className="relative h-64">
+        <div className={`w-full h-full ${imageIsPortrait ? 'bg-gradient-to-r from-blue-600 to-indigo-800 flex justify-center items-center' : ''}`}>
+          <img 
+            src={image || '/assets/images/placeholder.jpg'} 
+            alt={title} 
+            className={`${imageIsPortrait ? 'h-full' : 'w-full h-full object-cover'}`}
+            onLoad={handleImageLoad}
+          />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
           <div className="p-6">
             <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
