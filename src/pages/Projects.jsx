@@ -1,96 +1,10 @@
 import { useState } from "react";
 import ProjectCard from "../components/projects/ProjectCard";
+import { projects } from "../data/projects";
 
 const Projects = () => {
   const [selectedFilters, setSelectedFilters] = useState([]);
 
-  const projects = [
-    {
-      id: "little-lemon",
-      title: "Little Lemon",
-      description:
-        "A mobile app fetching data from APIs, storing locally, and filtering effectively.",
-      image: "/assets/images/projects/little-lemon.png",
-      techStack: [
-        "JavaScript",
-        "React Native",
-        "Expo",
-        "React Navigation",
-        "Context API",
-        "Axios",
-        "SQLite",
-        "Expo Image Picker",
-        "Async Storage"
-      ],
-      categories: ["mobile"],
-      github: "https://github.com/terzidest/little-lemon",
-      featured: true,
-    },
-    {
-      id: "infovault",
-      title: "InfoVault",
-      description: "A password manager with secure local authentication.",
-      image: "/assets/images/projects/info-vault.png",
-      techStack: [
-        "JavaScript",
-        "React Native", 
-        "Expo",
-        "React Navigation",
-        "Zustand",
-        "Nativewind", 
-        "Expo Secure Store", 
-        "Expo Local Authentication",
-        "Lottie"
-        ],
-      categories: ["mobile"],
-      github: "https://github.com/terzidest/InfoVault",
-      featured: true,
-    },
-    {
-      id: "ethereal-nature",
-      title: "EtherealNature",
-      description:
-        "A cross-platform e-commerce solution with shared Firebase backend for web, mobile and admin panel.",
-      image: "/assets/images/projects/ethnature.png",
-      techStack: [
-        "JavaScript",
-        "React",
-        "React Native", 
-        "Expo",
-        "Vite",
-        "React Navigation",
-        "React Router",
-        "Zustand",
-        "TailwindCSS",
-        "Nativewind",
-        "Firebase"
-      ],
-      categories: ["mobile", "web"],
-      github: "https://github.com/terzidest/etherealNature",
-      featured: true,
-    },
-    {
-      id: "portfolio",
-      title: "Personal Portfolio",
-      description: "This responsive portfolio website showcasing my projects and skills as a developer.",
-      image: "/assets/images/projects/portfolio.jpg",
-      techStack: [
-        "JavaScript",
-        "React", 
-        "Vite", 
-        "TailwindCSS", 
-        "React Router"
-      ],
-      categories: ["web"],
-      github: "https://github.com/terzidest/portfolio",
-      featured: true,
-    },
-  ];
-
-  /*const filteredProjects =
-    filter === "all"
-      ? projects
-      : projects.filter((project) => project.category === filter); */
   // Toggle filter selection
   const toggleFilter = (filter) => {
     if (selectedFilters.includes(filter)) {

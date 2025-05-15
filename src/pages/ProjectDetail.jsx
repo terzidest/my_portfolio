@@ -1,153 +1,27 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { getProjectById, getAdjacentProjectIds } from '../data/projects';
 
 const ProjectDetail = () => {
   const { id } = useParams();
   const [project, setProject] = useState(null);
+  const [adjacentProjects, setAdjacentProjects] = useState({ prevId: null, nextId: null });
+  const [imageIsPortrait, setImageIsPortrait] = useState(false);
   const [loading, setLoading] = useState(true);
   
-  // This would typically be fetched from an API or larger data store
-  // For this example, we'll use mock data
+  const handleImageLoad = (e) => {
+    const img = e.target;
+    setImageIsPortrait(img.naturalWidth < img.naturalHeight);
+  };
   useEffect(() => {
-    // Simulate loading the project data
     setLoading(true);
     
-    const projectData = {
-      'little-lemon': {
-        title: 'Little Lemon',
-        description: 'A mobile app fetching data from APIs, storing locally, and filtering effectively.',
-        longDescription: `
-          Little Lemon is a comprehensive mobile application for a restaurant that demonstrates my skills in React Native development.
-          
-          The app features a clean, intuitive user interface that allows users to browse the restaurant's menu, place orders, and make reservations.
-          
-          Key technical features include:
-          - Efficient data fetching from REST APIs
-          - Local storage implementation for offline access
-          - Complex filtering and search functionality
-          - Clean architecture with reusable components
-          - Performance optimization for smooth scrolling and transitions
-        `,
-        image: '/assets/images/projects/little-lemon.jpg',
-        techStack: ['React Native', 'JavaScript', 'API Integration', 'Local Storage', 'Navigation'],
-        features: [
-          'User authentication',
-          'Menu browsing with categories',
-          'Item filtering and search',
-          'Order placement',
-          'Reservation system',
-          'Profile management'
-        ],
-        challenges: [
-          'Implementing efficient local storage sync',
-          'Optimizing image loading for performance',
-          'Creating a smooth, intuitive filtering interface'
-        ],
-        github: 'https://github.com/terzidest/little-lemon'
-      },
-      'infovault': {
-        title: 'InfoVault',
-        description: 'A password manager with secure local authentication.',
-        longDescription: `
-          InfoVault is a secure password management application built with React Native and Expo.
-          
-          The app provides a secure way for users to store their passwords and sensitive information locally on their device,
-          protected by biometric authentication and encryption.
-          
-          Security was the top priority for this project, implementing industry best practices for
-          data protection and user privacy.
-        `,
-        image: '/assets/images/projects/infovault.jpg',
-        techStack: ['React Native', 'Expo', 'Secure Store', 'Biometric Authentication', 'Encryption'],
-        features: [
-          'Biometric authentication (fingerprint/face)',
-          'AES-256 encryption for stored data',
-          'Auto-fill integration with device',
-          'Password strength analyzer',
-          'Secure notes feature',
-          'Automatic backup options'
-        ],
-        challenges: [
-          'Implementing secure storage without compromising UX',
-          'Creating a reliable biometric authentication flow',
-          'Ensuring proper encryption key management'
-        ],
-        github: 'https://github.com/terzidest/InfoVault'
-      },
-      'ethereal-nature': {
-        title: 'EtherealNature',
-        description: 'A cross-platform e-commerce solution with shared Firebase backend for web, mobile and admin panel.',
-        longDescription: `
-          EtherealNature is a full-featured e-commerce ecosystem specialized for an essential oils business,
-          encompassing web, mobile, and admin interfaces with a shared Firebase backend.
-          
-          The platform combines clean, appealing interfaces with powerful e-commerce functionality across 
-          all touchpoints. The mobile app is built with React Native, the web interface with React, and 
-          everything is unified through a common Firebase backend with a monorepo workspace structure.
-          
-          This project demonstrates my ability to architect and build complex, production-ready 
-          cross-platform applications with shared business logic and consistent user experiences.
-        `,
-        image: '/assets/images/projects/ethereal-nature.jpg',
-        techStack: ['React Native', 'React', 'Firebase', 'Firestore', 'Authentication', 'Cloud Functions', 'Payment Processing', 'Monorepo'],
-        features: [
-          'Unified user authentication across platforms',
-          'Shared product catalog with categories',
-          'Platform-optimized interfaces',
-          'Shopping cart synchronization across devices',
-          'Responsive web design with mobile-first approach',
-          'Admin dashboard for inventory and order management',
-          'Real-time data synchronization',
-          'Push notifications'
-        ],
-        challenges: [
-          'Creating consistent experiences across platforms',
-          'Structuring a maintainable monorepo architecture',
-          'Implementing secure payment processing',
-          'Optimizing shared code while respecting platform differences',
-          'Maintaining type safety across the codebase'
-        ],
-        github: 'https://github.com/terzidest/etherealNature'
-      },
-      'portfolio': {
-        title: 'Personal Portfolio',
-        description: 'This responsive portfolio website showcasing my projects and skills as a developer.',
-        longDescription: `
-          My personal portfolio website is built using modern web technologies to showcase my projects and skills 
-          as a React and React Native developer. The site itself serves as a demonstration of my web development 
-          capabilities and design sensibilities.
-          
-          Built with React, Vite, and TailwindCSS, the portfolio features a clean, responsive design that works 
-          seamlessly across all devices. The site is structured to provide an optimal user experience, with smooth 
-          navigation and transitions between sections.
-          
-          This project was an opportunity to apply best practices in web development and to create a platform 
-          that effectively communicates my professional identity and technical expertise.
-        `,
-        image: '/assets/images/projects/portfolio.jpg',
-        techStack: ['React', 'Vite', 'TailwindCSS', 'React Router', 'Responsive Design'],
-        features: [
-          'Responsive design for all device sizes',
-          'Modern UI with subtle animations',
-          'Project showcase with detailed case studies',
-          'Skills and expertise highlighting',
-          'Contact form for easy communication',
-          'Optimized performance and accessibility',
-          'Clean, maintainable code structure'
-        ],
-        challenges: [
-          'Creating an elegant, professional design that stands out',
-          'Implementing responsive layouts that work across all devices',
-          'Optimizing image assets for performance',
-          'Balancing visual appeal with fast load times',
-          'Structuring project data for easy maintenance'
-        ],
-        github: 'https://github.com/terzidest/portfolio'
-      }
-    };
+    const projectData = getProjectById(id);
+    const { prevId, nextId } = getAdjacentProjectIds(id);
     
-    if (projectData[id]) {
-      setProject(projectData[id]);
+    if (projectData) {
+      setProject(projectData);
+      setAdjacentProjects({ prevId, nextId });
       setLoading(false);
     } else {
       // Handle project not found
@@ -198,12 +72,15 @@ const ProjectDetail = () => {
         
         <div className="bg-white rounded-xl shadow-md overflow-hidden mb-10">
           <div className="md:flex">
-            <div className="md:flex-shrink-0">
-              <img 
-                className="h-48 w-full object-cover md:w-48" 
-                src={project.image || '/assets/images/placeholder.jpg'} 
-                alt={project.title} 
-              />
+            <div className="md:w-64 h-48 overflow-hidden flex-shrink-0 mt-2 ml-2">
+              <div className="w-full h-full bg-gradient-to-r from-blue-600 to-indigo-800 flex justify-center items-center rounded-xl">
+                <img 
+                  src={project.image || '/assets/images/placeholder.jpg'} 
+                  alt={project.title} 
+                  className={`rounded-xl ${imageIsPortrait ? 'h-40 w-auto' : 'w-full h-48 object-cover object-top'}`}
+                  onLoad={handleImageLoad}
+                />
+              </div>
             </div>
             <div className="p-8">
               <h1 className="text-3xl font-bold text-gray-800 mb-2">{project.title}</h1>
@@ -272,6 +149,52 @@ const ProjectDetail = () => {
                 ))}
               </ul>
             </div>
+          </div>
+        </div>
+        
+        {/* Development Process Section - only show if process exists */}
+        {project.process && (
+          <div className="bg-white rounded-xl shadow-md p-8 mb-10">
+            <h2 className="text-2xl font-bold text-gray-800 mb-6">Development Process</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {project.process.map((step, index) => (
+                <div key={index} className="bg-gray-50 p-6 rounded-lg">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-2">{index + 1}. {step.title}</h3>
+                  <p className="text-gray-600">{step.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+        
+        {/* Next/Previous Navigation */}
+        <div className="mt-12 border-t border-gray-200 pt-6">
+          <div className="flex justify-between items-center">
+            {adjacentProjects.prevId ? (
+              <Link 
+                to={`/projects/${adjacentProjects.prevId}`}
+                className="flex items-center text-primary hover:text-blue-700"
+              >
+                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+                Previous Project
+              </Link>
+            ) : (
+              <div></div> 
+            )}
+            
+            {adjacentProjects.nextId && (
+              <Link 
+                to={`/projects/${adjacentProjects.nextId}`}
+                className="flex items-center text-primary hover:text-blue-700"
+              >
+                Next Project
+                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </Link>
+            )}
           </div>
         </div>
       </div>
