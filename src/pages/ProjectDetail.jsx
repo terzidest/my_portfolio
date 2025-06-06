@@ -110,7 +110,7 @@ const ProjectDetail = () => {
           </div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+        
           <div className="col-span-2">
             <div className="bg-white rounded-xl shadow-md p-8">
               <h2 className="text-2xl font-bold text-gray-800 mb-4">Overview</h2>
@@ -122,50 +122,28 @@ const ProjectDetail = () => {
                 ))}
               </div>
             </div>
-          </div>
-          
-          <div>
-            <div className="bg-white rounded-xl shadow-md p-8 mb-8">
-              <h2 className="text-xl font-bold text-gray-800 mb-4">Key Features</h2>
-              <ul className="space-y-2">
-                {project.features.map((feature, index) => (
-                  <li key={index} className="flex items-start">
-                    <svg className="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    <span className="text-gray-600">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
             
-            <div className="bg-white rounded-xl shadow-md p-8">
-              <h2 className="text-xl font-bold text-gray-800 mb-4">Challenges & Solutions</h2>
-              <ul className="space-y-4">
-                {project.challenges.map((challenge, index) => (
-                  <li key={index} className="text-gray-600">
-                    <span className="font-medium text-gray-800">Challenge {index + 1}:</span> {challenge}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-        
-        {/* Development Process Section - only show if process exists */}
-        {project.process && (
-          <div className="bg-white rounded-xl shadow-md p-8 mb-10">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">Development Process</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {project.process.map((step, index) => (
-                <div key={index} className="bg-gray-50 p-6 rounded-lg">
-                  <h3 className="text-lg font-semibold text-gray-800 mb-2">{index + 1}. {step.title}</h3>
-                  <p className="text-gray-600">{step.description}</p>
+            {/* Image Gallery - only show if additionalImages exist */}
+            {project.additionalImages && project.additionalImages.length > 0 && (
+              <div className="bg-white rounded-xl shadow-md p-8 mt-8">
+                <h2 className="text-2xl font-bold text-gray-800 mb-6">Project Gallery</h2>
+                <div className="flex flex-wrap gap-5">
+                  {project.additionalImages.map((imgSrc, index) => (
+                    <div key={index} className="bg-gradient-to-r from-blue-600 to-indigo-800 p-1 rounded-xl w-80 h-72 flex-shrink-0 flex items-center justify-center">
+                      <img 
+                        src={imgSrc} 
+                        alt={`${project.title} screenshot ${index + 1}`}
+                        className={`rounded-xl ${imageIsPortrait ? 'h-full w-auto' : 'w-auto h-full object-cover object-top'}`}
+                        onLoad={handleImageLoad}
+                      />
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </div>
-        )}
+              </div>
+            )}
+          
+
+        </div>
         
         {/* Next/Previous Navigation */}
         <div className="mt-12 border-t border-gray-200 pt-6">
