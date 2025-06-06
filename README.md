@@ -1,6 +1,6 @@
 # Triantaphilos Terzides - Portfolio Website
 
-A professional portfolio website built with React, Vite, and TailwindCSS to showcase my work as a React Native Developer.
+A professional portfolio website built with React, Vite, and TailwindCSS to showcase my work as a React/React Native Developer.
 
 ## Features
 

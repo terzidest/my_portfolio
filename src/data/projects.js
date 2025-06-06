@@ -1,14 +1,16 @@
+const getImagePath = (path) => `${import.meta.env.BASE_URL}${path.startsWith('/') ? path.slice(1) : path}`;
+
 // src/data/projects.js
 export const projects = [
   {
     id: 'little-lemon',
     title: 'Little Lemon',
     description: 'A mobile app fetching data from firebase and filtering effectively.',
-    image: '/assets/images/projects/little-lemon.png',
+    image: getImagePath('/assets/images/projects/little-lemon.png'),
     additionalImages: [
-      '/assets/images/projects/little-lemon-2.png',
-      '/assets/images/projects/little-lemon.png',
-      '/assets/images/projects/little-lemon-3.png',
+      getImagePath('/assets/images/projects/little-lemon-2.png'),
+      getImagePath('/assets/images/projects/little-lemon.png'),
+      getImagePath('/assets/images/projects/little-lemon-3.png'),
     ],
     techStack: ['React Native', 'JavaScript', 'Firebase', 'Nativewind', 'React Navigation', 'Zustand'],
     categories: ['mobile'],
@@ -31,11 +33,11 @@ export const projects = [
     id: 'infovault',
     title: 'InfoVault',
     description: 'A password manager with secure local authentication.',
-    image: '/assets/images/projects/info-vault.png',
+    image: getImagePath('/assets/images/projects/info-vault.png'),
     additionalImages: [
-      '/assets/images/projects/info-vault-2.png',
-      '/assets/images/projects/info-vault.png',
-      '/assets/images/projects/info-vault-3.png',
+      getImagePath('/assets/images/projects/info-vault-2.png'),
+      getImagePath('/assets/images/projects/info-vault.png'),
+      getImagePath('/assets/images/projects/info-vault-3.png'),
     ],
     techStack: ['React Native', 'Expo', 'Secure Store', 'Biometric Authentication', 'Encryption'],
     categories: ['mobile'],
@@ -46,24 +48,21 @@ export const projects = [
       
       The app provides a secure way for users to store their passwords and sensitive information locally on their device,
       protected by biometric authentication and encryption.
-      
-      Security was the top priority for this project, implementing industry best practices for
-      data protection and user privacy.
     `,
   },
   {
     id: 'ethereal-nature',
     title: 'EtherealNature',
     description: 'A cross-platform e-commerce solution with shared Firebase backend for web and mobile.',
-    image: '/assets/images/projects/ethnature.png',
+    image: getImagePath('/assets/images/projects/ethnature.png'),
     additionalImages: [
-      '/assets/images/projects/ethnature.png',
-      '/assets/images/projects/ethnature.png',
-      '/assets/images/projects/ethnature.png',
+      getImagePath('/assets/images/projects/ethnature.png'),
+      getImagePath('/assets/images/projects/ethnature2.png'),
+      getImagePath('/assets/images/projects/ethnature3.png'),
     ],
-    techStack: ['React Native', 'React', 'Firebase', 'Firestore', 'Authentication', 'Cloud Functions', 'Payment Processing', 'Monorepo'],
+    techStack: ['React Native', 'React', 'Firebase', 'Firestore', 'Authentication', 'Monorepo'],
     categories: ['mobile', 'web'],
-    github: 'https://github.com/terzidest/etherealNature',
+    github: 'https://github.com/terzidest/ethereal_nature',
     featured: true,
     longDescription: `
       EtherealNature is a full-featured e-commerce ecosystem specialized for an essential oils business,
@@ -72,24 +71,21 @@ export const projects = [
       The platform combines clean, appealing interfaces with powerful e-commerce functionality across 
       all touchpoints. The mobile app is built with React Native, the web interface with React, and 
       everything is unified through a common Firebase backend with a monorepo workspace structure.
-      
-      This project demonstrates my ability to architect and build complex, production-ready 
-      cross-platform applications with shared business logic and consistent user experiences.
     `
   },
   {
     id: 'portfolio',
     title: 'Personal Portfolio',
     description: 'This responsive portfolio website showcasing my projects and skills as a developer.',
-    image: '/assets/images/projects/portfolio.jpg',
+    image: getImagePath('/assets/images/projects/portfolio.png'),
     additionalImages: [
-      '/assets/images/projects/portfolio-mobile.jpg',
-      '/assets/images/projects/portfolio-projects.jpg',
-      '/assets/images/projects/portfolio-detail.jpg',
+      getImagePath('/assets/images/projects/portfolio-mobile-1.png'),
+      getImagePath('/assets/images/projects/portfolio-mobile-2.png'),
+      getImagePath('/assets/images/projects/portfolio-mobile-3.png'),
     ],
     techStack: ['React', 'Vite', 'TailwindCSS', 'React Router', 'Responsive Design'],
     categories: ['web'],
-    github: 'https://github.com/terzidest/portfolio',
+    github: 'https://github.com/terzidest/my_portfolio',
     featured: true,
     longDescription: `
       My personal portfolio website is built using modern web technologies to showcase my projects and skills 

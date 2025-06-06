@@ -8,9 +8,13 @@ const AboutSection = () => {
           {/* Profile Image */}
           <div className="lg:w-1/3 mb-12 lg:mb-0 flex justify-center">
             <div className="relative">
-              {/* Replace with your photo */}
+              {/* photo */}
               <div className="w-72 h-72 rounded-full overflow-hidden shadow-xl">
-                <div className="w-full h-full bg-gradient-to-r from-blue-400 to-indigo-500"></div>
+                <img 
+                src={`${import.meta.env.BASE_URL}assets/images/profile.jpg`}
+                alt="Terzidest" 
+                className="w-full h-full object-cover"
+                />
               </div>
               {/* Decorative elements */}
               <div className="absolute -top-4 -right-4 w-24 h-24 bg-yellow-400 rounded-full opacity-20"></div>
@@ -24,14 +28,14 @@ const AboutSection = () => {
             <div className="w-16 h-1 bg-primary mb-6"></div>
             
             <p className="text-gray-600 text-lg mb-6">
-              I'm a creative React Native Developer with a strong background in building and implementing
-              functional, high-quality apps for mobile platforms. I specialize in
-              development using React Native, Expo, and Firebase, allowing me to
-              efficiently create cross-platform apps for iOS and Android.
+              I'm a creative Developer with a strong background in building and implementing
+              functional, high-quality apps . I specialize in
+              development using React, React Native and Firebase, allowing me to
+              efficiently create cross-platform apps for iOS, Android and the web.
             </p>
             
             <p className="text-gray-600 text-lg mb-6">
-              As a Meta-certified React Native developer, I'm a fast learner, adaptable to new technologies, 
+              I'm a fast learner, adaptable to new technologies, 
               and always focused on delivering solutions with a keen eye for detail.
               I believe in creating applications that not only look great but also deliver measurable business results.
             </p>

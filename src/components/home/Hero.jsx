@@ -80,7 +80,7 @@ const Hero = () => {
       <div className="container mx-auto px-6 mt-16 relative z-10">
         <p className="text-sm text-center text-blue-200 mb-4 uppercase tracking-wider">Technologies I Work With</p>
         <div className="flex flex-wrap justify-center gap-8">
-          {['JavaScript', 'React Native(Expo)','React(vite)', 'React navigation/router', 'Zustand', 'TailwindCSS/Nativewind', 'Firebase'].map((tech, index) => (
+          {['JavaScript/TypeScript', 'React Native(Expo)','React(vite)', 'React navigation/router', 'Zustand', 'TailwindCSS/Nativewind', 'Firebase'].map((tech, index) => (
             <div key={index} className="text-white font-medium">
               {tech}
             </div>
