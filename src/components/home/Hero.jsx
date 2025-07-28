@@ -1,5 +1,4 @@
-import { Link } from 'react-router-dom';
-import Button from '../common/Button';
+import Button from "../common/Button";
 
 const Hero = () => {
   return (
@@ -14,21 +13,28 @@ const Hero = () => {
               <br />
               <span className="text-blue-200">Developer</span>
             </h1>
-            <p className="text-lg text-blue-100 mb-8 max-w-md animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-            Meta-certified developer crafting high-quality cross-platform mobile and dynamic web apps 
-            backed by Firebase for real-time data and secure authentication.
+            <p
+              className="text-lg text-blue-100 mb-8 max-w-md animate-fade-in-up"
+              style={{ animationDelay: "0.2s" }}
+            >
+              Meta-certified developer crafting high-quality cross-platform
+              mobile and dynamic web apps backed by Firebase for real-time data
+              and secure authentication.
             </p>
-            <div className="flex flex-col sm:flex-row animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-              <Button 
-                to="/projects" 
+            <div
+              className="flex flex-col sm:flex-row animate-fade-in-up"
+              style={{ animationDelay: "0.4s" }}
+            >
+              <Button
+                to="/projects"
                 variant="secondary"
                 size="lg"
                 className="text-blue-800 bg-white hover:bg-gray-100 mb-4 sm:mb-0 sm:mr-4"
               >
                 View Projects
               </Button>
-              <Button 
-                to="/contact" 
+              <Button
+                to="/contact"
                 variant="outline"
                 size="lg"
                 className="text-white border-2 border-white hover:bg-blue-700"
@@ -37,8 +43,11 @@ const Hero = () => {
               </Button>
             </div>
           </div>
-          <div className="md:w-1/2 relative animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
-            {/* Phone mockup illustration (placeholder) */}
+          <div
+            className="md:w-1/2 relative animate-fade-in-up"
+            style={{ animationDelay: "0.6s" }}
+          >
+            {/* Phone mockup illustration */}
             <div className="relative mx-auto w-64 h-128 bg-white rounded-3xl shadow-2xl overflow-hidden">
               <div className="absolute top-0 left-0 right-0 h-6 bg-gray-800 flex justify-center items-center">
                 <div className="w-16 h-1 bg-gray-600 rounded-full"></div>
@@ -61,26 +70,36 @@ const Hero = () => {
                 </div>
               </div>
             </div>
-            
+
             {/* Floating elements for visual interest */}
             <div className="absolute top-10 -left-10 w-20 h-20 bg-yellow-400 rounded-full opacity-70"></div>
             <div className="absolute bottom-10 -right-10 w-16 h-16 bg-pink-400 rounded-full opacity-70"></div>
           </div>
         </div>
       </div>
-      
+
       {/* Background shapes */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
         <div className="absolute -top-20 -right-20 w-64 h-64 bg-blue-500 rounded-full opacity-20"></div>
         <div className="absolute top-1/2 -left-32 w-96 h-96 bg-indigo-600 rounded-full opacity-20"></div>
         <div className="absolute -bottom-20 right-1/4 w-80 h-80 bg-blue-700 rounded-full opacity-20"></div>
       </div>
-      
+
       {/* Technology logos */}
       <div className="container mx-auto px-6 mt-16 relative z-10">
-        <p className="text-sm text-center text-blue-200 mb-4 uppercase tracking-wider">Technologies I Work With</p>
+        <p className="text-sm text-center text-blue-200 mb-4 uppercase tracking-wider">
+          Technologies I Work With
+        </p>
         <div className="flex flex-wrap justify-center gap-8">
-          {['JavaScript/TypeScript', 'React Native(Expo)','React(vite)', 'React navigation/router', 'Zustand', 'TailwindCSS/Nativewind', 'Firebase'].map((tech, index) => (
+          {[
+            "JavaScript/TypeScript",
+            "React Native(Expo)",
+            "React(vite)",
+            "React navigation/router",
+            "Zustand",
+            "TailwindCSS/Nativewind",
+            "Firebase",
+          ].map((tech, index) => (
             <div key={index} className="text-white font-medium">
               {tech}
             </div>

@@ -1,6 +1,5 @@
 import Hero from "../components/home/Hero";
 import FeatureCard from "../components/home/FeatureCard";
-//import SkillsSection from "../components/skills/SkillsSection";
 import Button from "../components/common/Button";
 
 const Home = () => {

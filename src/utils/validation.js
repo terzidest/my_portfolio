@@ -5,23 +5,23 @@
  */
 export const validateContactForm = (values) => {
   const errors = {};
-  
-  if (!values.name || values.name.trim() === '') {
-    errors.name = 'Name is required';
+
+  if (!values.name || values.name.trim() === "") {
+    errors.name = "Name is required";
   }
-  
-  if (!values.email || values.email.trim() === '') {
-    errors.email = 'Email is required';
+
+  if (!values.email || values.email.trim() === "") {
+    errors.email = "Email is required";
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-    errors.email = 'Invalid email address';
+    errors.email = "Invalid email address";
   }
-  
-  if (!values.message || values.message.trim() === '') {
-    errors.message = 'Message is required';
+
+  if (!values.message || values.message.trim() === "") {
+    errors.message = "Message is required";
   } else if (values.message.trim().length < 10) {
-    errors.message = 'Message must be at least 10 characters';
+    errors.message = "Message must be at least 10 characters";
   }
-  
+
   return errors;
 };
 
@@ -32,9 +32,7 @@ export const validateContactForm = (values) => {
  * @returns {string|null} - Error message or null
  */
 export const validateRequired = (value, fieldName) => {
-  return !value || value.trim() === '' 
-    ? `${fieldName} is required` 
-    : null;
+  return !value || value.trim() === "" ? `${fieldName} is required` : null;
 };
 
 /**
@@ -43,14 +41,14 @@ export const validateRequired = (value, fieldName) => {
  * @returns {string|null} - Error message or null
  */
 export const validateEmail = (email) => {
-  if (!email || email.trim() === '') {
-    return 'Email is required';
+  if (!email || email.trim() === "") {
+    return "Email is required";
   }
-  
+
   if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
-    return 'Invalid email address';
+    return "Invalid email address";
   }
-  
+
   return null;
 };
 
