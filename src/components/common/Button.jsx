@@ -45,7 +45,7 @@ const Button = ({
       </a>
     );
   }
-  
+  //
   // Render as button for click events
   return (
     <button type="button" className={buttonStyles} onClick={onClick} {...props}>
