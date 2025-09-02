@@ -11,7 +11,7 @@ const AboutSection = () => {
               {/* photo */}
               <div className="w-72 h-72 rounded-full overflow-hidden shadow-xl">
                 <img 
-                src={`${import.meta.env.BASE_URL}assets/images/profile.jpg`}
+                src={"assets/images/profile.jpg"}
                 alt="Terzidest" 
                 className="w-full h-full object-cover"
                 />
