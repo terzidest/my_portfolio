@@ -1,30 +1,31 @@
 import useForm from '../../hooks/useForm';
 import { validateContactForm } from '../../utils/validation';
 import Button from '../common/Button';
+import type { ContactFormValues } from '../../types';
 
 const ContactForm = () => {
-  const initialValues = {
+  const initialValues: ContactFormValues = {
     name: '',
     email: '',
     subject: '',
     message: ''
   };
-  
-  const { 
-    values, 
-    errors, 
-    isSubmitting, 
+
+  const {
+    values,
+    errors,
+    isSubmitting,
     submitted,
-    handleChange, 
+    handleChange,
     handleSubmit,
-    setSubmitted 
-  } = useForm(initialValues, validateContactForm);
-  
-  const onSubmit = async (formData) => {
+    setSubmitted
+  } = useForm<ContactFormValues>(initialValues, validateContactForm);
+
+  const onSubmit = async (formData: ContactFormValues) => {
     // In a real application, you would send the form data to a server
     // For this example, we'll simulate a successful submission
     console.log('Form data to submit:', formData);
-    
+
     // Simulate API call
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -79,7 +80,7 @@ const ContactForm = () => {
                 <p className="mt-1 text-sm text-red-600">{errors.name}</p>
               )}
             </div>
-            
+
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                 Email <span className="text-red-500">*</span>
@@ -100,7 +101,7 @@ const ContactForm = () => {
               )}
             </div>
           </div>
-          
+
           <div className="mb-6">
             <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
               Subject
@@ -115,7 +116,7 @@ const ContactForm = () => {
               placeholder="What is this about?"
             />
           </div>
-          
+
           <div className="mb-6">
             <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
               Message <span className="text-red-500">*</span>
@@ -123,7 +124,7 @@ const ContactForm = () => {
             <textarea
               id="message"
               name="message"
-              rows="5"
+              rows={5}
               value={values.message}
               onChange={handleChange}
               className={`block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary ${
@@ -135,7 +136,7 @@ const ContactForm = () => {
               <p className="mt-1 text-sm text-red-600">{errors.message}</p>
             )}
           </div>
-          
+
           <div className="text-right">
             <Button
               type="submit"

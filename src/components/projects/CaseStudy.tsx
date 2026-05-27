@@ -1,16 +1,21 @@
 import { Link } from 'react-router-dom';
+import type { Project } from '../../types';
 
-const CaseStudy = ({ project }) => {
-  const { id, title, description, image, techStack, features, challenges, longDescription, github } = project;
-  
+interface CaseStudyProps {
+  project: Project;
+}
+
+const CaseStudy = ({ project }: CaseStudyProps) => {
+  const { id, title, description, image, techStack, github } = project;
+
   return (
     <div className="bg-white rounded-xl shadow-md overflow-hidden mb-10">
       <div className="md:flex">
         <div className="md:flex-shrink-0">
-          <img 
-            className="h-48 w-full object-cover md:w-48" 
-            src={image || '/assets/images/placeholder.jpg'} 
-            alt={title} 
+          <img
+            className="h-48 w-full object-cover md:w-48"
+            src={image || '/assets/images/placeholder.jpg'}
+            alt={title}
           />
         </div>
         <div className="p-8">
@@ -20,18 +25,18 @@ const CaseStudy = ({ project }) => {
           <p className="text-gray-600 mb-4">{description}</p>
           <div className="flex flex-wrap gap-2 mb-4">
             {techStack && techStack.map((tech, index) => (
-              <span 
-                key={index} 
+              <span
+                key={index}
                 className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded"
               >
                 {tech}
               </span>
             ))}
           </div>
-          
+
           <div className="flex items-center justify-between">
-            <Link 
-              to={`/projects/${id}`} 
+            <Link
+              to={`/projects/${id}`}
               className="inline-flex items-center text-primary hover:text-blue-700 font-medium"
             >
               View Details
@@ -39,11 +44,11 @@ const CaseStudy = ({ project }) => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
             </Link>
-            
+
             {github && (
-              <a 
-                href={github} 
-                target="_blank" 
+              <a
+                href={github}
+                target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-500 hover:text-gray-800 transition-colors"
               >

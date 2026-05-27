@@ -22,7 +22,7 @@ const About = () => {
       'Technological Innovation and Entrepreneurship'
     ]
   };
-  
+
   const certifications = [
     {
       title: 'React Native Specialization by Meta',
@@ -48,7 +48,7 @@ const About = () => {
     <div className="pt-28 pb-20 bg-gray-50">
       <div className="container mx-auto px-6">
         <AboutSection />
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
           <div className="bg-white rounded-xl shadow-md p-8">
             <h2 className="text-2xl font-bold text-gray-800 mb-6">Education</h2>
@@ -56,7 +56,7 @@ const About = () => {
               <h3 className="text-xl font-bold text-gray-800">{education.degree}</h3>
               <p className="text-gray-600 italic">{education.institution}</p>
               <p className="text-gray-500 text-sm mb-4">Graduated: {education.graduationDate}</p>
-              
+
               <div className="mb-4">
                 <h4 className="font-bold text-gray-700">Specializations:</h4>
                 <ul className="list-disc list-inside text-gray-600 pl-4">
@@ -65,13 +65,13 @@ const About = () => {
                   ))}
                 </ul>
               </div>
-              
+
               <div>
                 <h4 className="font-bold text-gray-700">Relevant Courses:</h4>
                 <div className="flex flex-wrap gap-2 mt-2">
                   {education.courses.map((course, index) => (
-                    <span 
-                      key={index} 
+                    <span
+                      key={index}
                       className="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded"
                     >
                       {course}
@@ -81,7 +81,7 @@ const About = () => {
               </div>
             </div>
           </div>
-          
+
           <div className="bg-white rounded-xl shadow-md p-8">
             <h2 className="text-2xl font-bold text-gray-800 mb-6">Certifications</h2>
             <div className="space-y-6">
@@ -94,10 +94,10 @@ const About = () => {
                   </div>
                   <div>
                     <h3 className="text-lg font-bold text-gray-800">{certification.title}</h3>
-                    <a 
-                      href={certification.link} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
+                    <a
+                      href={certification.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="text-primary hover:text-blue-700 text-sm"
                     >
                       View Certificate →

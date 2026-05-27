@@ -1,25 +1,27 @@
-import { Link } from 'react-router-dom';
-import Button from '../common/Button';
 import { useState } from 'react';
+import Button from '../common/Button';
+import type { Project } from '../../types';
 
-const ProjectCard = ({ project }) => {
+interface ProjectCardProps {
+  project: Project;
+}
+
+const ProjectCard = ({ project }: ProjectCardProps) => {
   const { id, title, description, image, techStack, github } = project;
-  const [imageLoaded, setImageLoaded] = useState(false);
   const [imageIsPortrait, setImageIsPortrait] = useState(false);
-  
-  const handleImageLoad = (e) => {
-    const img = e.target;
+
+  const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const img = e.currentTarget;
     setImageIsPortrait(img.naturalWidth < img.naturalHeight);
-    setImageLoaded(true);
   };
-  
+
   return (
     <div className="bg-white rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:shadow-xl hover:translate-y-[-5px]">
       <div className="relative h-64">
         <div className={`w-full h-full ${imageIsPortrait ? 'bg-gradient-to-r from-blue-600 to-indigo-800 flex justify-center items-center' : ''}`}>
-          <img 
-            src={image || '/assets/images/placeholder.jpg'} 
-            alt={title} 
+          <img
+            src={image || '/assets/images/placeholder.jpg'}
+            alt={title}
             className={`${imageIsPortrait ? 'h-full' : 'w-full h-full object-cover'}`}
             onLoad={handleImageLoad}
           />
@@ -30,47 +32,47 @@ const ProjectCard = ({ project }) => {
           </div>
         </div>
       </div>
-      
+
       <div className="p-6 pt-3">
         <p className="text-gray-600 mb-4 line-clamp-3">{description}</p>
-        
+
         <div className="flex flex-wrap gap-2 mb-4">
           {techStack && techStack.map((tech, index) => (
-            <span 
-              key={index} 
+            <span
+              key={index}
               className="px-3 py-1 bg-blue-50 text-primary text-xs font-medium rounded-full"
             >
               {tech}
             </span>
           ))}
         </div>
-        
+
         <div className="flex justify-between items-center">
-          <Button 
-            to={`/projects/${id}`} 
+          <Button
+            to={`/projects/${id}`}
             variant="text"
             className="text-primary font-medium"
           >
             View Details
-            <svg 
-              className="w-4 h-4 inline-block ml-1" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24" 
+            <svg
+              className="w-4 h-4 inline-block ml-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth="2" 
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M14 5l7 7m0 0l-7 7m7-7H3"
               />
             </svg>
           </Button>
-          
+
           {github && (
-            <Button 
-              href={github} 
+            <Button
+              href={github}
               variant="text"
               className="text-gray-500 hover:text-gray-800 p-1"
             >
