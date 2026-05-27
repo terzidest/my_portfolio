@@ -1,24 +1,30 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getProjectById, getAdjacentProjectIds } from '../data/projects';
+import type { Project } from '../types';
 
 const ProjectDetail = () => {
-  const { id } = useParams();
-  const [project, setProject] = useState(null);
-  const [adjacentProjects, setAdjacentProjects] = useState({ prevId: null, nextId: null });
+  const { id } = useParams<{ id: string }>();
+  const [project, setProject] = useState<Project | null>(null);
+  const [adjacentProjects, setAdjacentProjects] = useState<{ prevId: string | null; nextId: string | null }>({ prevId: null, nextId: null });
   const [imageIsPortrait, setImageIsPortrait] = useState(false);
   const [loading, setLoading] = useState(true);
-  
-  const handleImageLoad = (e) => {
-    const img = e.target;
+
+  const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const img = e.currentTarget;
     setImageIsPortrait(img.naturalWidth < img.naturalHeight);
   };
   useEffect(() => {
+    if (!id) {
+      setLoading(false);
+      return;
+    }
+
     setLoading(true);
-    
+
     const projectData = getProjectById(id);
     const { prevId, nextId } = getAdjacentProjectIds(id);
-    
+
     if (projectData) {
       setProject(projectData);
       setAdjacentProjects({ prevId, nextId });
@@ -36,15 +42,15 @@ const ProjectDetail = () => {
       </div>
     );
   }
-  
+
   if (!project) {
     return (
       <div className="pt-28 pb-20 min-h-screen">
         <div className="container mx-auto px-6 text-center">
           <h1 className="text-3xl font-bold text-gray-800 mb-6">Project Not Found</h1>
           <p className="text-gray-600 mb-8">Sorry, the project you're looking for doesn't exist.</p>
-          <Link 
-            to="/projects" 
+          <Link
+            to="/projects"
             className="inline-flex items-center bg-primary text-white py-2 px-4 rounded-md hover:bg-blue-700"
           >
             <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -60,8 +66,8 @@ const ProjectDetail = () => {
   return (
     <div className="pt-28 pb-20 bg-gray-50">
       <div className="container mx-auto px-6">
-        <Link 
-          to="/projects" 
+        <Link
+          to="/projects"
           className="inline-flex items-center text-primary hover:text-blue-700 mb-6"
         >
           <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -69,14 +75,14 @@ const ProjectDetail = () => {
           </svg>
           Back to Projects
         </Link>
-        
+
         <div className="bg-white rounded-xl shadow-md overflow-hidden mb-10">
           <div className="md:flex">
             <div className="md:w-64 h-48 overflow-hidden flex-shrink-0 mt-2 ml-2">
               <div className="w-full h-full bg-gradient-to-r from-blue-600 to-indigo-800 flex justify-center items-center rounded-xl">
-                <img 
-                  src={project.image || '/assets/images/placeholder.jpg'} 
-                  alt={project.title} 
+                <img
+                  src={project.image || '/assets/images/placeholder.jpg'}
+                  alt={project.title}
                   className={`rounded-xl ${imageIsPortrait ? 'h-40 w-auto' : 'w-full h-48 object-cover object-top'}`}
                   onLoad={handleImageLoad}
                 />
@@ -87,17 +93,17 @@ const ProjectDetail = () => {
               <p className="text-gray-600 mb-4">{project.description}</p>
               <div className="flex flex-wrap gap-2 mb-4">
                 {project.techStack.map((tech, index) => (
-                  <span 
-                    key={index} 
+                  <span
+                    key={index}
                     className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded"
                   >
                     {tech}
                   </span>
                 ))}
               </div>
-              <a 
-                href={project.github} 
-                target="_blank" 
+              <a
+                href={project.github}
+                target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center text-primary hover:text-blue-700"
               >
@@ -109,8 +115,8 @@ const ProjectDetail = () => {
             </div>
           </div>
         </div>
-        
-        
+
+
           <div className="col-span-2">
             <div className="bg-white rounded-xl shadow-md p-8">
               <h2 className="text-2xl font-bold text-gray-800 mb-4">Overview</h2>
@@ -122,7 +128,7 @@ const ProjectDetail = () => {
                 ))}
               </div>
             </div>
-            
+
             {/* Image Gallery - only show if additionalImages exist */}
             {project.additionalImages && project.additionalImages.length > 0 && (
               <div className="bg-white rounded-xl shadow-md p-8 mt-8">
@@ -130,8 +136,8 @@ const ProjectDetail = () => {
                 <div className="flex flex-wrap gap-5">
                   {project.additionalImages.map((imgSrc, index) => (
                     <div key={index} className="bg-gradient-to-r from-blue-600 to-indigo-800 p-1 rounded-xl w-80 h-72 flex-shrink-0 flex items-center justify-center">
-                      <img 
-                        src={imgSrc} 
+                      <img
+                        src={imgSrc}
                         alt={`${project.title} screenshot ${index + 1}`}
                         className={`rounded-xl ${imageIsPortrait ? 'h-full w-auto' : 'w-auto h-full object-cover object-top'}`}
                         onLoad={handleImageLoad}
@@ -141,15 +147,15 @@ const ProjectDetail = () => {
                 </div>
               </div>
             )}
-          
+
 
         </div>
-        
+
         {/* Next/Previous Navigation */}
         <div className="mt-12 border-t border-gray-200 pt-6">
           <div className="flex justify-between items-center">
             {adjacentProjects.prevId ? (
-              <Link 
+              <Link
                 to={`/projects/${adjacentProjects.prevId}`}
                 className="flex items-center text-primary hover:text-blue-700"
               >
@@ -159,11 +165,11 @@ const ProjectDetail = () => {
                 Previous Project
               </Link>
             ) : (
-              <div></div> 
+              <div></div>
             )}
-            
+
             {adjacentProjects.nextId && (
-              <Link 
+              <Link
                 to={`/projects/${adjacentProjects.nextId}`}
                 className="flex items-center text-primary hover:text-blue-700"
               >
