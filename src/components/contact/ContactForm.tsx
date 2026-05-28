@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import useForm from '../../hooks/useForm';
 import { validateContactForm } from '../../utils/validation';
 import Button from '../common/Button';
@@ -21,17 +22,21 @@ const ContactForm = () => {
     setSubmitted
   } = useForm<ContactFormValues>(initialValues, validateContactForm);
 
-  const onSubmit = async (formData: ContactFormValues) => {
-    // In a real application, you would send the form data to a server
-    // For this example, we'll simulate a successful submission
-    console.log('Form data to submit:', formData);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
-    // Simulate API call
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({ success: true });
-      }, 1000);
+  const onSubmit = async (formData: ContactFormValues) => {
+    setSubmitError(null);
+    const response = await fetch('/.netlify/functions/send-contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
     });
+    if (!response.ok) {
+      setSubmitError(
+        "Sorry, something went wrong sending your message. Please email me directly at terzidest@gmail.com."
+      );
+      throw new Error(`send-contact failed: ${response.status}`);
+    }
   };
 
   return (
@@ -60,6 +65,18 @@ const ContactForm = () => {
         </div>
       ) : (
         <form onSubmit={(e) => handleSubmit(e, onSubmit)}>
+          {submitError && (
+            <div className="rounded-md p-4 mb-6 bg-red-50 text-red-800">
+              <div className="flex">
+                <div className="flex-shrink-0">
+                  <svg className="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01M12 19a7 7 0 110-14 7 7 0 010 14z" />
+                  </svg>
+                </div>
+                <p className="ml-3 text-sm font-medium">{submitError}</p>
+              </div>
+            </div>
+          )}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
