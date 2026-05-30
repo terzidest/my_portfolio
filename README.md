@@ -1,103 +1,85 @@
-# Triantaphilos Terzides - Portfolio Website
+# Triantaphilos Terzides — Portfolio
 
-A professional portfolio website built with React, Vite, and TailwindCSS to showcase my work as a React/React Native Developer.
+A professional portfolio website built with React, Vite, TypeScript and TailwindCSS to showcase my work as a Frontend Engineer.
 
-## Features
+**Live**:
 
-- **Responsive Design**: Fully responsive layout that works on all devices
-- **Modern UI**: Clean and professional interface with smooth animations
-- **Project Showcase**: Detailed case studies of my development projects
-- **Skills Section**: Highlighting my technical expertise and certifications
-- **Contact Form**: Easy way for potential clients to reach out
+- Netlify (production): https://terzidest.netlify.app
+- GitHub Pages mirror: https://terzidest.github.io/my_portfolio/
 
-## Technologies Used
+## Tech stack
 
-- **React**: Frontend library for building the user interface
-- **Vite**: Fast build tool and development server
-- **TailwindCSS**: Utility-first CSS framework for styling
-- **React Router**: For handling navigation within the application
+- **React 18** + **TypeScript** (strict mode)
+- **Vite** — build & dev server
+- **TailwindCSS** — styling
+- **React Router v6** — client-side routing
+- **Netlify Functions** + **Resend** — serverless email backend for the contact form
 
-## Project Structure
+## Project structure
 
 ```
-portfolio-site/
-├── public/                 # Static assets
-│   └── assets/
-│       ├── images/         # Image assets
-│       └── videos/         # Video assets
+my_portfolio/
+├── public/
+│   ├── _redirects                  # Netlify SPA fallback (/* /index.html 200)
+│   └── assets/images/              # Profile and project screenshots
 ├── src/
-│   ├── assets/             # Component-specific assets
-│   ├── components/         # Reusable components
-│   │   ├── about/          # About page components
-│   │   ├── common/         # Shared components (navbar, footer, etc.)
-│   │   ├── contact/        # Contact page components
-│   │   ├── home/           # Home page components
-│   │   ├── projects/       # Project page components
-│   │   └── skills/         # Skills page components
-│   ├── hooks/              # Custom React hooks
-│   ├── pages/              # Page components
-│   ├── utils/              # Utility functions
-│   ├── App.jsx             # Main app component
-│   └── main.jsx            # Entry point
-├── .gitignore
-├── package.json
-├── tailwind.config.js      # TailwindCSS configuration
-└── vite.config.js          # Vite configuration
+│   ├── components/                 # UI by area
+│   │   ├── about/                  #   About page
+│   │   ├── common/                 #   Navbar, Footer, Button
+│   │   ├── contact/                #   Contact form
+│   │   ├── home/                   #   Hero, FeatureCard
+│   │   └── projects/               #   ProjectCard, CaseStudy
+│   ├── data/projects.ts            # Project data + helpers
+│   ├── hooks/useForm.ts            # Generic typed form hook
+│   ├── pages/                      # Route components
+│   ├── utils/                      # validation, ScrollToTop
+│   ├── types.ts                    # Shared types
+│   ├── vite-env.d.ts               # Vite ambient types
+│   ├── App.tsx, main.tsx           # Entry
+│   └── index.css
+├── netlify/functions/
+│   └── send-contact.ts             # Serverless contact-form handler (Resend)
+├── .github/workflows/static.yml    # GitHub Pages deploy
+├── netlify.toml                    # Netlify build & functions config
+├── tsconfig.{json,app,node,functions}.json
+└── vite.config.ts
 ```
 
-## Getting Started
+## Local development
 
-### Prerequisites
+Requires Node.js LTS (20+).
 
-- Node.js (v14.0.0 or higher)
-- npm or yarn
-
-### Installation
-
-1. Clone the repository:
 ```bash
-git clone https://github.com/terzidest/portfolio.git
-cd portfolio
-```
-
-2. Install dependencies:
-```bash
+git clone https://github.com/terzidest/my_portfolio.git
+cd my_portfolio
 npm install
-# or
-yarn
+npm run dev        # http://localhost:5173 — Vite only (no functions)
 ```
 
-3. Start the development server:
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-4. Open your browser and visit `http://localhost:5173/`
-
-## Building for Production
+To run the contact-form function locally end-to-end:
 
 ```bash
-npm run build
-# or
-yarn build
+npm install -g netlify-cli
+echo 'RESEND_API_KEY=re_your_key' > .env   # already gitignored
+netlify dev        # http://localhost:8888 — Vite + functions
 ```
 
-This will create a `dist` directory with the production-ready files.
+## Scripts
 
-## Future Enhancements
+- `npm run dev` — Vite dev server
+- `npm run build` — production build for Netlify (base `/`)
+- `npm run build:pages` — production build for GitHub Pages (base `/my_portfolio/`)
+- `npm run typecheck` — `tsc -b` across all project references
+- `npm run lint` — ESLint
+- `npm run preview` — preview the production build locally
 
-- Add blog section
-- Implement dark mode
-- Add animations for project transitions
-- Integrate with a CMS for easier content updates
+## Deployment
 
-## License
+Both targets deploy from `main` — no per-target branch:
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+- **Netlify** (production): runs `npm run build`, publishes `dist/`. Requires `RESEND_API_KEY` in the Netlify dashboard (Site settings → Environment variables). Optional `RESEND_SENDER` (e.g. `Portfolio <noreply@your-domain>`) replaces the default test sender and unlocks the auto-reply to submitters.
+- **GitHub Pages**: [.github/workflows/static.yml](.github/workflows/static.yml) runs on push to `main`, builds with `npm run build:pages` (so assets resolve under `/my_portfolio/`), and deploys via `actions/deploy-pages`. The serverless function isn't available on the Pages mirror — the contact form falls back to a direct-email message there.
 
 ## Contact
 
-Triantaphilos Terzides - terzidest@gmail.com
-
+Triantaphilos Terzides — terzidest@gmail.com

@@ -28,16 +28,11 @@ const AboutSection = () => {
             <div className="w-16 h-1 bg-primary mb-6"></div>
 
             <p className="text-gray-600 text-lg mb-6">
-              I'm a creative Developer with a strong background in building and implementing
-              functional, high-quality apps . I specialize in
-              development using React, React Native and Firebase, allowing me to
-              efficiently create cross-platform apps for iOS, Android and the web.
+              I'm a frontend engineer based in Athens with several years of experience building production React applications — from mobile apps to large-scale web platforms. I specialize in React and its ecosystem, with a focus on architecture that scales: modular codebases, clean state management, and maintainable component design.
             </p>
 
             <p className="text-gray-600 text-lg mb-6">
-              I'm a fast learner, adaptable to new technologies,
-              and always focused on delivering solutions with a keen eye for detail.
-              I believe in creating applications that not only look great but also deliver measurable business results.
+              I care about the craft — not just making things work, but making them work well. I'm comfortable owning frontend decisions end-to-end, collaborating closely with backend teams, and navigating complex domains like iGaming, fintech, or data-heavy B2B products.
             </p>
 
             <div className="mb-10">
@@ -48,25 +43,31 @@ const AboutSection = () => {
                   <svg className="w-6 h-6 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span className="text-gray-600">Cross-platform development with a single codebase</span>
+                  <span className="text-gray-600">Architecture-first thinking — clear boundaries between domain, state, and UI</span>
                 </li>
                 <li className="flex items-start">
                   <svg className="w-6 h-6 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span className="text-gray-600">Clean, reusable components for scalable solutions</span>
+                  <span className="text-gray-600">Component design that scales: composable, testable, and easy to reason about</span>
                 </li>
                 <li className="flex items-start">
                   <svg className="w-6 h-6 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span className="text-gray-600">Secure authentications and integrations with APIs</span>
+                  <span className="text-gray-600">Pragmatic state management — the right tool for the job, not the trendiest one</span>
                 </li>
                 <li className="flex items-start">
                   <svg className="w-6 h-6 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span className="text-gray-600">Focus on performance and user experience optimization</span>
+                  <span className="text-gray-600">Performance and accessibility as defaults, not afterthoughts</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="w-6 h-6 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span className="text-gray-600">Comfortable owning features end-to-end, from API contract to deployed UI</span>
                 </li>
               </ul>
             </div>

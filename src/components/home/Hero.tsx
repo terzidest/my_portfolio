@@ -7,15 +7,12 @@ const Hero = () => {
         <div className="flex flex-col md:flex-row items-center">
           <div className="md:w-1/2 flex flex-col mb-16 md:mb-0 md:items-start items-center text-center md:text-left">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-fade-in-up">
-              React &
+              Frontend
               <br />
-              React Native
-              <br />
-              <span className="text-blue-200">Developer</span>
+              <span className="text-blue-200">Engineer</span>
             </h1>
             <p className="text-lg text-blue-100 mb-8 max-w-md animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-            Meta-certified developer crafting high-quality cross-platform mobile and dynamic web apps
-            backed by Firebase for real-time data and secure authentication.
+              Building production-grade web and mobile experiences with React ecosystems — from component architecture to scalable state management and cross-platform delivery.
             </p>
             <div className="flex flex-col sm:flex-row animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
               <Button
@@ -79,7 +76,7 @@ const Hero = () => {
       <div className="container mx-auto px-6 mt-16 relative z-10">
         <p className="text-sm text-center text-blue-200 mb-4 uppercase tracking-wider">Technologies I Work With</p>
         <div className="flex flex-wrap justify-center gap-8">
-          {['JavaScript/TypeScript', 'React Native(Expo)','React(vite)', 'React navigation/router', 'Zustand', 'TailwindCSS/Nativewind', 'Firebase'].map((tech, index) => (
+          {['React', 'TypeScript', 'Next.js', 'React Native', 'React Query', 'Zustand', 'Styled Components', 'TailwindCSS', 'Node.js / Express'].map((tech, index) => (
             <div key={index} className="text-white font-medium">
               {tech}
             </div>
