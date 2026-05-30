@@ -9,8 +9,6 @@ const Home = () => {
       title: "React Ecosystem Architecture",
       description:
         "Designing scalable frontend systems with React — feature-based module structure, performant state management, and clean separation between UI and domain logic.",
-      // No dedicated icon for "architecture" yet; falls through to the
-      // default lightning icon in FeatureCard.
       icon: "architecture",
     },
     {

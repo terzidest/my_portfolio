@@ -64,6 +64,21 @@ const FeatureCard = ({ title, description, icon }: FeatureCardProps) => {
             />
           </svg>
         );
+      case "architecture":
+        // 2x2 grid of rounded blocks — reads as "modular components".
+        return (
+          <svg
+            className="w-9 h-9"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect x="2" y="2" width="7" height="7" rx="1.2" />
+            <rect x="11" y="2" width="7" height="7" rx="1.2" />
+            <rect x="2" y="11" width="7" height="7" rx="1.2" />
+            <rect x="11" y="11" width="7" height="7" rx="1.2" />
+          </svg>
+        );
       default:
         return (
           <svg
