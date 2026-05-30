@@ -23,13 +23,16 @@ const ContactForm = () => {
   } = useForm<ContactFormValues>(initialValues, validateContactForm);
 
   const [submitError, setSubmitError] = useState<string | null>(null);
+  // Honeypot: hidden field humans don't see but bots will fill. The function
+  // silently drops submissions where this is non-empty.
+  const [honeypot, setHoneypot] = useState('');
 
   const onSubmit = async (formData: ContactFormValues) => {
     setSubmitError(null);
     const response = await fetch('/.netlify/functions/send-contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData)
+      body: JSON.stringify({ ...formData, website: honeypot })
     });
     if (!response.ok) {
       setSubmitError(
@@ -65,6 +68,22 @@ const ContactForm = () => {
         </div>
       ) : (
         <form onSubmit={(e) => handleSubmit(e, onSubmit)}>
+          {/* Honeypot: positioned off-screen so humans never see it.
+              tabIndex/autoComplete/aria-hidden keep keyboard, password
+              managers and screen readers from touching it either. */}
+          <div style={{ position: 'absolute', left: '-5000px' }} aria-hidden="true">
+            <label>
+              Leave this field empty
+              <input
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                value={honeypot}
+                onChange={(e) => setHoneypot(e.target.value)}
+              />
+            </label>
+          </div>
           {submitError && (
             <div className="rounded-md p-4 mb-6 bg-red-50 text-red-800">
               <div className="flex">
