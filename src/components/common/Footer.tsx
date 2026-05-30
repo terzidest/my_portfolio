@@ -13,7 +13,7 @@ const Footer = () => {
               Triantaphilos Terzides
             </Link>
             <p className="text-gray-400 mb-6 mx-auto md:mx-0 text-center md:text-left max-w-xs">
-              React/React Native Developer specializing in building high-quality mobile and web applications.
+              Frontend engineer building production-grade web and mobile experiences with React.
             </p>
             <div className="flex space-x-4 justify-center md:justify-start">
               <a
