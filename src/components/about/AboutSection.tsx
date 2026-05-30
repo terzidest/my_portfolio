@@ -43,25 +43,31 @@ const AboutSection = () => {
                   <svg className="w-6 h-6 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span className="text-gray-600">Cross-platform development with a single codebase</span>
+                  <span className="text-gray-600">Architecture-first thinking — clear boundaries between domain, state, and UI</span>
                 </li>
                 <li className="flex items-start">
                   <svg className="w-6 h-6 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span className="text-gray-600">Clean, reusable components for scalable solutions</span>
+                  <span className="text-gray-600">Component design that scales: composable, testable, and easy to reason about</span>
                 </li>
                 <li className="flex items-start">
                   <svg className="w-6 h-6 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span className="text-gray-600">Secure authentications and integrations with APIs</span>
+                  <span className="text-gray-600">Pragmatic state management — the right tool for the job, not the trendiest one</span>
                 </li>
                 <li className="flex items-start">
                   <svg className="w-6 h-6 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span className="text-gray-600">Focus on performance and user experience optimization</span>
+                  <span className="text-gray-600">Performance and accessibility as defaults, not afterthoughts</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="w-6 h-6 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span className="text-gray-600">Comfortable owning features end-to-end, from API contract to deployed UI</span>
                 </li>
               </ul>
             </div>
