@@ -28,16 +28,11 @@ const AboutSection = () => {
             <div className="w-16 h-1 bg-primary mb-6"></div>
 
             <p className="text-gray-600 text-lg mb-6">
-              I'm a creative Developer with a strong background in building and implementing
-              functional, high-quality apps . I specialize in
-              development using React, React Native and Firebase, allowing me to
-              efficiently create cross-platform apps for iOS, Android and the web.
+              I'm a frontend engineer based in Athens with several years of experience building production React applications — from mobile apps to large-scale web platforms. I specialize in React and its ecosystem, with a focus on architecture that scales: modular codebases, clean state management, and maintainable component design.
             </p>
 
             <p className="text-gray-600 text-lg mb-6">
-              I'm a fast learner, adaptable to new technologies,
-              and always focused on delivering solutions with a keen eye for detail.
-              I believe in creating applications that not only look great but also deliver measurable business results.
+              I care about the craft — not just making things work, but making them work well. I'm comfortable owning frontend decisions end-to-end, collaborating closely with backend teams, and navigating complex domains like iGaming, fintech, or data-heavy B2B products.
             </p>
 
             <div className="mb-10">

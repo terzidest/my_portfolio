@@ -6,22 +6,24 @@ import Button from "../components/common/Button";
 const Home = () => {
   const features = [
     {
-      title: "Cross-Platform mobile Development with React Native",
+      title: "React Ecosystem Architecture",
       description:
-        "Build sleek, native-feeling mobile apps for iOS and Android from a single codebase. Leverage React Native's performance benefits while maintaining rapid development cycles and code reusability across platforms.",
-      icon: "mobile",
+        "Designing scalable frontend systems with React — feature-based module structure, performant state management, and clean separation between UI and domain logic.",
+      // No dedicated icon for "architecture" yet; falls through to the
+      // default lightning icon in FeatureCard.
+      icon: "architecture",
     },
     {
-      title: "Web Development with React",
+      title: "Complex UI & Dashboard Development",
       description:
-        "Create dynamic, responsive web applications with the leading web library, utilizing component based architecture to build interactive UIs that are both maintainable and optimized for performance.",
+        "Building data-heavy interfaces, real-time dashboards, and admin platforms that handle scale — with a focus on performance, accessibility, and maintainability.",
       icon: "web",
     },
     {
-      title: "Firebase Integration",
+      title: "Cross-Platform Mobile Development",
       description:
-        "Power your applications with scalable cloud infrastructure that handles real-time data synchronization and secure user authentication without server management.",
-      icon: "firebase",
+        "Delivering native-feeling iOS and Android apps with React Native and Expo, sharing logic with web codebases where it makes sense.",
+      icon: "mobile",
     },
   ];
 
