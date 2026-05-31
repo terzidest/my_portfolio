@@ -1,4 +1,5 @@
 import AboutSection from '../components/about/AboutSection';
+import ExperienceSection from '../components/about/ExperienceSection';
 
 const About = () => {
   const education = {
@@ -48,6 +49,8 @@ const About = () => {
     <div className="pt-28 pb-20 bg-gray-50">
       <div className="container mx-auto px-6">
         <AboutSection />
+
+        <ExperienceSection />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
           <div className="bg-white rounded-xl shadow-md p-8">
