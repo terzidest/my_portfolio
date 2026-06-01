@@ -39,21 +39,68 @@ const Hero = () => {
               <div className="absolute top-0 left-0 right-0 h-6 bg-gray-800 flex justify-center items-center">
                 <div className="w-16 h-1 bg-gray-600 rounded-full"></div>
               </div>
-              {/* Mobile app screenshot placeholder */}
-              <div className="w-full h-full bg-gradient-to-br from-blue-400 to-purple-500 pt-6">
-                {/* App content mockup */}
-                <div className="bg-white mx-2 rounded-lg h-10 mb-2 flex items-center px-3">
-                  <div className="w-4 h-4 bg-gray-300 rounded-full mr-2"></div>
-                  <div className="h-3 bg-gray-200 rounded-full w-3/4"></div>
+              {/* Mobile app UI — entirely CSS, no images. The internal
+                  layout (header / search / featured card / grid / row /
+                  tab bar) is meant to read as a finished generic app
+                  rather than placeholder/skeleton blocks. */}
+              <div className="w-full h-full bg-gray-50 pt-6 flex flex-col">
+                {/* App header: title + avatar */}
+                <div className="px-4 pt-4 pb-3 flex items-center justify-between">
+                  <div className="space-y-1.5">
+                    <div className="h-2.5 w-20 bg-gray-800 rounded-full"></div>
+                    <div className="h-1.5 w-14 bg-gray-300 rounded-full"></div>
+                  </div>
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 shadow-sm"></div>
                 </div>
-                <div className="flex px-2 mb-3">
-                  <div className="w-1/3 bg-white rounded-lg h-20 mr-1"></div>
-                  <div className="w-1/3 bg-white rounded-lg h-20 mr-1"></div>
-                  <div className="w-1/3 bg-white rounded-lg h-20"></div>
+
+                {/* Search bar */}
+                <div className="mx-4 mb-3 h-9 bg-white rounded-full shadow-sm flex items-center px-3">
+                  <div className="w-3 h-3 rounded-full border-2 border-gray-300"></div>
+                  <div className="h-1.5 w-24 bg-gray-200 rounded-full ml-2"></div>
                 </div>
-                <div className="bg-white mx-2 rounded-lg h-32 mb-2"></div>
-                <div className="bg-white mx-2 rounded-lg h-12 mb-2 flex items-center justify-center">
-                  <div className="w-20 h-6 bg-blue-500 rounded-full"></div>
+
+                {/* Featured card */}
+                <div className="mx-4 mb-3 h-28 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-md p-3 flex flex-col justify-end">
+                  <div className="h-2 w-3/4 bg-white/90 rounded-full mb-1.5"></div>
+                  <div className="h-1.5 w-1/2 bg-white/70 rounded-full"></div>
+                </div>
+
+                {/* Two-column grid */}
+                <div className="mx-4 mb-3 grid grid-cols-2 gap-2">
+                  <div className="h-20 rounded-lg bg-white shadow-sm p-2 flex flex-col justify-between">
+                    <div className="w-6 h-6 rounded-md bg-yellow-100"></div>
+                    <div>
+                      <div className="h-1.5 w-3/4 bg-gray-700 rounded-full mb-1"></div>
+                      <div className="h-1 w-1/2 bg-gray-300 rounded-full"></div>
+                    </div>
+                  </div>
+                  <div className="h-20 rounded-lg bg-white shadow-sm p-2 flex flex-col justify-between">
+                    <div className="w-6 h-6 rounded-md bg-pink-100"></div>
+                    <div>
+                      <div className="h-1.5 w-3/4 bg-gray-700 rounded-full mb-1"></div>
+                      <div className="h-1 w-1/2 bg-gray-300 rounded-full"></div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* List row */}
+                <div className="mx-4 mb-3 bg-white rounded-lg shadow-sm p-2 flex items-center">
+                  <div className="w-9 h-9 rounded-md bg-green-100 flex-shrink-0"></div>
+                  <div className="ml-2 flex-1 space-y-1">
+                    <div className="h-1.5 w-2/3 bg-gray-700 rounded-full"></div>
+                    <div className="h-1 w-1/2 bg-gray-300 rounded-full"></div>
+                  </div>
+                </div>
+
+                {/* Spacer pushes the tab bar to the bottom */}
+                <div className="flex-1"></div>
+
+                {/* Tab bar */}
+                <div className="border-t border-gray-200 bg-white h-12 flex items-center justify-around px-4">
+                  <div className="w-5 h-5 rounded-full bg-primary"></div>
+                  <div className="w-5 h-5 rounded-full bg-gray-300"></div>
+                  <div className="w-5 h-5 rounded-full bg-gray-300"></div>
+                  <div className="w-5 h-5 rounded-full bg-gray-300"></div>
                 </div>
               </div>
             </div>
