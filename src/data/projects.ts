@@ -19,18 +19,11 @@ export const projects: Project[] = [
     categories: ['mobile'],
     github: 'https://github.com/terzidest/little-lemon',
     featured: true,
-    longDescription: `
-      Little Lemon is a comprehensive mobile application for a restaurant that demonstrates my skills in React Native development.
-
-      The app features a clean, intuitive user interface that allows users to browse the restaurant's menu.
-
-      Key technical features include:
-      - User Authentication
-      - Menu Items preview
-      - Filtering and search functionality
-      - Clean architecture with reusable components
-      - Performance optimization for smooth scrolling and transitions
-    `
+    problem:
+      "Course-derived brief from Meta's React Native Specialization: build a complete restaurant menu mobile experience covering onboarding, authentication, browsable menu items, and search/filter — exercising end-to-end React Native fundamentals against a realistic domain rather than a toy app.",
+    role: 'Solo developer — UI, state, navigation, persistence, and Firebase integration.',
+    outcome:
+      'A working app covering the full brief: auth, menu browsing with search and filter, and a clean component layer with shared primitives. Used to consolidate the Meta React Native Specialization material and as a reference codebase for later React Native work.',
   },
   {
     id: 'infovault',
@@ -46,12 +39,11 @@ export const projects: Project[] = [
     categories: ['mobile'],
     github: 'https://github.com/terzidest/InfoVault',
     featured: true,
-    longDescription: `
-      InfoVault is a secure password management application built with React Native and Expo.
-
-      The app provides a secure way for users to store their passwords and sensitive information locally on their device,
-      protected by biometric authentication and encryption.
-    `,
+    problem:
+      "I wanted a password manager that never leaves the device — no cloud sync, no third-party server — backed by OS-level biometrics and encryption at rest. An exercise in handling genuinely sensitive data inside a React Native app.",
+    role: 'Solo developer — architecture, encryption layer, UI, and biometric integration.',
+    outcome:
+      'A functional offline-only vault built on Expo SecureStore and platform biometrics. Demonstrates safe handling of sensitive data and use of platform-specific security APIs from a React Native codebase.',
   },
   {
     id: 'ethereal-nature',
@@ -67,14 +59,11 @@ export const projects: Project[] = [
     categories: ['mobile', 'web'],
     github: 'https://github.com/terzidest/ethereal_nature',
     featured: true,
-    longDescription: `
-      EtherealNature is a full-featured e-commerce ecosystem specialized for an essential oils business,
-      encompassing web, mobile, and admin interfaces with a shared Firebase backend.
-
-      The platform combines clean, appealing interfaces with powerful e-commerce functionality across
-      all touchpoints. The mobile app is built with React Native, the web interface with React, and
-      everything is unified through a common Firebase backend with a monorepo workspace structure.
-    `
+    problem:
+      'A small essential-oils business needed a web storefront, a mobile app, and an admin interface — all sharing the same product and order data without three disconnected databases or duplicated business logic.',
+    role: 'Solo developer across the monorepo — mobile (React Native), web (React), shared Firebase backend, and admin tooling.',
+    outcome:
+      'A unified ecosystem with shared auth, shared data, and a single source of truth in Firestore. Demonstrates monorepo organization and shared-backend architecture across web and mobile in one codebase.',
   },
   {
     id: 'portfolio',
@@ -86,22 +75,15 @@ export const projects: Project[] = [
       getImagePath('/assets/images/projects/portfolio-mobile-2.png'),
       getImagePath('/assets/images/projects/portfolio-mobile-3.png'),
     ],
-    techStack: ['React', 'Vite', 'TailwindCSS', 'React Router', 'Responsive Design'],
+    techStack: ['React', 'TypeScript', 'Vite', 'TailwindCSS', 'React Router', 'Netlify Functions', 'Resend'],
     categories: ['web'],
     github: 'https://github.com/terzidest/my_portfolio',
     featured: true,
-    longDescription: `
-      My personal portfolio website is built using modern web technologies to showcase my projects and skills
-      as a React and React Native developer. The site itself serves as a demonstration of my web development and design
-      capabilities.
-
-      Built with React, Vite, and TailwindCSS, the portfolio features a clean, responsive design that works
-      seamlessly across all devices. The site is structured to provide an optimal user experience, with smooth
-      navigation and transitions between sections.
-
-      This project was an opportunity to apply best practices in web development and to create a platform
-      that effectively communicates my professional identity and technical expertise.
-    `
+    problem:
+      "The existing portfolio framed me as a 'React & React Native developer' and was drifting from how I actually work today. I needed a site that reflects my current Frontend Engineer positioning — architecture, scalability, testability — and that I'd actually maintain over time.",
+    role: 'Solo — design, implementation, and deployment of a TypeScript-strict React app with a serverless contact-form backend.',
+    outcome:
+      "Live at terzidest.netlify.app from a single `main` branch that deploys to both Netlify (primary) and GitHub Pages, end-to-end TypeScript under strict mode, and a Netlify Function for the contact form using Resend — with honeypot spam protection, length caps, and an opt-in auto-reply.",
   }
 ];
 
