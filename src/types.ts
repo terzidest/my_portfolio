@@ -10,7 +10,12 @@ export interface Project {
   categories: ProjectCategory[];
   github: string;
   featured: boolean;
-  longDescription: string;
+  /** What this project addressed (1–2 paragraphs; use \n\n for paragraph breaks). */
+  problem: string;
+  /** Your role on the project (typically one or two sentences). */
+  role: string;
+  /** What you shipped or what was learned (1–2 paragraphs). */
+  outcome: string;
 }
 
 export type ContactFormValues = {
