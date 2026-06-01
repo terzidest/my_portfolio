@@ -3,6 +3,11 @@ import { useState, useEffect } from 'react';
 import { getProjectById, getAdjacentProjectIds } from '../data/projects';
 import type { Project } from '../types';
 
+// Split a multi-paragraph string on blank-line breaks so single newlines
+// inside a paragraph don't produce empty <p> tags.
+const toParagraphs = (text: string): string[] =>
+  text.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
+
 const ProjectDetail = () => {
   const { id } = useParams<{ id: string }>();
   const [project, setProject] = useState<Project | null>(null);
@@ -91,16 +96,6 @@ const ProjectDetail = () => {
             <div className="p-8">
               <h1 className="text-3xl font-bold text-gray-800 mb-2">{project.title}</h1>
               <p className="text-gray-600 mb-4">{project.description}</p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.techStack.map((tech, index) => (
-                  <span
-                    key={index}
-                    className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
               <a
                 href={project.github}
                 target="_blank"
@@ -119,14 +114,42 @@ const ProjectDetail = () => {
 
           <div className="col-span-2">
             <div className="bg-white rounded-xl shadow-md p-8">
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">Overview</h2>
-              <div className="prose max-w-none">
-                {project.longDescription.split('\n').map((paragraph, index) => (
-                  <p key={index} className="mb-4 text-gray-600">
-                    {paragraph}
+              <section>
+                <h2 className="text-xl font-bold text-gray-800 mb-3">Problem</h2>
+                {toParagraphs(project.problem).map((p, i) => (
+                  <p key={i} className="mb-4 text-gray-600 leading-relaxed last:mb-0">
+                    {p}
                   </p>
                 ))}
-              </div>
+              </section>
+
+              <section className="mt-8">
+                <h2 className="text-xl font-bold text-gray-800 mb-3">Role</h2>
+                <p className="text-gray-600 leading-relaxed">{project.role}</p>
+              </section>
+
+              <section className="mt-8">
+                <h2 className="text-xl font-bold text-gray-800 mb-3">Stack</h2>
+                <div className="flex flex-wrap gap-2">
+                  {project.techStack.map((tech, index) => (
+                    <span
+                      key={index}
+                      className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </section>
+
+              <section className="mt-8">
+                <h2 className="text-xl font-bold text-gray-800 mb-3">Outcome</h2>
+                {toParagraphs(project.outcome).map((p, i) => (
+                  <p key={i} className="mb-4 text-gray-600 leading-relaxed last:mb-0">
+                    {p}
+                  </p>
+                ))}
+              </section>
             </div>
 
             {/* Image Gallery - only show if additionalImages exist */}
