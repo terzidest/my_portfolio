@@ -60,3 +60,7 @@ cypress/screenshots
 
 # Optional: Storybook
 /storybook-static
+
+# Local Netlify folder
+.netlify
+deno.lock
