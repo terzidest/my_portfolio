@@ -123,7 +123,7 @@ const Hero = () => {
       <div className="container mx-auto px-6 mt-16 relative z-10">
         <p className="text-sm text-center text-blue-200 mb-4 uppercase tracking-wider">Technologies I Work With</p>
         <div className="flex flex-wrap justify-center gap-8">
-          {['React', 'TypeScript', 'Next.js', 'React Native', 'React Query', 'Zustand', 'Styled Components', 'TailwindCSS', 'Node.js / Express'].map((tech, index) => (
+          {['React', 'TypeScript', 'Next.js', 'React Native', 'React Query', 'Zustand', 'MUI', 'TailwindCSS', 'Node.js'].map((tech, index) => (
             <div key={index} className="text-white font-medium">
               {tech}
             </div>
