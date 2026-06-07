@@ -6,24 +6,23 @@ const getImagePath = (path: string): string =>
 // src/data/projects.ts
 export const projects: Project[] = [
   {
-    id: 'little-lemon',
-    title: 'Little Lemon',
-    description: 'A mobile app fetching data from firebase and filtering effectively.',
-    image: getImagePath('/assets/images/projects/little-lemon.png'),
+    id: 'stack-game',
+    title: 'Stack Game',
+    description: 'A from-scratch mobile stack game built with Expo, Skia, and Reanimated worklets.',
+    image: getImagePath('/assets/images/projects/stack-game.png'),
     additionalImages: [
-      getImagePath('/assets/images/projects/little-lemon-2.png'),
-      getImagePath('/assets/images/projects/little-lemon.png'),
-      getImagePath('/assets/images/projects/little-lemon-3.png'),
+      getImagePath('/assets/images/projects/stack-game-2.png'),
+      getImagePath('/assets/images/projects/stack-game-3.png'),
     ],
-    techStack: ['React Native', 'JavaScript', 'Firebase', 'Nativewind', 'React Navigation', 'Zustand'],
+    techStack: ['Expo', 'React Native', 'TypeScript', 'React Native Skia', 'Reanimated', 'Gesture Handler'],
     categories: ['mobile'],
-    github: 'https://github.com/terzidest/little-lemon',
+    github: 'https://github.com/terzidest/stack-game',
     featured: true,
     problem:
-      "Course-derived brief from Meta's React Native Specialization: build a complete restaurant menu mobile experience covering onboarding, authentication, browsable menu items, and search/filter — exercising end-to-end React Native fundamentals against a realistic domain rather than a toy app.",
-    role: 'Solo developer — UI, state, navigation, persistence, and Firebase integration.',
+      "Writing a polished mobile game from scratch — no game engine — as a test bed for Reanimated worklets, Skia rendering, and React Native's new architecture. A simple but unforgiving gameplay loop (Stack: drop a sliding block onto a tower, slice the overhang, lose when you miss) gave a small enough scope to ship while still surfacing the hard parts: a UI-thread game loop, cross-thread state coordination, sub-pixel collision math, and game-feel polish.",
+    role: 'Solo developer — gameplay loop, rendering, audio, and game-feel polish.',
     outcome:
-      'A working app covering the full brief: auth, menu browsing with search and filter, and a clean component layer with shared primitives. Used to consolidate the Meta React Native Specialization material and as a reference codebase for later React Native work.',
+      "A playable game on Expo + RN 0.85 with the New Architecture (Fabric), driving the entire animation loop from Reanimated worklets on the UI thread and rendering via Skia. Core gameplay complete with combo / perfect-drop detection, haptics, and sound; thread model and data flow documented in the repo's ARCHITECTURE.md. Demonstrates handling worklet/JS state coordination and shipping a 60 fps gameplay loop without a game engine.",
   },
   {
     id: 'infovault',
@@ -84,6 +83,26 @@ export const projects: Project[] = [
     role: 'Solo — design, implementation, and deployment of a TypeScript-strict React app with a serverless contact-form backend.',
     outcome:
       "Live at terzidest.netlify.app from a single `main` branch that deploys to both Netlify (primary) and GitHub Pages, end-to-end TypeScript under strict mode, and a Netlify Function for the contact form using Resend — with honeypot spam protection, length caps, and an opt-in auto-reply.",
+  },
+  {
+    id: 'little-lemon',
+    title: 'Little Lemon',
+    description: 'A mobile app fetching data from firebase and filtering effectively.',
+    image: getImagePath('/assets/images/projects/little-lemon.png'),
+    additionalImages: [
+      getImagePath('/assets/images/projects/little-lemon-2.png'),
+      getImagePath('/assets/images/projects/little-lemon.png'),
+      getImagePath('/assets/images/projects/little-lemon-3.png'),
+    ],
+    techStack: ['React Native', 'JavaScript', 'Firebase', 'Nativewind', 'React Navigation', 'Zustand'],
+    categories: ['mobile'],
+    github: 'https://github.com/terzidest/little-lemon',
+    featured: true,
+    problem:
+      "Course-derived brief from Meta's React Native Specialization: build a complete restaurant menu mobile experience covering onboarding, authentication, browsable menu items, and search/filter — exercising end-to-end React Native fundamentals against a realistic domain rather than a toy app.",
+    role: 'Solo developer — UI, state, navigation, persistence, and Firebase integration.',
+    outcome:
+      'A working app covering the full brief: auth, menu browsing with search and filter, and a clean component layer with shared primitives. Used to consolidate the Meta React Native Specialization material and as a reference codebase for later React Native work.',
   }
 ];
 
