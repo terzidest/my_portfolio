@@ -6,6 +6,24 @@ const getImagePath = (path: string): string =>
 // src/data/projects.ts
 export const projects: Project[] = [
   {
+    id: 'stack-game',
+    title: 'Stack Game',
+    description: 'A from-scratch mobile stack game built with Expo, Skia, and Reanimated worklets.',
+    // Placeholder until real screenshots are added under
+    // public/assets/images/projects/stack-game.png (and -2, -3 for the gallery).
+    image: getImagePath('/assets/images/placeholder.jpg'),
+    additionalImages: [],
+    techStack: ['Expo', 'React Native', 'TypeScript', 'React Native Skia', 'Reanimated', 'Gesture Handler'],
+    categories: ['mobile'],
+    github: 'https://github.com/terzidest/stack-game',
+    featured: true,
+    problem:
+      "Writing a polished mobile game from scratch — no game engine — as a test bed for Reanimated worklets, Skia rendering, and React Native's new architecture. A simple but unforgiving gameplay loop (Stack: drop a sliding block onto a tower, slice the overhang, lose when you miss) gave a small enough scope to ship while still surfacing the hard parts: a UI-thread game loop, cross-thread state coordination, sub-pixel collision math, and game-feel polish.",
+    role: 'Solo developer — gameplay loop, rendering, audio, and game-feel polish.',
+    outcome:
+      "A playable game on Expo + RN 0.85 with the New Architecture (Fabric), driving the entire animation loop from Reanimated worklets on the UI thread and rendering via Skia. Core gameplay complete with combo / perfect-drop detection, haptics, and sound; thread model and data flow documented in the repo's ARCHITECTURE.md. Demonstrates handling worklet/JS state coordination and shipping a 60 fps gameplay loop without a game engine.",
+  },
+  {
     id: 'little-lemon',
     title: 'Little Lemon',
     description: 'A mobile app fetching data from firebase and filtering effectively.',
