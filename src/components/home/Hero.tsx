@@ -35,7 +35,7 @@ const Hero = () => {
           </div>
           <div className="md:w-1/2 relative animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
             {/* Phone mockup illustration (placeholder) */}
-            <div className="relative mx-auto w-64 h-128 bg-white rounded-3xl shadow-2xl overflow-hidden">
+            <div className="relative mx-auto w-64 h-128 bg-white rounded-3xl shadow-2xl overflow-hidden animate-float">
               <div className="absolute top-0 left-0 right-0 h-6 bg-gray-800 flex justify-center items-center">
                 <div className="w-16 h-1 bg-gray-600 rounded-full"></div>
               </div>
@@ -44,8 +44,9 @@ const Hero = () => {
                   tab bar) is meant to read as a finished generic app
                   rather than placeholder/skeleton blocks. */}
               <div className="w-full h-full bg-gray-50 pt-6 flex flex-col">
-                {/* App header: title + avatar */}
-                <div className="px-4 pt-4 pb-3 flex items-center justify-between">
+                {/* App header: title + avatar. The inner elements "boot in"
+                    sequentially after the phone itself fades in (0.6s). */}
+                <div className="px-4 pt-4 pb-3 flex items-center justify-between animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
                   <div className="space-y-1.5">
                     <div className="h-2.5 w-20 bg-gray-800 rounded-full"></div>
                     <div className="h-1.5 w-14 bg-gray-300 rounded-full"></div>
@@ -54,19 +55,19 @@ const Hero = () => {
                 </div>
 
                 {/* Search bar */}
-                <div className="mx-4 mb-3 h-9 bg-white rounded-full shadow-sm flex items-center px-3">
+                <div className="mx-4 mb-3 h-9 bg-white rounded-full shadow-sm flex items-center px-3 animate-fade-in-up" style={{ animationDelay: '0.9s' }}>
                   <div className="w-3 h-3 rounded-full border-2 border-gray-300"></div>
                   <div className="h-1.5 w-24 bg-gray-200 rounded-full ml-2"></div>
                 </div>
 
                 {/* Featured card */}
-                <div className="mx-4 mb-3 h-28 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-md p-3 flex flex-col justify-end">
+                <div className="mx-4 mb-3 h-28 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-md p-3 flex flex-col justify-end animate-fade-in-up" style={{ animationDelay: '1s' }}>
                   <div className="h-2 w-3/4 bg-white/90 rounded-full mb-1.5"></div>
                   <div className="h-1.5 w-1/2 bg-white/70 rounded-full"></div>
                 </div>
 
                 {/* Two-column grid */}
-                <div className="mx-4 mb-3 grid grid-cols-2 gap-2">
+                <div className="mx-4 mb-3 grid grid-cols-2 gap-2 animate-fade-in-up" style={{ animationDelay: '1.1s' }}>
                   <div className="h-20 rounded-lg bg-white shadow-sm p-2 flex flex-col justify-between">
                     <div className="w-6 h-6 rounded-md bg-yellow-100"></div>
                     <div>
@@ -84,7 +85,7 @@ const Hero = () => {
                 </div>
 
                 {/* List row */}
-                <div className="mx-4 mb-3 bg-white rounded-lg shadow-sm p-2 flex items-center">
+                <div className="mx-4 mb-3 bg-white rounded-lg shadow-sm p-2 flex items-center animate-fade-in-up" style={{ animationDelay: '1.2s' }}>
                   <div className="w-9 h-9 rounded-md bg-green-100 flex-shrink-0"></div>
                   <div className="ml-2 flex-1 space-y-1">
                     <div className="h-1.5 w-2/3 bg-gray-700 rounded-full"></div>
@@ -96,7 +97,7 @@ const Hero = () => {
                 <div className="flex-1"></div>
 
                 {/* Tab bar */}
-                <div className="border-t border-gray-200 bg-white h-12 flex items-center justify-around px-4">
+                <div className="border-t border-gray-200 bg-white h-12 flex items-center justify-around px-4 animate-fade-in-up" style={{ animationDelay: '1.3s' }}>
                   <div className="w-5 h-5 rounded-full bg-primary"></div>
                   <div className="w-5 h-5 rounded-full bg-gray-300"></div>
                   <div className="w-5 h-5 rounded-full bg-gray-300"></div>

@@ -105,7 +105,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className={`md:hidden border-t border-blue-700 py-2 shadow-md fixed top-[60px] inset-x-0 z-50 ${
+        <div className={`md:hidden animate-slide-down border-t border-blue-700 py-2 shadow-md fixed top-[60px] inset-x-0 z-50 ${
           location.pathname === '/'
             ? 'bg-gradient-to-r from-blue-600 to-indigo-800'
             : 'bg-blue-600'
