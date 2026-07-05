@@ -146,11 +146,14 @@ const Hero = () => {
           >
             <div className="flex w-max animate-marquee">
               {/* Two identical copies so translateX(-50%) loops seamlessly.
-                  Trailing pr-8 keeps spacing even across the seam. */}
+                  Each copy is min-w-[100vw] so a screen-width window never
+                  spans more than one copy — i.e. no tech is ever visible
+                  twice at once. justify-around spreads the items to fill
+                  that width and keeps spacing even across the loop seam. */}
               {[0, 1].map((copy) => (
-                <ul key={copy} className="flex shrink-0 items-center gap-8 pr-8" aria-hidden={copy === 1}>
+                <ul key={copy} className="flex shrink-0 items-center justify-around min-w-[100vw]" aria-hidden={copy === 1}>
                   {technologies.map((tech) => (
-                    <li key={tech} className="text-white font-medium whitespace-nowrap">
+                    <li key={tech} className="px-4 text-white font-medium whitespace-nowrap">
                       {tech}
                     </li>
                   ))}
