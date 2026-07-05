@@ -9,20 +9,24 @@ interface ProjectCardProps {
 const ProjectCard = ({ project }: ProjectCardProps) => {
   const { id, title, description, image, techStack, github } = project;
   const [imageIsPortrait, setImageIsPortrait] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
     const img = e.currentTarget;
     setImageIsPortrait(img.naturalWidth < img.naturalHeight);
+    setImageLoaded(true);
   };
 
   return (
     <div className="group h-full flex flex-col bg-white rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:translate-y-[-5px]">
-      <div className="relative h-64 overflow-hidden">
+      <div className="relative h-64 overflow-hidden bg-gray-100">
+        {/* Shimmer placeholder until the image finishes loading. */}
+        {!imageLoaded && <div className="shimmer absolute inset-0 overflow-hidden bg-gray-200"></div>}
         <div className={`w-full h-full ${imageIsPortrait ? 'bg-gradient-to-r from-blue-600 to-indigo-800 flex justify-center items-center' : ''}`}>
           <img
             src={image || '/assets/images/placeholder.jpg'}
             alt={title}
-            className={`transition-transform duration-500 group-hover:scale-105 ${imageIsPortrait ? 'h-full' : 'w-full h-full object-cover'}`}
+            className={`transition-all duration-500 group-hover:scale-105 ${imageLoaded ? 'opacity-100' : 'opacity-0'} ${imageIsPortrait ? 'h-full' : 'w-full h-full object-cover'}`}
             onLoad={handleImageLoad}
           />
         </div>
