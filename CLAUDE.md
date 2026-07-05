@@ -13,7 +13,7 @@ npm run dev          # Vite dev server (http://localhost:5173) — no functions
 npm run build        # tsc -b && vite build  — production build for Netlify (base '/')
 npm run build:pages  # production build for GitHub Pages (base '/my_portfolio/')
 npm run typecheck    # tsc -b across all project references
-npm run lint         # ESLint (note: no eslint config committed yet — see Known gaps)
+npm run lint         # ESLint — TS-aware, zero-warning gate (config in .eslintrc.cjs)
 npm run preview      # preview the production build
 
 # Contact form end-to-end locally (Vite + the Netlify Function):
@@ -77,6 +77,5 @@ TypeScript is split into project references: `tsconfig.app.json` (src), `tsconfi
 
 ## Known gaps (don't be surprised)
 
-- **No ESLint config is committed**, so `npm run lint` currently fails with "couldn't find a configuration file". Type safety is enforced via strict `tsc`. Adding a flat config with `@typescript-eslint` is an open follow-up.
 - **Dark mode** is not implemented (deferred as a separate project).
 - Image shimmer/fade-in is applied on the Projects listing cards but not the ProjectDetail page images.
