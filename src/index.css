@@ -62,6 +62,46 @@ body {
   animation: slide-down 0.25s ease-out both;
 }
 
+/* Loading shimmer for image placeholders. */
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.35),
+    transparent
+  );
+  animation: shimmer 1.4s infinite;
+}
+
+/* Horizontally-scrolling marquee track (duplicated content, so a full
+   loop is -50% of the track width). Pause when hovered. */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 32s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
 /* Reduced motion: collapse all CSS animations/transitions to instant.
    (framer-motion is handled separately via MotionConfig reducedMotion="user".) */
 @media (prefers-reduced-motion: reduce) {
