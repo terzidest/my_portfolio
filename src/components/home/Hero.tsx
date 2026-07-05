@@ -1,6 +1,11 @@
 import Button from '../common/Button';
+import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion';
+
+const technologies = ['React', 'TypeScript', 'Next.js', 'React Native', 'React Query', 'Zustand', 'MUI', 'TailwindCSS', 'Node.js'];
 
 const Hero = () => {
+  const reducedMotion = usePrefersReducedMotion();
+
   return (
     <section className="relative bg-gradient-to-r from-blue-600 to-indigo-800 text-white pt-32 pb-20 overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
@@ -121,15 +126,39 @@ const Hero = () => {
       </div>
 
       {/* Technology logos */}
-      <div className="container mx-auto px-6 mt-16 relative z-10">
+      <div className="mt-16 relative z-10">
         <p className="text-sm text-center text-blue-200 mb-4 uppercase tracking-wider">Technologies I Work With</p>
-        <div className="flex flex-wrap justify-center gap-8">
-          {['React', 'TypeScript', 'Next.js', 'React Native', 'React Query', 'Zustand', 'MUI', 'TailwindCSS', 'Node.js'].map((tech, index) => (
-            <div key={index} className="text-white font-medium">
-              {tech}
+        {reducedMotion ? (
+          <div className="container mx-auto px-6 flex flex-wrap justify-center gap-8">
+            {technologies.map((tech) => (
+              <div key={tech} className="text-white font-medium">
+                {tech}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div
+            className="overflow-hidden"
+            style={{
+              WebkitMaskImage: 'linear-gradient(to right, transparent, black 8%, black 92%, transparent)',
+              maskImage: 'linear-gradient(to right, transparent, black 8%, black 92%, transparent)',
+            }}
+          >
+            <div className="flex w-max animate-marquee">
+              {/* Two identical copies so translateX(-50%) loops seamlessly.
+                  Trailing pr-8 keeps spacing even across the seam. */}
+              {[0, 1].map((copy) => (
+                <ul key={copy} className="flex shrink-0 items-center gap-8 pr-8" aria-hidden={copy === 1}>
+                  {technologies.map((tech) => (
+                    <li key={tech} className="text-white font-medium whitespace-nowrap">
+                      {tech}
+                    </li>
+                  ))}
+                </ul>
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
+        )}
       </div>
     </section>
   );
