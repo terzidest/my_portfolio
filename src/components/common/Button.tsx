@@ -18,7 +18,7 @@ const Button = ({
   onClick,
   ...props
 }: ButtonProps) => {
-  const baseStyles = 'inline-flex items-center justify-center font-medium rounded-md transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2';
+  const baseStyles = 'inline-flex items-center justify-center font-medium rounded-md transition-all duration-300 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2';
 
   const variants: Record<NonNullable<ButtonProps['variant']>, string> = {
     primary: 'bg-primary text-white hover:bg-blue-700 focus:ring-blue-500',

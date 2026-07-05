@@ -1,5 +1,6 @@
 import AboutSection from '../components/about/AboutSection';
 import ExperienceSection from '../components/about/ExperienceSection';
+import Reveal from '../components/common/Reveal';
 
 const About = () => {
   const education = {
@@ -52,7 +53,7 @@ const About = () => {
 
         <ExperienceSection />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
+        <Reveal className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
           <div className="bg-white rounded-xl shadow-md p-8">
             <h2 className="text-2xl font-bold text-gray-800 mb-6">Education</h2>
             <div className="mb-2">
@@ -110,7 +111,7 @@ const About = () => {
               ))}
             </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </div>
   );

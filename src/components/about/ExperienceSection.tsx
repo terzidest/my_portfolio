@@ -1,15 +1,18 @@
 import { experiences } from '../../data/experience';
+import Reveal from '../common/Reveal';
 
 const ExperienceSection = () => {
   return (
     <section className="mt-16">
-      <h2 className="text-3xl font-bold text-gray-900 mb-2">Experience</h2>
-      <div className="w-16 h-1 bg-primary mb-8"></div>
+      <Reveal>
+        <h2 className="text-3xl font-bold text-gray-900 mb-2">Experience</h2>
+        <div className="w-16 h-1 bg-primary mb-8"></div>
+      </Reveal>
 
       <div className="space-y-6">
-        {experiences.map((exp) => (
+        {experiences.map((exp, expIndex) => (
+          <Reveal key={`${exp.company}-${exp.title}`} delay={expIndex * 100}>
           <article
-            key={`${exp.company}-${exp.title}`}
             className="bg-white rounded-xl shadow-md p-8"
           >
             <header className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-1 mb-4">
@@ -40,6 +43,7 @@ const ExperienceSection = () => {
               ))}
             </ul>
           </article>
+          </Reveal>
         ))}
       </div>
     </section>

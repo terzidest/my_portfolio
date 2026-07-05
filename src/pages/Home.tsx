@@ -2,6 +2,7 @@ import Hero from "../components/home/Hero";
 import FeatureCard from "../components/home/FeatureCard";
 //import SkillsSection from "../components/skills/SkillsSection";
 import Button from "../components/common/Button";
+import Reveal from "../components/common/Reveal";
 
 const Home = () => {
   const features = [
@@ -31,7 +32,7 @@ const Home = () => {
 
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
+          <Reveal className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
               Technical Expertise
             </h2>
@@ -40,23 +41,24 @@ const Home = () => {
               Specialized in development of modern apps with cutting-edge
               technologies.
             </p>
-          </div>
+          </Reveal>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {features.map((feature, index) => (
-              <FeatureCard
-                key={index}
-                title={feature.title}
-                description={feature.description}
-                icon={feature.icon}
-              />
+              <Reveal key={index} delay={index * 120} className="h-full">
+                <FeatureCard
+                  title={feature.title}
+                  description={feature.description}
+                  icon={feature.icon}
+                />
+              </Reveal>
             ))}
           </div>
-          <div className="text-center mt-16">
+          <Reveal className="text-center mt-16" delay={200}>
             <Button to="/about" variant="primary" size="md">
               Learn More About Me →
             </Button>
-          </div>
+          </Reveal>
         </div>
       </section>
 

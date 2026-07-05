@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { AnimatePresence, MotionConfig, motion } from "framer-motion";
 import ProjectCard from "../components/projects/ProjectCard";
+import Reveal from "../components/common/Reveal";
 import { projects } from "../data/projects";
 import type { ProjectCategory } from "../types";
 
@@ -65,11 +67,29 @@ const Projects = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </div>
+        {/* MotionConfig reducedMotion="user" disables framer-motion's
+            transforms for users with prefers-reduced-motion set. */}
+        <MotionConfig reducedMotion="user">
+          <Reveal>
+            <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <AnimatePresence mode="popLayout">
+                {filteredProjects.map((project) => (
+                  <motion.div
+                    key={project.id}
+                    layout
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.25, ease: "easeOut" }}
+                    className="h-full"
+                  >
+                    <ProjectCard project={project} />
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </motion.div>
+          </Reveal>
+        </MotionConfig>
       </div>
     </div>
   );

@@ -16,13 +16,13 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
   };
 
   return (
-    <div className="bg-white rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:shadow-xl hover:translate-y-[-5px]">
-      <div className="relative h-64">
+    <div className="group h-full flex flex-col bg-white rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:translate-y-[-5px]">
+      <div className="relative h-64 overflow-hidden">
         <div className={`w-full h-full ${imageIsPortrait ? 'bg-gradient-to-r from-blue-600 to-indigo-800 flex justify-center items-center' : ''}`}>
           <img
             src={image || '/assets/images/placeholder.jpg'}
             alt={title}
-            className={`${imageIsPortrait ? 'h-full' : 'w-full h-full object-cover'}`}
+            className={`transition-transform duration-500 group-hover:scale-105 ${imageIsPortrait ? 'h-full' : 'w-full h-full object-cover'}`}
             onLoad={handleImageLoad}
           />
         </div>
@@ -33,7 +33,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
         </div>
       </div>
 
-      <div className="p-6 pt-3">
+      <div className="p-6 pt-3 flex flex-col flex-grow">
         <p className="text-gray-600 mb-4 line-clamp-3">{description}</p>
 
         <div className="flex flex-wrap gap-2 mb-4">
@@ -47,7 +47,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
           ))}
         </div>
 
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center mt-auto">
           <Button
             to={`/projects/${id}`}
             variant="text"
@@ -55,7 +55,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
           >
             View Details
             <svg
-              className="w-4 h-4 inline-block ml-1"
+              className="w-4 h-4 inline-block ml-1 transition-transform duration-300 group-hover:translate-x-1"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
