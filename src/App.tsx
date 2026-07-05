@@ -7,6 +7,7 @@ import ProjectDetail from './pages/ProjectDetail'
 import About from './pages/About'
 import Contact from './pages/Contact'
 import ScrollToTop from './utils/ScrollToTop'
+import BackToTop from './components/common/BackToTop'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         </Routes>
       </main>
       <Footer />
+      <BackToTop />
     </div>
   )
 }
