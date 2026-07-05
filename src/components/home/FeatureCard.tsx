@@ -98,7 +98,7 @@ const FeatureCard = ({ title, description, icon }: FeatureCardProps) => {
   };
 
   return (
-    <div className="bg-white rounded-lg p-8 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
+    <div className="h-full bg-white rounded-lg p-8 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
       <div className="w-16 h-16 bg-blue-100 text-primary rounded-lg flex items-center justify-center mb-6">
         {renderIcon()}
       </div>

@@ -45,7 +45,7 @@ const Home = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {features.map((feature, index) => (
-              <Reveal key={index} delay={index * 120}>
+              <Reveal key={index} delay={index * 120} className="h-full">
                 <FeatureCard
                   title={feature.title}
                   description={feature.description}

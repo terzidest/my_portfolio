@@ -81,6 +81,7 @@ const Projects = () => {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.25, ease: "easeOut" }}
+                    className="h-full"
                   >
                     <ProjectCard project={project} />
                   </motion.div>

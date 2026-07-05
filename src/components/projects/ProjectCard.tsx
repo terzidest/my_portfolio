@@ -16,7 +16,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
   };
 
   return (
-    <div className="group bg-white rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:translate-y-[-5px]">
+    <div className="group h-full flex flex-col bg-white rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:translate-y-[-5px]">
       <div className="relative h-64 overflow-hidden">
         <div className={`w-full h-full ${imageIsPortrait ? 'bg-gradient-to-r from-blue-600 to-indigo-800 flex justify-center items-center' : ''}`}>
           <img
@@ -33,7 +33,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
         </div>
       </div>
 
-      <div className="p-6 pt-3">
+      <div className="p-6 pt-3 flex flex-col flex-grow">
         <p className="text-gray-600 mb-4 line-clamp-3">{description}</p>
 
         <div className="flex flex-wrap gap-2 mb-4">
@@ -47,7 +47,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
           ))}
         </div>
 
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center mt-auto">
           <Button
             to={`/projects/${id}`}
             variant="text"
