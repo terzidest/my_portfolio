@@ -24,7 +24,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
         {!imageLoaded && <div className="shimmer absolute inset-0 overflow-hidden bg-gray-200"></div>}
         <div className={`w-full h-full ${imageIsPortrait ? 'bg-gradient-to-r from-blue-600 to-indigo-800 flex justify-center items-center' : ''}`}>
           <img
-            src={image || '/assets/images/placeholder.jpg'}
+            src={image}
             alt={title}
             className={`transition-all duration-500 group-hover:scale-105 ${imageLoaded ? 'opacity-100' : 'opacity-0'} ${imageIsPortrait ? 'h-full' : 'w-full h-full object-cover'}`}
             onLoad={handleImageLoad}

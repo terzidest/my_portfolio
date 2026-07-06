@@ -7,6 +7,7 @@ import Projects from './pages/Projects'
 import ProjectDetail from './pages/ProjectDetail'
 import About from './pages/About'
 import Contact from './pages/Contact'
+import NotFound from './pages/NotFound'
 import ScrollToTop from './utils/ScrollToTop'
 import BackToTop from './components/common/BackToTop'
 import usePrefersReducedMotion from './hooks/usePrefersReducedMotion'
@@ -22,6 +23,7 @@ function App() {
       <Route path="/projects/:id" element={<ProjectDetail />} />
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   )
 
