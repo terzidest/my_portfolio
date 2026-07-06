@@ -3,9 +3,16 @@ import { AnimatePresence, MotionConfig, motion } from "framer-motion";
 import ProjectCard from "../components/projects/ProjectCard";
 import Reveal from "../components/common/Reveal";
 import { projects } from "../data/projects";
+import usePageMeta from "../hooks/usePageMeta";
 import type { ProjectCategory } from "../types";
 
 const Projects = () => {
+  usePageMeta({
+    title: "Projects",
+    description:
+      "Selected web and mobile projects — React, React Native, and TypeScript case studies covering problem, role, stack, and outcome.",
+  });
+
   const [selectedFilters, setSelectedFilters] = useState<ProjectCategory[]>([]);
 
   // Toggle filter selection

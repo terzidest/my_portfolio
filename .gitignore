@@ -50,8 +50,6 @@ Icon
 .cache
 
 # Generated files
-/public/sitemap.xml
-/public/robots.txt
 /public/manifest.json
 
 # Optional: Cypress e2e testing

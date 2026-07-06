@@ -1,6 +1,13 @@
 import { Link } from 'react-router-dom';
+import usePageMeta from '../hooks/usePageMeta';
 
 const NotFound = () => {
+  usePageMeta({
+    title: 'Page Not Found',
+    description: 'This page does not exist.',
+    noindex: true,
+  });
+
   return (
     <div className="pt-28 pb-20 min-h-screen bg-gray-50">
       <div className="container mx-auto px-6 text-center">
