@@ -8,21 +8,15 @@ export const validateContactForm = (
 ): Partial<Record<keyof ContactFormValues, string>> => {
   const errors: Partial<Record<keyof ContactFormValues, string>> = {};
 
-  if (!values.name || values.name.trim() === '') {
-    errors.name = 'Name is required';
-  }
+  const nameError = validateRequired(values.name, 'Name');
+  if (nameError) errors.name = nameError;
 
-  if (!values.email || values.email.trim() === '') {
-    errors.email = 'Email is required';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-    errors.email = 'Invalid email address';
-  }
+  const emailError = validateEmail(values.email);
+  if (emailError) errors.email = emailError;
 
-  if (!values.message || values.message.trim() === '') {
-    errors.message = 'Message is required';
-  } else if (values.message.trim().length < 10) {
-    errors.message = 'Message must be at least 10 characters';
-  }
+  const messageError =
+    validateRequired(values.message, 'Message') ?? validateMinLength(values.message, 10, 'Message');
+  if (messageError) errors.message = messageError;
 
   return errors;
 };

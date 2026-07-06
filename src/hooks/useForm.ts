@@ -50,20 +50,11 @@ const useForm = <T extends Record<string, unknown>>(
     try {
       await onSubmit(values);
       setSubmitted(true);
-      // Reset form after submission if needed
-      // setValues(initialValues);
     } catch (error) {
       console.error('Form submission error:', error);
     } finally {
       setIsSubmitting(false);
     }
-  };
-
-  const resetForm = () => {
-    setValues(initialValues);
-    setErrors({});
-    setSubmitted(false);
-    setIsSubmitting(false);
   };
 
   return {
@@ -73,9 +64,6 @@ const useForm = <T extends Record<string, unknown>>(
     submitted,
     handleChange,
     handleSubmit,
-    resetForm,
-    setValues,
-    setErrors,
     setSubmitted
   };
 };
