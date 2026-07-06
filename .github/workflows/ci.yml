@@ -1,0 +1,31 @@
+# Quality gates for pull requests: typecheck, lint, and both production
+# builds (Netlify and GitHub Pages use different base paths, so both must
+# compile). Deployment stays in static.yml.
+name: CI
+
+on:
+  pull_request:
+    branches: ['main']
+  workflow_dispatch:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Lint
+        run: npm run lint
+      - name: Build (Netlify base)
+        run: npm run build
+      - name: Build (GitHub Pages base)
+        run: npm run build:pages
