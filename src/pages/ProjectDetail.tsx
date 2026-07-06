@@ -1,52 +1,43 @@
 import { useParams, Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { getProjectById, getAdjacentProjectIds } from '../data/projects';
-import type { Project } from '../types';
 
 // Split a multi-paragraph string on blank-line breaks so single newlines
 // inside a paragraph don't produce empty <p> tags.
 const toParagraphs = (text: string): string[] =>
   text.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
 
+// Screenshots mix portrait (mobile) and landscape (web) orientations, so each
+// image measures itself on load and picks its own sizing classes.
+interface AdaptiveImageProps {
+  src: string;
+  alt: string;
+  portraitClassName: string;
+  landscapeClassName: string;
+}
+
+const AdaptiveImage = ({ src, alt, portraitClassName, landscapeClassName }: AdaptiveImageProps) => {
+  const [isPortrait, setIsPortrait] = useState(false);
+
+  const handleLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const img = e.currentTarget;
+    setIsPortrait(img.naturalWidth < img.naturalHeight);
+  };
+
+  return (
+    <img
+      src={src}
+      alt={alt}
+      className={`rounded-xl ${isPortrait ? portraitClassName : landscapeClassName}`}
+      onLoad={handleLoad}
+    />
+  );
+};
+
 const ProjectDetail = () => {
   const { id } = useParams<{ id: string }>();
-  const [project, setProject] = useState<Project | null>(null);
-  const [adjacentProjects, setAdjacentProjects] = useState<{ prevId: string | null; nextId: string | null }>({ prevId: null, nextId: null });
-  const [imageIsPortrait, setImageIsPortrait] = useState(false);
-  const [loading, setLoading] = useState(true);
-
-  const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
-    const img = e.currentTarget;
-    setImageIsPortrait(img.naturalWidth < img.naturalHeight);
-  };
-  useEffect(() => {
-    if (!id) {
-      setLoading(false);
-      return;
-    }
-
-    setLoading(true);
-
-    const projectData = getProjectById(id);
-    const { prevId, nextId } = getAdjacentProjectIds(id);
-
-    if (projectData) {
-      setProject(projectData);
-      setAdjacentProjects({ prevId, nextId });
-      setLoading(false);
-    } else {
-      // Handle project not found
-      setLoading(false);
-    }
-  }, [id]);
-
-  if (loading) {
-    return (
-      <div className="pt-28 pb-20 min-h-screen flex justify-center items-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
+  const project = id ? getProjectById(id) : undefined;
+  const adjacentProjects = id ? getAdjacentProjectIds(id) : { prevId: null, nextId: null };
 
   if (!project) {
     return (
@@ -85,11 +76,11 @@ const ProjectDetail = () => {
           <div className="md:flex">
             <div className="md:w-64 h-48 overflow-hidden flex-shrink-0 mt-2 ml-2">
               <div className="w-full h-full bg-gradient-to-r from-blue-600 to-indigo-800 flex justify-center items-center rounded-xl">
-                <img
-                  src={project.image || '/assets/images/placeholder.jpg'}
+                <AdaptiveImage
+                  src={project.image}
                   alt={project.title}
-                  className={`rounded-xl ${imageIsPortrait ? 'h-40 w-auto' : 'w-full h-48 object-cover object-top'}`}
-                  onLoad={handleImageLoad}
+                  portraitClassName="h-40 w-auto"
+                  landscapeClassName="w-full h-48 object-cover object-top"
                 />
               </div>
             </div>
@@ -159,11 +150,11 @@ const ProjectDetail = () => {
                 <div className="flex flex-wrap gap-5">
                   {project.additionalImages.map((imgSrc, index) => (
                     <div key={index} className="bg-gradient-to-r from-blue-600 to-indigo-800 p-1 rounded-xl w-80 h-72 flex-shrink-0 flex items-center justify-center">
-                      <img
+                      <AdaptiveImage
                         src={imgSrc}
                         alt={`${project.title} screenshot ${index + 1}`}
-                        className={`rounded-xl ${imageIsPortrait ? 'h-full w-auto' : 'w-auto h-full object-cover object-top'}`}
-                        onLoad={handleImageLoad}
+                        portraitClassName="h-full w-auto"
+                        landscapeClassName="w-auto h-full object-cover object-top"
                       />
                     </div>
                   ))}

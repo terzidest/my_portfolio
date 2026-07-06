@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "build:pages": "tsc -b && vite build --base=/my_portfolio/",
+    "build:pages": "tsc -b && vite build --base=/my_portfolio/ && cp dist/index.html dist/404.html",
     "typecheck": "tsc -b",
     "lint": "eslint . --ext js,jsx,ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
