@@ -47,22 +47,22 @@ export const projects: Project[] = [
   {
     id: 'ethereal-nature',
     title: 'EtherealNature',
-    description: 'A cross-platform e-commerce solution with shared Firebase backend for web and mobile.',
+    description: 'A contract-first e-commerce reference architecture: a TanStack storefront and admin over a Kotlin/Ktor + PostgreSQL backend in a polyglot monorepo.',
     image: getImagePath('/assets/images/projects/ethnature.png'),
     additionalImages: [
       getImagePath('/assets/images/projects/ethnature.png'),
       getImagePath('/assets/images/projects/ethnature2.png'),
       getImagePath('/assets/images/projects/ethnature3.png'),
     ],
-    techStack: ['React Native', 'React', 'Firebase', 'Firestore', 'Authentication', 'Monorepo'],
-    categories: ['mobile', 'web'],
+    techStack: ['TanStack Start', 'React', 'TypeScript', 'Kotlin', 'Ktor', 'PostgreSQL', 'Turborepo', 'OpenAPI'],
+    categories: ['web'],
     github: 'https://github.com/terzidest/ethereal_nature',
     featured: true,
     problem:
-      'A small essential-oils business needed a web storefront, a mobile app, and an admin interface — all sharing the same product and order data without three disconnected databases or duplicated business logic.',
-    role: 'Solo developer across the monorepo — mobile (React Native), web (React), shared Firebase backend, and admin tooling.',
+      "A deliberately minimal e-shop domain — catalog, cart, ordering, identity — used as a vehicle for the hard part: structural integrity at scale. The guiding rule is that the server never trusts a client-supplied price, total, or stock; client carts are intents only, and the backend stays the authoritative source for money and inventory, recomputed at every cart merge and checkout.",
+    role: 'Solo developer across a polyglot monorepo — TanStack storefront and admin (TypeScript), Kotlin/Ktor backend, and the OpenAPI contract that ties them together.',
     outcome:
-      'A unified ecosystem with shared auth, shared data, and a single source of truth in Firestore. Demonstrates monorepo organization and shared-backend architecture across web and mobile in one codebase.',
+      'A contract-first architecture where an OpenAPI spec generates the typed API client shared by a server-rendered storefront and an authenticated admin SPA, backed by Ktor + Exposed on PostgreSQL. Built as a reference codebase — bounded contexts, Architecture Decision Records, and a phased roadmap (read paths before writes) documented in the repo — to demonstrate scalable, well-separated full-stack design rather than feature breadth.',
   },
   {
     id: 'portfolio',
