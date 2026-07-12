@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Button from '../common/Button';
+import TechBadge from '../common/TechBadge';
 import type { Project } from '../../types';
 
 interface ProjectCardProps {
@@ -41,13 +42,8 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
         <p className="text-gray-600 mb-4 line-clamp-3">{description}</p>
 
         <div className="flex flex-wrap gap-2 mb-4">
-          {techStack && techStack.map((tech, index) => (
-            <span
-              key={index}
-              className="px-3 py-1 bg-blue-50 text-primary text-xs font-medium rounded-full"
-            >
-              {tech}
-            </span>
+          {techStack && techStack.map((tech) => (
+            <TechBadge key={tech} label={tech} />
           ))}
         </div>
 

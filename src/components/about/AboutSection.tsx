@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom';
 
 const AboutSection = () => {
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="container mx-auto px-6">
-        <div className="flex flex-col lg:flex-row">
+    // Layout-neutral: the About page owns the outer padding/background.
+    <section>
+      <div className="flex flex-col lg:flex-row">
           {/* Profile Image */}
           <div className="lg:w-1/3 mb-12 lg:mb-0 flex justify-center">
             <div className="relative">
@@ -90,7 +90,6 @@ const AboutSection = () => {
               </Link>
             </div>
           </div>
-        </div>
       </div>
     </section>
   );
