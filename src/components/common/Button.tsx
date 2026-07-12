@@ -20,12 +20,14 @@ const Button = ({
 }: ButtonProps) => {
   // focus-visible (not focus) so the ring shows for keyboard users only,
   // not on every mouse click.
-  const baseStyles = 'inline-flex items-center justify-center font-medium rounded-md transition-all duration-300 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2';
+  const baseStyles = 'inline-flex items-center justify-center font-medium rounded-md transition-all duration-300 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900';
 
+  // 'secondary' has no dark styles on purpose: its only use is the Hero's
+  // white-on-gradient CTA, which looks the same in both themes.
   const variants: Record<NonNullable<ButtonProps['variant']>, string> = {
     primary: 'bg-primary text-white hover:bg-primary-dark focus-visible:ring-primary',
     secondary: 'bg-white text-primary border border-primary hover:bg-gray-50 focus-visible:ring-primary',
-    outline: 'bg-transparent text-primary border border-primary hover:bg-blue-50 focus-visible:ring-primary',
+    outline: 'bg-transparent text-primary border border-primary hover:bg-blue-50 dark:hover:bg-blue-500/10 focus-visible:ring-primary',
     text: 'bg-transparent text-primary hover:text-primary-dark hover:underline',
     dark: 'bg-gray-800 text-white hover:bg-gray-900 focus-visible:ring-gray-500',
   };

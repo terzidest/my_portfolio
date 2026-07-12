@@ -98,12 +98,12 @@ const FeatureCard = ({ title, description, icon }: FeatureCardProps) => {
   };
 
   return (
-    <div className="h-full bg-white rounded-lg p-8 shadow-lg transition-all duration-300 hover:translate-y-[-5px] hover:shadow-xl">
-      <div className="w-16 h-16 bg-blue-100 text-primary rounded-lg flex items-center justify-center mb-6">
+    <div className="h-full bg-white dark:bg-slate-800 dark:ring-1 dark:ring-slate-700 rounded-lg p-8 shadow-lg transition-all duration-300 hover:translate-y-[-5px] hover:shadow-xl">
+      <div className="w-16 h-16 bg-blue-100 dark:bg-blue-500/10 text-primary rounded-lg flex items-center justify-center mb-6">
         {renderIcon()}
       </div>
-      <h3 className="text-xl font-bold text-gray-900 mb-3">{title}</h3>
-      <p className="text-gray-600 leading-relaxed">{description}</p>
+      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">{title}</h3>
+      <p className="text-gray-600 dark:text-slate-300 leading-relaxed">{description}</p>
     </div>
   );
 };
