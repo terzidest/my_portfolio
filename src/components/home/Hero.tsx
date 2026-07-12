@@ -24,7 +24,7 @@ const Hero = () => {
                 to="/projects"
                 variant="secondary"
                 size="lg"
-                className="text-blue-800 bg-white hover:bg-gray-100 mb-4 sm:mb-0 sm:mr-4"
+                className="text-primary-dark bg-white hover:bg-gray-100 mb-4 sm:mb-0 sm:mr-4"
               >
                 View Projects
               </Button>
@@ -32,7 +32,7 @@ const Hero = () => {
                 to="/contact"
                 variant="outline"
                 size="lg"
-                className="text-white border-2 border-white hover:bg-blue-700"
+                className="text-white border-2 border-white hover:bg-white/10"
               >
                 Contact Me
               </Button>

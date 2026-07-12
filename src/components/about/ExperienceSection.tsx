@@ -20,7 +20,7 @@ const ExperienceSection = () => {
               <article className="bg-white rounded-xl shadow-md p-8">
                 <header className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-1 mb-4">
                   <div>
-                    <h3 className="text-xl font-bold text-gray-800">{exp.title}</h3>
+                    <h3 className="text-xl font-bold text-gray-900">{exp.title}</h3>
                     <p className="text-primary font-medium">{exp.company}</p>
                   </div>
                   <p className="text-gray-500 text-sm md:ml-4 md:flex-shrink-0">
