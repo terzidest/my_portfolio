@@ -8,6 +8,10 @@ const Navbar = () => {
 
   const isActive = (path: string) => location.pathname === path;
 
+  // The bar is transparent only over the home hero; everywhere else (and on
+  // home once scrolled) it's the same frosted-glass treatment.
+  const transparent = location.pathname === '/' && !isScrolled;
+
   const navLinks = [
     { path: '/', label: 'Home' },
     { path: '/projects', label: 'Projects' },
@@ -30,16 +34,12 @@ const Navbar = () => {
 
   return (
     <nav className={`fixed w-full z-50 transition-all duration-300 ${
-      location.pathname === '/'
-        ? (isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4')
-        : (isScrolled ? 'bg-blue-600 py-2' : 'bg-white shadow-md py-2')
+      transparent ? 'bg-transparent py-4' : 'bg-white/80 backdrop-blur-md shadow-md py-2'
     }`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
         <Link to="/" className="flex items-center">
           <span className={`text-xl font-bold transition-colors duration-300 ${
-            location.pathname === '/'
-              ? (isScrolled ? 'text-primary' : 'text-white')
-              : (isScrolled ? 'text-white' : 'text-primary')
+            transparent ? 'text-white' : 'text-primary'
           }`}>
             Triantaphilos Terzides
           </span>
@@ -52,21 +52,13 @@ const Navbar = () => {
               key={link.path}
               to={link.path}
               className={`transition-colors duration-300 ${
-                location.pathname === '/'
-                  ? (
-                      isActive(link.path)
-                        ? 'text-primary font-medium'
-                        : isScrolled
-                          ? 'text-gray-600 hover:text-primary'
-                          : 'text-white hover:text-gray-200'
-                    )
-                  : (
-                      isActive(link.path)
-                        ? (isScrolled ? 'text-blue-200 font-medium' : 'text-primary font-medium')
-                        : isScrolled
-                          ? 'text-white hover:text-blue-200'
-                          : 'text-gray-600 hover:text-primary'
-                    )
+                transparent
+                  ? (isActive(link.path)
+                      ? 'text-white font-semibold'
+                      : 'text-blue-100 hover:text-white')
+                  : (isActive(link.path)
+                      ? 'text-primary font-medium'
+                      : 'text-gray-600 hover:text-primary')
               }`}
             >
               {link.label}
@@ -79,9 +71,7 @@ const Navbar = () => {
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className={`rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-current transition-colors duration-300 ${
-              location.pathname === '/'
-                ? (isScrolled ? 'text-gray-500 hover:text-primary' : 'text-white hover:text-gray-200')
-                : (isScrolled ? 'text-white hover:text-blue-200' : 'text-gray-500 hover:text-primary')
+              transparent ? 'text-white hover:text-gray-200' : 'text-gray-500 hover:text-primary'
             }`}
             aria-label="Toggle menu"
           >
@@ -105,11 +95,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className={`md:hidden animate-slide-down border-t border-blue-700 py-2 shadow-md fixed top-[60px] inset-x-0 z-50 ${
-          location.pathname === '/'
-            ? 'bg-gradient-to-r from-blue-600 to-indigo-800'
-            : 'bg-blue-600'
-        }`}>
+        <div className="md:hidden animate-slide-down border-t border-gray-200 py-2 shadow-md fixed top-[60px] inset-x-0 z-50 bg-white/95 backdrop-blur-md">
           <div className="container mx-auto px-6 flex flex-col space-y-3 pt-1">
             {navLinks.map((link) => (
               <Link
@@ -121,8 +107,8 @@ const Navbar = () => {
                 }}
                 className={`${
                   isActive(link.path)
-                    ? 'text-blue-200 font-medium'
-                    : 'text-white hover:text-blue-200'
+                    ? 'text-primary font-medium'
+                    : 'text-gray-700 hover:text-primary'
                 } py-3 block w-full text-base`}
               >
                 {link.label}
