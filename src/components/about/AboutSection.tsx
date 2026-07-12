@@ -24,50 +24,50 @@ const AboutSection = () => {
 
           {/* Profile Information */}
           <div className="lg:w-2/3 lg:pl-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">About Me</h2>
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">About Me</h2>
             <div className="w-16 h-1 bg-primary mb-6"></div>
 
-            <p className="text-gray-600 text-lg mb-6">
+            <p className="text-gray-600 dark:text-slate-300 text-lg mb-6">
               I'm a frontend engineer based in Athens with several years of experience building production React applications — from mobile apps to large-scale web platforms. I specialize in React and its ecosystem, with a focus on architecture that scales: modular codebases, clean state management, and maintainable component design.
             </p>
 
-            <p className="text-gray-600 text-lg mb-6">
+            <p className="text-gray-600 dark:text-slate-300 text-lg mb-6">
               I care about the craft — not just making things work, but making them work well. I'm comfortable owning frontend decisions end-to-end, collaborating closely with backend teams, and navigating complex domains like iGaming, fintech, or data-heavy B2B products.
             </p>
 
             <div className="mb-10">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">My Approach</h3>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">My Approach</h3>
 
               <ul className="space-y-3">
                 <li className="flex items-start">
                   <svg className="w-6 h-6 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span className="text-gray-600">Architecture-first thinking — clear boundaries between domain, state, and UI</span>
+                  <span className="text-gray-600 dark:text-slate-300">Architecture-first thinking — clear boundaries between domain, state, and UI</span>
                 </li>
                 <li className="flex items-start">
                   <svg className="w-6 h-6 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span className="text-gray-600">Component design that scales: composable, testable, and easy to reason about</span>
+                  <span className="text-gray-600 dark:text-slate-300">Component design that scales: composable, testable, and easy to reason about</span>
                 </li>
                 <li className="flex items-start">
                   <svg className="w-6 h-6 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span className="text-gray-600">Pragmatic state management — the right tool for the job, not the trendiest one</span>
+                  <span className="text-gray-600 dark:text-slate-300">Pragmatic state management — the right tool for the job, not the trendiest one</span>
                 </li>
                 <li className="flex items-start">
                   <svg className="w-6 h-6 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span className="text-gray-600">Performance and accessibility as defaults, not afterthoughts</span>
+                  <span className="text-gray-600 dark:text-slate-300">Performance and accessibility as defaults, not afterthoughts</span>
                 </li>
                 <li className="flex items-start">
                   <svg className="w-6 h-6 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span className="text-gray-600">Comfortable owning features end-to-end, from API contract to deployed UI</span>
+                  <span className="text-gray-600 dark:text-slate-300">Comfortable owning features end-to-end, from API contract to deployed UI</span>
                 </li>
               </ul>
             </div>
@@ -84,7 +84,7 @@ const AboutSection = () => {
               </Link>
               <Link
                 to="/contact"
-                className="inline-flex items-center bg-white text-primary border border-primary py-2 px-4 rounded-md hover:bg-gray-50 transition-colors"
+                className="inline-flex items-center bg-white dark:bg-slate-800 text-primary border border-primary py-2 px-4 rounded-md hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
               >
                 Contact Me
               </Link>

@@ -68,6 +68,7 @@ TypeScript is split into project references: `tsconfig.app.json` (src), `tsconfi
   - `usePrefersReducedMotion` for JS-driven cases the CSS guard can't reach (marquee, framer-motion page transitions).
 - **framer-motion** is used for the `/projects` filter animation and route cross-fades (`App.tsx`); both gated for reduced motion.
 - **Styling** is Tailwind utility classes inline. Custom keyframes (fade-in-up, float, slide-down, shimmer, marquee) live in `src/index.css`. Primary brand color is the `primary` token in `tailwind.config.js`.
+- **Dark mode** uses Tailwind's class strategy (`darkMode: 'class'`) with additive `dark:` variants — never remove a light class, append the dark one. Dark palette is slate (surfaces `slate-800/900`, text `slate-300/400`); cards keep their shadow and add `dark:ring-1 dark:ring-slate-700`. Theme state lives in `src/hooks/useTheme.ts` (toggle in the Navbar): no `theme` key in localStorage → follow the OS live; a stored `'light' | 'dark'` pins the choice. An inline anti-FOUC script in `index.html` sets the `dark` class before first paint, and `color-scheme` in `index.css` keeps native controls/scrollbars in sync.
 - Grid cards use `h-full` on both the reveal/motion wrapper and the card root so they stay equal height (wrapping a grid item breaks CSS grid's automatic stretch).
 
 ## Workflow
@@ -78,5 +79,4 @@ TypeScript is split into project references: `tsconfig.app.json` (src), `tsconfi
 
 ## Known gaps (don't be surprised)
 
-- **Dark mode** is not implemented (deferred as a separate project).
-- Image shimmer/fade-in is applied on the Projects listing cards but not the ProjectDetail page images.
+- The Button `dark` variant (`bg-gray-800`) predates dark mode and is unused — it's a dark-colored button style, not a theme variant.

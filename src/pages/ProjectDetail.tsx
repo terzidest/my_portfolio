@@ -58,8 +58,8 @@ const ProjectDetail = () => {
     return (
       <div className="pt-28 pb-20 min-h-screen">
         <div className="container mx-auto px-6 text-center">
-          <h1 className="text-3xl font-bold text-gray-900 mb-6">Project Not Found</h1>
-          <p className="text-gray-600 mb-8">Sorry, the project you're looking for doesn't exist.</p>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Project Not Found</h1>
+          <p className="text-gray-600 dark:text-slate-300 mb-8">Sorry, the project you're looking for doesn't exist.</p>
           <Link
             to="/projects"
             className="inline-flex items-center bg-primary text-white py-2 px-4 rounded-md hover:bg-primary-dark"
@@ -75,7 +75,7 @@ const ProjectDetail = () => {
   }
 
   return (
-    <div className="pt-28 pb-20 bg-gray-50">
+    <div className="pt-28 pb-20 bg-gray-50 dark:bg-slate-900">
       <div className="container mx-auto px-6">
         <Link
           to="/projects"
@@ -87,10 +87,10 @@ const ProjectDetail = () => {
           Back to Projects
         </Link>
 
-        <div className="bg-white rounded-xl shadow-md overflow-hidden mb-10">
+        <div className="bg-white dark:bg-slate-800 dark:ring-1 dark:ring-slate-700 rounded-xl shadow-md overflow-hidden mb-10">
           <div className="md:flex">
             <div className="md:w-64 h-48 overflow-hidden flex-shrink-0 m-2">
-              <div className="relative w-full h-full bg-gradient-to-r from-blue-600 to-indigo-800 flex justify-center items-center rounded-xl overflow-hidden">
+              <div className="relative w-full h-full bg-gradient-to-r from-blue-600 to-indigo-800 dark:from-blue-800 dark:to-indigo-950 flex justify-center items-center rounded-xl overflow-hidden">
                 <AdaptiveImage
                   src={project.image}
                   alt={project.title}
@@ -100,8 +100,8 @@ const ProjectDetail = () => {
               </div>
             </div>
             <div className="p-8">
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">{project.title}</h1>
-              <p className="text-gray-600 mb-4">{project.description}</p>
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{project.title}</h1>
+              <p className="text-gray-600 dark:text-slate-300 mb-4">{project.description}</p>
               <a
                 href={project.github}
                 target="_blank"
@@ -118,23 +118,23 @@ const ProjectDetail = () => {
         </div>
 
           <div>
-            <div className="bg-white rounded-xl shadow-md p-8">
+            <div className="bg-white dark:bg-slate-800 dark:ring-1 dark:ring-slate-700 rounded-xl shadow-md p-8">
               <section>
-                <h2 className="text-xl font-bold text-gray-900 mb-3">Problem</h2>
+                <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Problem</h2>
                 {toParagraphs(project.problem).map((p, i) => (
-                  <p key={i} className="mb-4 text-gray-600 leading-relaxed last:mb-0">
+                  <p key={i} className="mb-4 text-gray-600 dark:text-slate-300 leading-relaxed last:mb-0">
                     {p}
                   </p>
                 ))}
               </section>
 
               <section className="mt-8">
-                <h2 className="text-xl font-bold text-gray-900 mb-3">Role</h2>
-                <p className="text-gray-600 leading-relaxed">{project.role}</p>
+                <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Role</h2>
+                <p className="text-gray-600 dark:text-slate-300 leading-relaxed">{project.role}</p>
               </section>
 
               <section className="mt-8">
-                <h2 className="text-xl font-bold text-gray-900 mb-3">Stack</h2>
+                <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Stack</h2>
                 <div className="flex flex-wrap gap-2">
                   {project.techStack.map((tech) => (
                     <TechBadge key={tech} label={tech} />
@@ -143,9 +143,9 @@ const ProjectDetail = () => {
               </section>
 
               <section className="mt-8">
-                <h2 className="text-xl font-bold text-gray-900 mb-3">Outcome</h2>
+                <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Outcome</h2>
                 {toParagraphs(project.outcome).map((p, i) => (
-                  <p key={i} className="mb-4 text-gray-600 leading-relaxed last:mb-0">
+                  <p key={i} className="mb-4 text-gray-600 dark:text-slate-300 leading-relaxed last:mb-0">
                     {p}
                   </p>
                 ))}
@@ -154,13 +154,13 @@ const ProjectDetail = () => {
 
             {/* Image Gallery - only show if additionalImages exist */}
             {project.additionalImages && project.additionalImages.length > 0 && (
-              <div className="bg-white rounded-xl shadow-md p-8 mt-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Project Gallery</h2>
+              <div className="bg-white dark:bg-slate-800 dark:ring-1 dark:ring-slate-700 rounded-xl shadow-md p-8 mt-8">
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Project Gallery</h2>
                 {/* Fixed-height cells keep rows even; object-contain shows
                     landscape shots uncropped inside them. */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                   {project.additionalImages.map((imgSrc, index) => (
-                    <div key={index} className="relative bg-gradient-to-r from-blue-600 to-indigo-800 p-1 rounded-xl h-72 flex items-center justify-center overflow-hidden">
+                    <div key={index} className="relative bg-gradient-to-r from-blue-600 to-indigo-800 dark:from-blue-800 dark:to-indigo-950 p-1 rounded-xl h-72 flex items-center justify-center overflow-hidden dark:ring-1 dark:ring-white/10">
                       <AdaptiveImage
                         src={imgSrc}
                         alt={`${project.title} screenshot ${index + 1}`}
@@ -177,7 +177,7 @@ const ProjectDetail = () => {
         </div>
 
         {/* Next/Previous Navigation */}
-        <div className="mt-12 border-t border-gray-200 pt-6">
+        <div className="mt-12 border-t border-gray-200 dark:border-slate-700 pt-6">
           <div className="flex justify-between items-center">
             {adjacentProjects.prevId ? (
               <Link

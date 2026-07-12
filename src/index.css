@@ -7,8 +7,17 @@
   scroll-behavior: smooth;
 }
 
+/* Native form controls and scrollbars follow the active theme. */
+html {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
 body {
-  @apply bg-white text-gray-800 font-sans;
+  @apply bg-white text-gray-800 font-sans dark:bg-slate-900 dark:text-slate-300;
 }
 
 .container {
@@ -81,6 +90,16 @@ body {
     transparent
   );
   animation: shimmer 1.4s infinite;
+}
+
+/* On dark surfaces the white sheen is blinding at 0.35 — tone it down. */
+.dark .shimmer::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
 }
 
 /* Horizontally-scrolling marquee track (duplicated content, so a full

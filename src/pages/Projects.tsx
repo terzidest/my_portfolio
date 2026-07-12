@@ -41,23 +41,23 @@ const Projects = () => {
   });
 
   return (
-    <div className="pt-28 pb-20 bg-gray-50">
+    <div className="pt-28 pb-20 bg-gray-50 dark:bg-slate-900">
       <div className="container mx-auto px-6">
-        <h1 className="text-4xl font-bold text-center text-gray-900 mb-4">My Projects</h1>
+        <h1 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-4">My Projects</h1>
         <div className="w-16 h-1 bg-primary mx-auto mb-6"></div>
-        <p className="text-center text-gray-600 mb-10 max-w-2xl mx-auto">
+        <p className="text-center text-gray-600 dark:text-slate-300 mb-10 max-w-2xl mx-auto">
           Below are some of the projects I've worked on. Each showcases different aspects of my skills
           in both React and React Native development.
         </p>
 
         <div className="flex justify-center mb-10">
-          <div className="inline-flex p-1 border border-gray-300 rounded-lg bg-white">
+          <div className="inline-flex p-1 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800">
             <button
               onClick={() => toggleFilter('mobile')}
               className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
                 selectedFilters.includes('mobile')
                   ? 'bg-primary text-white'
-                  : 'text-gray-500 hover:text-gray-900'
+                  : 'text-gray-500 hover:text-gray-900 dark:text-slate-400 dark:hover:text-white'
               }`}
             >
               Mobile Apps
@@ -67,7 +67,7 @@ const Projects = () => {
               className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
                 selectedFilters.includes('web')
                   ? 'bg-primary text-white'
-                  : 'text-gray-500 hover:text-gray-900'
+                  : 'text-gray-500 hover:text-gray-900 dark:text-slate-400 dark:hover:text-white'
               }`}
             >
               Web Apps
