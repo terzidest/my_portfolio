@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState } from 'react';
 import { getProjectById, getAdjacentProjectIds } from '../data/projects';
+import usePageMeta from '../hooks/usePageMeta';
 
 // Split a multi-paragraph string on blank-line breaks so single newlines
 // inside a paragraph don't produce empty <p> tags.
@@ -38,6 +39,12 @@ const ProjectDetail = () => {
   const { id } = useParams<{ id: string }>();
   const project = id ? getProjectById(id) : undefined;
   const adjacentProjects = id ? getAdjacentProjectIds(id) : { prevId: null, nextId: null };
+
+  usePageMeta(
+    project
+      ? { title: project.title, description: project.description }
+      : { title: 'Project Not Found', description: 'This project does not exist.', noindex: true }
+  );
 
   if (!project) {
     return (

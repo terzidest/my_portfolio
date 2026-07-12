@@ -1,8 +1,15 @@
 import AboutSection from '../components/about/AboutSection';
 import ExperienceSection from '../components/about/ExperienceSection';
 import Reveal from '../components/common/Reveal';
+import usePageMeta from '../hooks/usePageMeta';
 
 const About = () => {
+  usePageMeta({
+    title: 'About',
+    description:
+      'Background, work experience, education, and certifications of Triantaphilos Terzides, frontend engineer.',
+  });
+
   const education = {
     degree: 'Bachelor of Science: Informatics',
     institution: 'Athens University of Economics and Business, Athens, Greece',

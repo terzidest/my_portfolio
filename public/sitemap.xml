@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- When adding a project to src/data/projects.ts, add its
+     /projects/<id> URL here too. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://terzidest.netlify.app/</loc></url>
+  <url><loc>https://terzidest.netlify.app/projects</loc></url>
+  <url><loc>https://terzidest.netlify.app/projects/stack-game</loc></url>
+  <url><loc>https://terzidest.netlify.app/projects/infovault</loc></url>
+  <url><loc>https://terzidest.netlify.app/projects/ethereal-nature</loc></url>
+  <url><loc>https://terzidest.netlify.app/projects/portfolio</loc></url>
+  <url><loc>https://terzidest.netlify.app/projects/little-lemon</loc></url>
+  <url><loc>https://terzidest.netlify.app/about</loc></url>
+  <url><loc>https://terzidest.netlify.app/contact</loc></url>
+</urlset>

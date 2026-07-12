@@ -1,6 +1,13 @@
 import ContactForm from '../components/contact/ContactForm';
+import usePageMeta from '../hooks/usePageMeta';
 
 const Contact = () => {
+  usePageMeta({
+    title: 'Contact',
+    description:
+      'Get in touch with Triantaphilos Terzides for frontend projects and opportunities.',
+  });
+
   return (
     <div className="pt-28 pb-20 bg-gray-50">
       <div className="container mx-auto px-6">

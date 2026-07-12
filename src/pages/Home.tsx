@@ -3,8 +3,14 @@ import FeatureCard from "../components/home/FeatureCard";
 //import SkillsSection from "../components/skills/SkillsSection";
 import Button from "../components/common/Button";
 import Reveal from "../components/common/Reveal";
+import usePageMeta from "../hooks/usePageMeta";
 
 const Home = () => {
+  usePageMeta({
+    description:
+      "Portfolio of Triantaphilos Terzides — frontend engineer based in Athens, building production React applications for web and mobile.",
+  });
+
   const features = [
     {
       title: "React Ecosystem Architecture",

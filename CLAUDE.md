@@ -46,7 +46,7 @@ src/
 │   ├── home/        Hero, FeatureCard
 │   └── projects/    ProjectCard
 ├── data/            projects.ts, experience.ts   (content lives here, not in JSX)
-├── hooks/           useForm, useInView, usePrefersReducedMotion
+├── hooks/           useForm, useInView, usePrefersReducedMotion, usePageMeta
 ├── pages/           Home, Projects, ProjectDetail, About, Contact
 ├── utils/           validation, ScrollToTop (route-change scroll reset)
 ├── types.ts         shared types (Project, Experience, ContactFormValues, …)
@@ -58,7 +58,8 @@ TypeScript is split into project references: `tsconfig.app.json` (src), `tsconfi
 
 ## Conventions & patterns
 
-- **Content is data, not markup.** Projects and work history live in `src/data/*.ts` as typed arrays. To add/edit a project or role, edit the data file — the pages render whatever's there. New projects are picked up automatically (helpers in `projects.ts` are array-position-driven; the first entry leads the list).
+- **Content is data, not markup.** Projects and work history live in `src/data/*.ts` as typed arrays. To add/edit a project or role, edit the data file — the pages render whatever's there. New projects are picked up automatically (helpers in `projects.ts` are array-position-driven; the first entry leads the list). When adding a project, also add its `/projects/<id>` URL to `public/sitemap.xml`.
+- **SEO**: every page calls `usePageMeta` (title, meta description, canonical, optional `noindex`) at the top of the component. Canonicals always point at the Netlify URL so the Pages mirror isn't treated as duplicate content. Site-wide Open Graph tags are static in `index.html` — social crawlers don't run JS, so per-route OG values are pointless without prerendering.
 - **Project case studies** use structured fields — `problem`, `role`, `outcome` (plus the shared `techStack` for "Stack"). There is no `longDescription`.
 - **Images**: drop files in `public/assets/images/projects/` (convention: `name.png`, `name-2.png`, …) and reference via `getImagePath()`. A project with no screenshots yet points `image` at `placeholder.jpg` and uses `additionalImages: []` (the gallery is hidden when empty).
 - **Motion always respects `prefers-reduced-motion`.** Three mechanisms, use the right one:
