@@ -12,7 +12,7 @@ const Contact = () => {
     <div className="pt-28 pb-20 bg-gray-50 dark:bg-slate-900">
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl font-bold text-center text-gray-900 mb-4">Get in Touch</h1>
+          <h1 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-4">Get in Touch</h1>
           <div className="w-16 h-1 bg-primary mx-auto mb-6"></div>
           <p className="text-center text-gray-600 dark:text-slate-300 mb-10 max-w-2xl mx-auto">
             Have a project in mind or want to discuss potential opportunities?
