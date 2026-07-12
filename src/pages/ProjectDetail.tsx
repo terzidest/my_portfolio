@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState } from 'react';
 import { getProjectById, getAdjacentProjectIds } from '../data/projects';
+import TechBadge from '../components/common/TechBadge';
 import usePageMeta from '../hooks/usePageMeta';
 
 // Split a multi-paragraph string on blank-line breaks so single newlines
@@ -19,19 +20,26 @@ interface AdaptiveImageProps {
 
 const AdaptiveImage = ({ src, alt, portraitClassName, landscapeClassName }: AdaptiveImageProps) => {
   const [isPortrait, setIsPortrait] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   const handleLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
     const img = e.currentTarget;
     setIsPortrait(img.naturalWidth < img.naturalHeight);
+    setLoaded(true);
   };
 
+  // The shimmer overlays the nearest positioned ancestor, so callers must
+  // put `relative` on the frame that wraps this image.
   return (
-    <img
-      src={src}
-      alt={alt}
-      className={`rounded-xl ${isPortrait ? portraitClassName : landscapeClassName}`}
-      onLoad={handleLoad}
-    />
+    <>
+      {!loaded && <div className="shimmer absolute inset-0 overflow-hidden rounded-xl bg-gray-200"></div>}
+      <img
+        src={src}
+        alt={alt}
+        className={`rounded-xl transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'} ${isPortrait ? portraitClassName : landscapeClassName}`}
+        onLoad={handleLoad}
+      />
+    </>
   );
 };
 
@@ -82,7 +90,7 @@ const ProjectDetail = () => {
         <div className="bg-white rounded-xl shadow-md overflow-hidden mb-10">
           <div className="md:flex">
             <div className="md:w-64 h-48 overflow-hidden flex-shrink-0 mt-2 ml-2">
-              <div className="w-full h-full bg-gradient-to-r from-blue-600 to-indigo-800 flex justify-center items-center rounded-xl">
+              <div className="relative w-full h-full bg-gradient-to-r from-blue-600 to-indigo-800 flex justify-center items-center rounded-xl overflow-hidden">
                 <AdaptiveImage
                   src={project.image}
                   alt={project.title}
@@ -109,8 +117,7 @@ const ProjectDetail = () => {
           </div>
         </div>
 
-
-          <div className="col-span-2">
+          <div>
             <div className="bg-white rounded-xl shadow-md p-8">
               <section>
                 <h2 className="text-xl font-bold text-gray-800 mb-3">Problem</h2>
@@ -129,13 +136,8 @@ const ProjectDetail = () => {
               <section className="mt-8">
                 <h2 className="text-xl font-bold text-gray-800 mb-3">Stack</h2>
                 <div className="flex flex-wrap gap-2">
-                  {project.techStack.map((tech, index) => (
-                    <span
-                      key={index}
-                      className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded"
-                    >
-                      {tech}
-                    </span>
+                  {project.techStack.map((tech) => (
+                    <TechBadge key={tech} label={tech} />
                   ))}
                 </div>
               </section>
@@ -154,14 +156,16 @@ const ProjectDetail = () => {
             {project.additionalImages && project.additionalImages.length > 0 && (
               <div className="bg-white rounded-xl shadow-md p-8 mt-8">
                 <h2 className="text-2xl font-bold text-gray-800 mb-6">Project Gallery</h2>
-                <div className="flex flex-wrap gap-5">
+                {/* Fixed-height cells keep rows even; object-contain shows
+                    landscape shots uncropped inside them. */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                   {project.additionalImages.map((imgSrc, index) => (
-                    <div key={index} className="bg-gradient-to-r from-blue-600 to-indigo-800 p-1 rounded-xl w-80 h-72 flex-shrink-0 flex items-center justify-center">
+                    <div key={index} className="relative bg-gradient-to-r from-blue-600 to-indigo-800 p-1 rounded-xl h-72 flex items-center justify-center overflow-hidden">
                       <AdaptiveImage
                         src={imgSrc}
                         alt={`${project.title} screenshot ${index + 1}`}
                         portraitClassName="h-full w-auto"
-                        landscapeClassName="w-auto h-full object-cover object-top"
+                        landscapeClassName="max-h-full w-full object-contain"
                       />
                     </div>
                   ))}
