@@ -20,7 +20,7 @@ npm run preview      # preview the production build
 netlify dev          # http://localhost:8888 — needs RESEND_API_KEY in .env
 ```
 
-**Type errors fail the build** (`tsc -b` runs before `vite build`). Always run `npm run typecheck` before committing. When touching anything visual, sanity-check **both** `npm run build` and `npm run build:pages`, since the two deploy targets use different base paths.
+**Type errors fail the build** (`tsc -b` runs before `vite build`). Always run `npm run typecheck` before committing. When touching anything visual, sanity-check **both** `npm run build` and `npm run build:pages` (the two deploy targets use different base paths) — and eyeball the change in **both themes** (toggle in the navbar, or set `localStorage.theme`). Missing `dark:` variants produce invisible-text bugs that typecheck/lint/build cannot catch.
 
 ## Deployment — one branch, two targets
 
@@ -69,6 +69,14 @@ TypeScript is split into project references: `tsconfig.app.json` (src), `tsconfi
 - **framer-motion** is used for the `/projects` filter animation and route cross-fades (`App.tsx`); both gated for reduced motion.
 - **Styling** is Tailwind utility classes inline. Custom keyframes (fade-in-up, float, slide-down, shimmer, marquee) live in `src/index.css`. Primary brand color is the `primary` token in `tailwind.config.js`.
 - **Dark mode** uses Tailwind's class strategy (`darkMode: 'class'`) with additive `dark:` variants — never remove a light class, append the dark one. Dark palette is slate (surfaces `slate-800/900`, text `slate-300/400`); cards keep their shadow and add `dark:ring-1 dark:ring-slate-700`. Theme state lives in `src/hooks/useTheme.ts` (toggle in the Navbar): no `theme` key in localStorage → follow the OS live; a stored `'light' | 'dark'` pins the choice. An inline anti-FOUC script in `index.html` sets the `dark` class before first paint, and `color-scheme` in `index.css` keeps native controls/scrollbars in sync.
+  Standard pairings — reuse these, don't invent new ones:
+  - cards/panels: `bg-white` → `dark:bg-slate-800 dark:ring-1 dark:ring-slate-700` (keep the shadow)
+  - page wrappers: `bg-gray-50` → `dark:bg-slate-900`
+  - headings: `text-gray-900` → `dark:text-white`; body copy `text-gray-600/700` → `dark:text-slate-300`; muted `text-gray-500/400` → `dark:text-slate-400/500`
+  - borders: `border-gray-200/300` → `dark:border-slate-700` (form inputs: `dark:border-slate-600 dark:bg-slate-900`)
+  - blue chips (`bg-blue-50/100`): → `dark:bg-blue-500/10` (tech chips: use `TechBadge`, already themed)
+  - brand gradients (`from-blue-600 to-indigo-800`): → `dark:from-blue-800 dark:to-indigo-950`; decorative circles halve their opacity
+  - `text-white` on gradients/primary buttons and black image overlays: no dark variant needed
 - Grid cards use `h-full` on both the reveal/motion wrapper and the card root so they stay equal height (wrapping a grid item breaks CSS grid's automatic stretch).
 
 ## Workflow
