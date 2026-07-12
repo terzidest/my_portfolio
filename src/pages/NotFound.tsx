@@ -12,8 +12,8 @@ const NotFound = () => {
     <div className="pt-28 pb-20 min-h-screen bg-gray-50">
       <div className="container mx-auto px-6 text-center">
         <p className="text-6xl font-bold text-primary mb-4">404</p>
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">Page Not Found</h1>
-        <p className="text-gray-600 mb-8">Sorry, the page you're looking for doesn't exist.</p>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Page Not Found</h1>
+        <p className="text-gray-600 dark:text-slate-300 mb-8">Sorry, the page you're looking for doesn't exist.</p>
         <Link
           to="/"
           className="inline-flex items-center bg-primary text-white py-2 px-4 rounded-md hover:bg-primary-dark"

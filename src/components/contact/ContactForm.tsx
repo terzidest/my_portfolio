@@ -43,9 +43,9 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-md p-8">
+    <div className="bg-white dark:bg-slate-800 dark:ring-1 dark:ring-slate-700 rounded-xl shadow-md p-8">
       {submitted ? (
-        <div className="rounded-md p-4 mb-6 bg-green-50 text-green-800">
+        <div className="rounded-md p-4 mb-6 bg-green-50 text-green-800 dark:bg-green-900/30 dark:text-green-300">
           <div className="flex">
             <div className="flex-shrink-0">
               <svg className="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -85,7 +85,7 @@ const ContactForm = () => {
             </label>
           </div>
           {submitError && (
-            <div className="rounded-md p-4 mb-6 bg-red-50 text-red-800">
+            <div className="rounded-md p-4 mb-6 bg-red-50 text-red-800 dark:bg-red-900/30 dark:text-red-300">
               <div className="flex">
                 <div className="flex-shrink-0">
                   <svg className="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -98,8 +98,8 @@ const ContactForm = () => {
           )}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                Name <span className="text-red-500">*</span>
+              <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">
+                Name <span className="text-red-500 dark:text-red-400">*</span>
               </label>
               <input
                 type="text"
@@ -107,19 +107,19 @@ const ContactForm = () => {
                 name="name"
                 value={values.name}
                 onChange={handleChange}
-                className={`block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary ${
+                className={`block w-full rounded-md border-gray-300 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:placeholder-slate-500 shadow-sm focus:border-primary focus:ring-primary ${
                   errors.name ? 'border-red-500' : ''
                 }`}
                 placeholder="Your name"
               />
               {errors.name && (
-                <p className="mt-1 text-sm text-red-600">{errors.name}</p>
+                <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.name}</p>
               )}
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                Email <span className="text-red-500">*</span>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">
+                Email <span className="text-red-500 dark:text-red-400">*</span>
               </label>
               <input
                 type="email"
@@ -127,19 +127,19 @@ const ContactForm = () => {
                 name="email"
                 value={values.email}
                 onChange={handleChange}
-                className={`block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary ${
+                className={`block w-full rounded-md border-gray-300 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:placeholder-slate-500 shadow-sm focus:border-primary focus:ring-primary ${
                   errors.email ? 'border-red-500' : ''
                 }`}
                 placeholder="your.email@example.com"
               />
               {errors.email && (
-                <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+                <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.email}</p>
               )}
             </div>
           </div>
 
           <div className="mb-6">
-            <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">
               Subject
             </label>
             <input
@@ -148,14 +148,14 @@ const ContactForm = () => {
               name="subject"
               value={values.subject}
               onChange={handleChange}
-              className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
+              className="block w-full rounded-md border-gray-300 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:placeholder-slate-500 shadow-sm focus:border-primary focus:ring-primary"
               placeholder="What is this about?"
             />
           </div>
 
           <div className="mb-6">
-            <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-              Message <span className="text-red-500">*</span>
+            <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">
+              Message <span className="text-red-500 dark:text-red-400">*</span>
             </label>
             <textarea
               id="message"
@@ -163,13 +163,13 @@ const ContactForm = () => {
               rows={5}
               value={values.message}
               onChange={handleChange}
-              className={`block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary ${
+              className={`block w-full rounded-md border-gray-300 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:placeholder-slate-500 shadow-sm focus:border-primary focus:ring-primary ${
                 errors.message ? 'border-red-500' : ''
               }`}
               placeholder="Your message here..."
             ></textarea>
             {errors.message && (
-              <p className="mt-1 text-sm text-red-600">{errors.message}</p>
+              <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.message}</p>
             )}
           </div>
 
