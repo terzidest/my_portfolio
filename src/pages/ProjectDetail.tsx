@@ -89,7 +89,7 @@ const ProjectDetail = () => {
 
         <div className="bg-white rounded-xl shadow-md overflow-hidden mb-10">
           <div className="md:flex">
-            <div className="md:w-64 h-48 overflow-hidden flex-shrink-0 mt-2 ml-2">
+            <div className="md:w-64 h-48 overflow-hidden flex-shrink-0 m-2">
               <div className="relative w-full h-full bg-gradient-to-r from-blue-600 to-indigo-800 flex justify-center items-center rounded-xl overflow-hidden">
                 <AdaptiveImage
                   src={project.image}
