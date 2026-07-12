@@ -36,14 +36,14 @@ const Home = () => {
     <div>
       <Hero />
 
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 dark:bg-slate-900">
         <div className="container mx-auto px-6">
           <Reveal className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
               Technical Expertise
             </h2>
             <div className="w-16 h-1 bg-primary mx-auto mb-4"></div>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-slate-300 max-w-2xl mx-auto">
               Specialized in development of modern apps with cutting-edge
               technologies.
             </p>
