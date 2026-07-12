@@ -43,7 +43,8 @@ const Projects = () => {
   return (
     <div className="pt-28 pb-20 bg-gray-50">
       <div className="container mx-auto px-6">
-        <h1 className="text-4xl font-bold text-center text-gray-800 mb-3">My Projects</h1>
+        <h1 className="text-4xl font-bold text-center text-gray-900 mb-4">My Projects</h1>
+        <div className="w-16 h-1 bg-primary mx-auto mb-6"></div>
         <p className="text-center text-gray-600 mb-10 max-w-2xl mx-auto">
           Below are some of the projects I've worked on. Each showcases different aspects of my skills
           in both React and React Native development.

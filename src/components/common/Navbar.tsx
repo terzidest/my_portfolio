@@ -78,7 +78,7 @@ const Navbar = () => {
         <div className="md:hidden">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className={`focus:outline-none transition-colors duration-300 ${
+            className={`rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-current transition-colors duration-300 ${
               location.pathname === '/'
                 ? (isScrolled ? 'text-gray-500 hover:text-primary' : 'text-white hover:text-gray-200')
                 : (isScrolled ? 'text-white hover:text-blue-200' : 'text-gray-500 hover:text-primary')

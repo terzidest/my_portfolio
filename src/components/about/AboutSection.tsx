@@ -36,7 +36,7 @@ const AboutSection = () => {
             </p>
 
             <div className="mb-10">
-              <h3 className="text-xl font-bold text-gray-800 mb-4">My Approach</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">My Approach</h3>
 
               <ul className="space-y-3">
                 <li className="flex items-start">
@@ -75,7 +75,7 @@ const AboutSection = () => {
             <div className="flex flex-wrap gap-4">
               <Link
                 to="/projects"
-                className="inline-flex items-center bg-primary text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
+                className="inline-flex items-center bg-primary text-white py-2 px-4 rounded-md hover:bg-primary-dark transition-colors"
               >
                 View My Projects
                 <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

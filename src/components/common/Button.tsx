@@ -18,14 +18,16 @@ const Button = ({
   onClick,
   ...props
 }: ButtonProps) => {
-  const baseStyles = 'inline-flex items-center justify-center font-medium rounded-md transition-all duration-300 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2';
+  // focus-visible (not focus) so the ring shows for keyboard users only,
+  // not on every mouse click.
+  const baseStyles = 'inline-flex items-center justify-center font-medium rounded-md transition-all duration-300 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2';
 
   const variants: Record<NonNullable<ButtonProps['variant']>, string> = {
-    primary: 'bg-primary text-white hover:bg-blue-700 focus:ring-blue-500',
-    secondary: 'bg-white text-primary border border-primary hover:bg-gray-50 focus:ring-blue-500',
-    outline: 'bg-transparent text-primary border border-primary hover:bg-blue-50 focus:ring-blue-500',
-    text: 'bg-transparent text-primary hover:text-blue-700 hover:underline',
-    dark: 'bg-gray-800 text-white hover:bg-gray-900 focus:ring-gray-500',
+    primary: 'bg-primary text-white hover:bg-primary-dark focus-visible:ring-primary',
+    secondary: 'bg-white text-primary border border-primary hover:bg-gray-50 focus-visible:ring-primary',
+    outline: 'bg-transparent text-primary border border-primary hover:bg-blue-50 focus-visible:ring-primary',
+    text: 'bg-transparent text-primary hover:text-primary-dark hover:underline',
+    dark: 'bg-gray-800 text-white hover:bg-gray-900 focus-visible:ring-gray-500',
   };
 
   const sizes: Record<NonNullable<ButtonProps['size']>, string> = {
