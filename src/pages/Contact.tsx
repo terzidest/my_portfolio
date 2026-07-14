@@ -59,6 +59,7 @@ const Contact = () => {
                     href="https://www.linkedin.com/in/triantaphilos-terzides-53b9882a3/"
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label="LinkedIn"
                     className="text-gray-400 dark:text-slate-500 hover:text-primary transition-colors"
                   >
                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -69,6 +70,7 @@ const Contact = () => {
                     href="https://github.com/terzidest"
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label="GitHub"
                     className="text-gray-400 dark:text-slate-500 hover:text-gray-900 dark:hover:text-white transition-colors"
                   >
                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

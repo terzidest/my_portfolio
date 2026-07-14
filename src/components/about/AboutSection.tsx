@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import ResponsiveImage from '../common/ResponsiveImage';
+import { profileImage } from '../../data/about';
 
 const AboutSection = () => {
   return (
@@ -10,15 +12,16 @@ const AboutSection = () => {
             <div className="relative">
               {/* photo */}
               <div className="w-72 h-72 rounded-full overflow-hidden shadow-xl">
-                <img
-                src={`${import.meta.env.BASE_URL}assets/images/profile.jpg`}
-                alt="Terzidest"
-                className="w-full h-full object-cover"
+                <ResponsiveImage
+                  source={profileImage}
+                  loading="eager"
+                  containerClassName="w-full h-full"
+                  imageClassName="w-full h-full object-cover"
                 />
               </div>
               {/* Decorative elements */}
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-yellow-400 rounded-full opacity-20"></div>
-              <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-primary rounded-full opacity-20"></div>
+              <div className="absolute -top-4 -right-4 w-24 h-24 bg-yellow-400 rounded-full opacity-20 dark:opacity-10"></div>
+              <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-primary rounded-full opacity-20 dark:opacity-10"></div>
             </div>
           </div>
 

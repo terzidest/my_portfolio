@@ -14,6 +14,7 @@ npm run build        # tsc -b && vite build  — production build for Netlify (b
 npm run build:pages  # production build for GitHub Pages (base '/my_portfolio/')
 npm run typecheck    # tsc -b across all project references
 npm run lint         # ESLint — TS-aware, zero-warning gate (config in .eslintrc.cjs)
+npm test             # Vitest + React Testing Library regression suite
 npm run preview      # preview the production build
 
 # Contact form end-to-end locally (Vite + the Netlify Function):
@@ -30,7 +31,7 @@ netlify dev          # http://localhost:8888 — needs RESEND_API_KEY in .env
 - **GitHub Pages (mirror)** — https://terzidest.github.io/my_portfolio/ — `.github/workflows/static.yml` runs `npm run build:pages` on push to `main`, `base: '/my_portfolio/'`.
 
 The base path is **build-time only** — never hardcode `/` or `/my_portfolio/`. Derive it from Vite:
-- Asset/image paths: use the `getImagePath()` helper in `src/data/projects.ts` (prefixes `import.meta.env.BASE_URL`).
+- Asset/image paths: use `createResponsiveImage()` / `getAssetPath()` in `src/data/images.ts` (prefixes `import.meta.env.BASE_URL`).
 - Router: `<BrowserRouter basename={import.meta.env.BASE_URL}>` (in `src/main.tsx`).
 
 The Netlify Function only exists on Netlify; on the Pages mirror the contact form gracefully falls back to a "email me directly" message.
@@ -61,7 +62,7 @@ TypeScript is split into project references: `tsconfig.app.json` (src), `tsconfi
 - **Content is data, not markup.** Projects and work history live in `src/data/*.ts` as typed arrays. To add/edit a project or role, edit the data file — the pages render whatever's there. New projects are picked up automatically (helpers in `projects.ts` are array-position-driven; the first entry leads the list). When adding a project, also add its `/projects/<id>` URL to `public/sitemap.xml`.
 - **SEO**: every page calls `usePageMeta` (title, meta description, canonical, optional `noindex`) at the top of the component. Canonicals always point at the Netlify URL so the Pages mirror isn't treated as duplicate content. Site-wide Open Graph tags are static in `index.html` — social crawlers don't run JS, so per-route OG values are pointless without prerendering.
 - **Project case studies** use structured fields — `problem`, `role`, `outcome` (plus the shared `techStack` for "Stack"). There is no `longDescription`.
-- **Images**: drop files in `public/assets/images/projects/` (convention: `name.png`, `name-2.png`, …) and reference via `getImagePath()`. A project with no screenshots yet points `image` at `placeholder.jpg` and uses `additionalImages: []` (the gallery is hidden when empty).
+- **Images**: drop originals in `public/assets/images/projects/` (convention: `name.png`, `name-2.png`, …), run `npm run images:generate`, and describe them with `createResponsiveImage()`. A project with no screenshots uses the placeholder descriptor and `additionalImages: []` (the gallery is hidden when empty).
 - **Motion always respects `prefers-reduced-motion`.** Three mechanisms, use the right one:
   - Global CSS guard in `src/index.css` collapses CSS animations/transitions.
   - `useInView` (scroll reveals) returns visible immediately under reduced motion; wrap sections in `<Reveal>`.

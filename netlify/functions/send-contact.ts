@@ -7,44 +7,14 @@
 //   the submitter (which requires a verified domain in Resend, since
 //   onboarding@resend.dev can only deliver to the Resend account owner).
 
+import { parseContactPayload } from '../../shared/contact';
+
 const RESEND_ENDPOINT = 'https://api.resend.com/emails';
 const RECIPIENT = 'terzidest@gmail.com';
 const DEFAULT_SENDER = 'Portfolio Contact <onboarding@resend.dev>';
 
 // Honeypot field name — must match the hidden input in ContactForm.tsx.
 const HONEYPOT_FIELD = 'website';
-
-// Length caps to prevent abuse-by-volume.
-const MAX_NAME = 200;
-const MAX_EMAIL = 200;
-const MAX_SUBJECT = 200;
-const MAX_MESSAGE = 5000;
-const MIN_MESSAGE = 10;
-
-interface ContactPayload {
-  name: string;
-  email: string;
-  subject?: string;
-  message: string;
-}
-
-const EMAIL_RE = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-
-const isValidPayload = (p: unknown): p is ContactPayload => {
-  if (!p || typeof p !== 'object') return false;
-  const v = p as Record<string, unknown>;
-  if (typeof v.name !== 'string' || v.name.trim().length === 0 || v.name.length > MAX_NAME) return false;
-  if (typeof v.email !== 'string' || v.email.length > MAX_EMAIL || !EMAIL_RE.test(v.email)) return false;
-  if (
-    typeof v.message !== 'string' ||
-    v.message.trim().length < MIN_MESSAGE ||
-    v.message.length > MAX_MESSAGE
-  ) {
-    return false;
-  }
-  if (v.subject !== undefined && (typeof v.subject !== 'string' || v.subject.length > MAX_SUBJECT)) return false;
-  return true;
-};
 
 const escapeHtml = (s: string): string =>
   s
@@ -121,12 +91,13 @@ export default async (req: Request): Promise<Response> => {
     return json(200, { success: true });
   }
 
-  if (!isValidPayload(payload)) {
+  const contact = parseContactPayload(payload);
+  if (!contact) {
     return json(400, { error: 'Invalid input' });
   }
 
-  const { name, email, subject, message } = payload;
-  const trimmedSubject = subject?.trim();
+  const { name, email, subject, message } = contact;
+  const trimmedSubject = subject.trim();
 
   const sender = process.env.RESEND_SENDER ?? DEFAULT_SENDER;
   const usingCustomSender = sender !== DEFAULT_SENDER;

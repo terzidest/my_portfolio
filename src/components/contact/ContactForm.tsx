@@ -1,8 +1,12 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import useForm from '../../hooks/useForm';
 import { validateContactForm } from '../../utils/validation';
 import Button from '../common/Button';
 import type { ContactFormValues } from '../../types';
+import { CONTACT_LIMITS } from '../../../shared/contact';
+import type { ContactErrors } from '../../../shared/contact';
+
+const SUBMIT_ERROR = 'Sorry, something went wrong sending your message.';
 
 const ContactForm = () => {
   const initialValues: ContactFormValues = {
@@ -26,26 +30,34 @@ const ContactForm = () => {
   // Honeypot: hidden field humans don't see but bots will fill. The function
   // silently drops submissions where this is non-empty.
   const [honeypot, setHoneypot] = useState('');
+  const fieldRefs = useRef<Partial<Record<keyof ContactFormValues, HTMLElement | null>>>({});
+
+  const focusFirstInvalidField = (validationErrors: ContactErrors) => {
+    const firstInvalid = (['name', 'email', 'subject', 'message'] as const).find(
+      (field) => validationErrors[field],
+    );
+    if (firstInvalid) fieldRefs.current[firstInvalid]?.focus();
+  };
 
   const onSubmit = async (formData: ContactFormValues) => {
     setSubmitError(null);
-    const response = await fetch('/.netlify/functions/send-contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...formData, website: honeypot })
-    });
-    if (!response.ok) {
-      setSubmitError(
-        "Sorry, something went wrong sending your message. Please email me directly at terzidest@gmail.com."
-      );
-      throw new Error(`send-contact failed: ${response.status}`);
+    try {
+      const response = await fetch('/.netlify/functions/send-contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, website: honeypot })
+      });
+      if (!response.ok) throw new Error(`send-contact failed: ${response.status}`);
+    } catch (error) {
+      setSubmitError(SUBMIT_ERROR);
+      throw error;
     }
   };
 
   return (
     <div className="bg-white dark:bg-slate-800 dark:ring-1 dark:ring-slate-700 rounded-xl shadow-md p-8">
       {submitted ? (
-        <div className="rounded-md p-4 mb-6 bg-green-50 text-green-800 dark:bg-green-900/30 dark:text-green-300">
+        <div role="status" className="rounded-md p-4 mb-6 bg-green-50 text-green-800 dark:bg-green-900/30 dark:text-green-300">
           <div className="flex">
             <div className="flex-shrink-0">
               <svg className="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -67,7 +79,7 @@ const ContactForm = () => {
           </div>
         </div>
       ) : (
-        <form onSubmit={(e) => handleSubmit(e, onSubmit)}>
+        <form noValidate onSubmit={(e) => handleSubmit(e, onSubmit, focusFirstInvalidField)}>
           {/* Honeypot: positioned off-screen so humans never see it.
               tabIndex/autoComplete/aria-hidden keep keyboard, password
               managers and screen readers from touching it either. */}
@@ -85,14 +97,19 @@ const ContactForm = () => {
             </label>
           </div>
           {submitError && (
-            <div className="rounded-md p-4 mb-6 bg-red-50 text-red-800 dark:bg-red-900/30 dark:text-red-300">
+            <div role="alert" className="rounded-md p-4 mb-6 bg-red-50 text-red-800 dark:bg-red-900/30 dark:text-red-300">
               <div className="flex">
                 <div className="flex-shrink-0">
                   <svg className="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01M12 19a7 7 0 110-14 7 7 0 010 14z" />
                   </svg>
                 </div>
-                <p className="ml-3 text-sm font-medium">{submitError}</p>
+                <p className="ml-3 text-sm font-medium">
+                  {submitError}{' '}
+                  <a href="mailto:terzidest@gmail.com" className="underline hover:no-underline">
+                    Email me directly instead.
+                  </a>
+                </p>
               </div>
             </div>
           )}
@@ -105,15 +122,21 @@ const ContactForm = () => {
                 type="text"
                 id="name"
                 name="name"
+                ref={(element) => { fieldRefs.current.name = element; }}
                 value={values.name}
                 onChange={handleChange}
+                required
+                maxLength={CONTACT_LIMITS.name}
+                autoComplete="name"
+                aria-invalid={Boolean(errors.name)}
+                aria-describedby={errors.name ? 'name-error' : undefined}
                 className={`block w-full rounded-md border-gray-300 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:placeholder-slate-500 shadow-sm focus:border-primary focus:ring-primary ${
                   errors.name ? 'border-red-500' : ''
                 }`}
                 placeholder="Your name"
               />
               {errors.name && (
-                <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.name}</p>
+                <p id="name-error" className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.name}</p>
               )}
             </div>
 
@@ -125,15 +148,21 @@ const ContactForm = () => {
                 type="email"
                 id="email"
                 name="email"
+                ref={(element) => { fieldRefs.current.email = element; }}
                 value={values.email}
                 onChange={handleChange}
+                required
+                maxLength={CONTACT_LIMITS.email}
+                autoComplete="email"
+                aria-invalid={Boolean(errors.email)}
+                aria-describedby={errors.email ? 'email-error' : undefined}
                 className={`block w-full rounded-md border-gray-300 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:placeholder-slate-500 shadow-sm focus:border-primary focus:ring-primary ${
                   errors.email ? 'border-red-500' : ''
                 }`}
                 placeholder="your.email@example.com"
               />
               {errors.email && (
-                <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.email}</p>
+                <p id="email-error" className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.email}</p>
               )}
             </div>
           </div>
@@ -146,11 +175,20 @@ const ContactForm = () => {
               type="text"
               id="subject"
               name="subject"
+              ref={(element) => { fieldRefs.current.subject = element; }}
               value={values.subject}
               onChange={handleChange}
-              className="block w-full rounded-md border-gray-300 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:placeholder-slate-500 shadow-sm focus:border-primary focus:ring-primary"
+              maxLength={CONTACT_LIMITS.subject}
+              aria-invalid={Boolean(errors.subject)}
+              aria-describedby={errors.subject ? 'subject-error' : undefined}
+              className={`block w-full rounded-md border-gray-300 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:placeholder-slate-500 shadow-sm focus:border-primary focus:ring-primary ${
+                errors.subject ? 'border-red-500' : ''
+              }`}
               placeholder="What is this about?"
             />
+            {errors.subject && (
+              <p id="subject-error" className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.subject}</p>
+            )}
           </div>
 
           <div className="mb-6">
@@ -160,16 +198,21 @@ const ContactForm = () => {
             <textarea
               id="message"
               name="message"
+              ref={(element) => { fieldRefs.current.message = element; }}
               rows={5}
               value={values.message}
               onChange={handleChange}
+              required
+              maxLength={CONTACT_LIMITS.messageMax}
+              aria-invalid={Boolean(errors.message)}
+              aria-describedby={errors.message ? 'message-error' : undefined}
               className={`block w-full rounded-md border-gray-300 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:placeholder-slate-500 shadow-sm focus:border-primary focus:ring-primary ${
                 errors.message ? 'border-red-500' : ''
               }`}
               placeholder="Your message here..."
             ></textarea>
             {errors.message && (
-              <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.message}</p>
+              <p id="message-error" className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.message}</p>
             )}
           </div>
 
@@ -179,6 +222,8 @@ const ContactForm = () => {
               variant="primary"
               size="lg"
               disabled={isSubmitting}
+              aria-busy={isSubmitting}
+              aria-live="polite"
             >
               {isSubmitting ? (
                 <>

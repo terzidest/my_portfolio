@@ -7,7 +7,10 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (path: string) =>
+    path === '/projects'
+      ? location.pathname === path || location.pathname.startsWith('/projects/')
+      : location.pathname === path;
 
   // The bar is transparent only over the home hero; everywhere else (and on
   // home once scrolled) it's the same frosted-glass treatment.
@@ -33,6 +36,19 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    if (!isMenuOpen) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setIsMenuOpen(false);
+    };
+    window.addEventListener('keydown', closeOnEscape);
+    return () => window.removeEventListener('keydown', closeOnEscape);
+  }, [isMenuOpen]);
+
   return (
     <nav className={`fixed w-full z-50 transition-all duration-300 ${
       transparent ? 'bg-transparent py-4' : 'bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-md py-2'
@@ -53,6 +69,7 @@ const Navbar = () => {
             <Link
               key={link.path}
               to={link.path}
+              aria-current={isActive(link.path) ? 'page' : undefined}
               className={`transition-colors duration-300 ${
                 transparent
                   ? (isActive(link.path)
@@ -84,6 +101,8 @@ const Navbar = () => {
               transparent ? 'text-white hover:text-gray-200' : 'text-gray-500 hover:text-primary dark:text-slate-400 dark:hover:text-primary-light'
             }`}
             aria-label="Toggle menu"
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-navigation"
           >
             <svg className="h-6 w-6 fill-current" viewBox="0 0 24 24">
               {isMenuOpen ? (
@@ -106,12 +125,13 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden animate-slide-down border-t border-gray-200 dark:border-slate-700 py-2 shadow-md fixed top-[60px] inset-x-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md">
+        <div id="mobile-navigation" className="md:hidden animate-slide-down border-t border-gray-200 dark:border-slate-700 py-2 shadow-md fixed top-[60px] inset-x-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md">
           <div className="container mx-auto px-6 flex flex-col space-y-3 pt-1">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
+                aria-current={isActive(link.path) ? 'page' : undefined}
                 onClick={() => {
                   setIsMenuOpen(false);
                   window.scrollTo(0, 0);
