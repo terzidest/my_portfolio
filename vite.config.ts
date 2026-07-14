@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 
 // `base` defaults to '/' for Netlify. The GitHub Pages build overrides it
@@ -6,4 +6,9 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   base: '/',
+  test: {
+    environment: 'jsdom',
+    setupFiles: './src/test/setup.ts',
+    restoreMocks: true,
+  },
 })

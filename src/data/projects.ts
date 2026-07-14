@@ -1,7 +1,24 @@
 import type { Project } from '../types';
+import { createResponsiveImage } from './images';
 
-const getImagePath = (path: string): string =>
-  `${import.meta.env.BASE_URL}${path.startsWith('/') ? path.slice(1) : path}`;
+const CARD_SIZES = '(min-width: 1024px) 30vw, (min-width: 768px) 46vw, 92vw';
+const GALLERY_SIZES = '(min-width: 1024px) 29vw, (min-width: 640px) 45vw, 88vw';
+
+const projectImage = (
+  filename: string,
+  width: number,
+  height: number,
+  webpWidths: number[],
+  alt: string,
+  sizes = GALLERY_SIZES,
+) => createResponsiveImage({
+  path: `/assets/images/projects/${filename}`,
+  webpWidths,
+  width,
+  height,
+  alt,
+  sizes,
+});
 
 // src/data/projects.ts
 export const projects: Project[] = [
@@ -9,15 +26,14 @@ export const projects: Project[] = [
     id: 'stack-game',
     title: 'Stack Game',
     description: 'A from-scratch mobile stack game built with Expo, Skia, and Reanimated worklets.',
-    image: getImagePath('/assets/images/projects/stack-game.png'),
+    image: projectImage('stack-game.png', 1206, 2622, [480, 960], 'Stack Game gameplay screen', CARD_SIZES),
     additionalImages: [
-      getImagePath('/assets/images/projects/stack-game-2.png'),
-      getImagePath('/assets/images/projects/stack-game-3.png'),
+      projectImage('stack-game-2.png', 1206, 2622, [480, 960], 'Stack Game tower and score screen'),
+      projectImage('stack-game-3.png', 1206, 2622, [480, 960], 'Stack Game game-over screen'),
     ],
     techStack: ['Expo', 'React Native', 'TypeScript', 'React Native Skia', 'Reanimated', 'Gesture Handler'],
     categories: ['mobile'],
     github: 'https://github.com/terzidest/stack-game',
-    featured: true,
     problem:
       "Writing a polished mobile game from scratch — no game engine — as a test bed for Reanimated worklets, Skia rendering, and React Native's new architecture. A simple but unforgiving gameplay loop (Stack: drop a sliding block onto a tower, slice the overhang, lose when you miss) gave a small enough scope to ship while still surfacing the hard parts: a UI-thread game loop, cross-thread state coordination, sub-pixel collision math, and game-feel polish.",
     role: 'Solo developer — gameplay loop, rendering, audio, and game-feel polish.',
@@ -28,16 +44,15 @@ export const projects: Project[] = [
     id: 'infovault',
     title: 'InfoVault',
     description: 'A password manager with secure local authentication.',
-    image: getImagePath('/assets/images/projects/info-vault.png'),
+    image: projectImage('info-vault.png', 1419, 2796, [480, 960], 'InfoVault password list', CARD_SIZES),
     additionalImages: [
-      getImagePath('/assets/images/projects/info-vault-2.png'),
-      getImagePath('/assets/images/projects/info-vault.png'),
-      getImagePath('/assets/images/projects/info-vault-3.png'),
+      projectImage('info-vault-2.png', 1419, 2796, [480, 960], 'InfoVault authentication screen'),
+      projectImage('info-vault.png', 1419, 2796, [480, 960], 'InfoVault password list'),
+      projectImage('info-vault-3.png', 1419, 2796, [480, 960], 'InfoVault credential detail screen'),
     ],
     techStack: ['React Native', 'Expo', 'Secure Store', 'Biometric Authentication', 'Encryption'],
     categories: ['mobile'],
     github: 'https://github.com/terzidest/InfoVault',
-    featured: true,
     problem:
       "I wanted a password manager that never leaves the device — no cloud sync, no third-party server — backed by OS-level biometrics and encryption at rest. An exercise in handling genuinely sensitive data inside a React Native app.",
     role: 'Solo developer — architecture, encryption layer, UI, and biometric integration.',
@@ -48,16 +63,15 @@ export const projects: Project[] = [
     id: 'ethereal-nature',
     title: 'EtherealNature',
     description: 'A contract-first e-commerce reference architecture: a TanStack storefront and admin over a Kotlin/Ktor + PostgreSQL backend in a polyglot monorepo.',
-    image: getImagePath('/assets/images/projects/ethnature.png'),
+    image: projectImage('ethnature.png', 600, 324, [320, 640], 'EtherealNature storefront home page', CARD_SIZES),
     additionalImages: [
-      getImagePath('/assets/images/projects/ethnature.png'),
-      getImagePath('/assets/images/projects/ethnature2.png'),
-      getImagePath('/assets/images/projects/ethnature3.png'),
+      projectImage('ethnature.png', 600, 324, [320, 640], 'EtherealNature storefront home page'),
+      projectImage('ethnature2.png', 602, 324, [320, 640], 'EtherealNature product catalog'),
+      projectImage('ethnature3.png', 608, 324, [320, 640], 'EtherealNature shopping cart'),
     ],
     techStack: ['TanStack Start', 'React', 'TypeScript', 'Kotlin', 'Ktor', 'PostgreSQL', 'Turborepo', 'OpenAPI'],
     categories: ['web'],
     github: 'https://github.com/terzidest/ethereal_nature',
-    featured: true,
     problem:
       "A deliberately minimal e-shop domain — catalog, cart, ordering, identity — used as a vehicle for the hard part: structural integrity at scale. The guiding rule is that the server never trusts a client-supplied price, total, or stock; client carts are intents only, and the backend stays the authoritative source for money and inventory, recomputed at every cart merge and checkout.",
     role: 'Solo developer across a polyglot monorepo — TanStack storefront and admin (TypeScript), Kotlin/Ktor backend, and the OpenAPI contract that ties them together.',
@@ -68,16 +82,15 @@ export const projects: Project[] = [
     id: 'portfolio',
     title: 'Personal Portfolio',
     description: 'This responsive portfolio website showcasing my projects and skills as a developer.',
-    image: getImagePath('/assets/images/projects/portfolio.png'),
+    image: projectImage('portfolio.png', 559, 324, [320, 640], 'Portfolio home page', CARD_SIZES),
     additionalImages: [
-      getImagePath('/assets/images/projects/portfolio-mobile-1.png'),
-      getImagePath('/assets/images/projects/portfolio-mobile-2.png'),
-      getImagePath('/assets/images/projects/portfolio-mobile-3.png'),
+      projectImage('portfolio-mobile-1.png', 1419, 2796, [480, 960], 'Portfolio mobile home page'),
+      projectImage('portfolio-mobile-2.png', 1419, 2796, [480, 960], 'Portfolio mobile projects page'),
+      projectImage('portfolio-mobile-3.png', 1419, 2796, [480, 960], 'Portfolio mobile project detail page'),
     ],
     techStack: ['React', 'TypeScript', 'Vite', 'TailwindCSS', 'React Router', 'Netlify Functions', 'Resend'],
     categories: ['web'],
     github: 'https://github.com/terzidest/my_portfolio',
-    featured: true,
     problem:
       "The existing portfolio framed me as a 'React & React Native developer' and was drifting from how I actually work today. I needed a site that reflects my current Frontend Engineer positioning — architecture, scalability, testability — and that I'd actually maintain over time.",
     role: 'Solo — design, implementation, and deployment of a TypeScript-strict React app with a serverless contact-form backend.',
@@ -88,16 +101,15 @@ export const projects: Project[] = [
     id: 'little-lemon',
     title: 'Little Lemon',
     description: 'A mobile app fetching data from firebase and filtering effectively.',
-    image: getImagePath('/assets/images/projects/little-lemon.png'),
+    image: projectImage('little-lemon.png', 1419, 2796, [480, 960], 'Little Lemon restaurant home screen', CARD_SIZES),
     additionalImages: [
-      getImagePath('/assets/images/projects/little-lemon-2.png'),
-      getImagePath('/assets/images/projects/little-lemon.png'),
-      getImagePath('/assets/images/projects/little-lemon-3.png'),
+      projectImage('little-lemon-2.png', 1419, 2796, [480, 960], 'Little Lemon onboarding screen'),
+      projectImage('little-lemon.png', 1419, 2796, [480, 960], 'Little Lemon restaurant home screen'),
+      projectImage('little-lemon-3.png', 1419, 2796, [480, 960], 'Little Lemon menu filters'),
     ],
     techStack: ['React Native', 'JavaScript', 'Firebase', 'Nativewind', 'React Navigation', 'Zustand'],
     categories: ['mobile'],
     github: 'https://github.com/terzidest/little-lemon',
-    featured: true,
     problem:
       "Course-derived brief from Meta's React Native Specialization: build a complete restaurant menu mobile experience covering onboarding, authentication, browsable menu items, and search/filter — exercising end-to-end React Native fundamentals against a realistic domain rather than a toy app.",
     role: 'Solo developer — UI, state, navigation, persistence, and Firebase integration.',

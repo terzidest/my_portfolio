@@ -39,6 +39,8 @@ my_portfolio/
 │   └── index.css
 ├── netlify/functions/
 │   └── send-contact.ts             # Serverless contact-form handler (Resend)
+├── shared/contact.ts               # Contact constraints shared by client/function
+├── scripts/generate-responsive-images.mjs
 ├── .github/workflows/static.yml    # GitHub Pages deploy
 ├── netlify.toml                    # Netlify build & functions config
 ├── tsconfig.{json,app,node,functions}.json
@@ -69,8 +71,10 @@ netlify dev        # http://localhost:8888 — Vite + functions
 - `npm run dev` — Vite dev server
 - `npm run build` — production build for Netlify (base `/`)
 - `npm run build:pages` — production build for GitHub Pages (base `/my_portfolio/`)
+- `npm test` — Vitest + React Testing Library regression suite
 - `npm run typecheck` — `tsc -b` across all project references
 - `npm run lint` — ESLint
+- `npm run images:generate` — regenerate committed responsive WebP variants
 - `npm run preview` — preview the production build locally
 
 ## Deployment

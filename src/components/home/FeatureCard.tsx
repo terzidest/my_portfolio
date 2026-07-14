@@ -1,7 +1,9 @@
+import type { FeatureIcon } from '../../data/home';
+
 interface FeatureCardProps {
   title: string;
   description: string;
-  icon: string;
+  icon: FeatureIcon;
 }
 
 const FeatureCard = ({ title, description, icon }: FeatureCardProps) => {

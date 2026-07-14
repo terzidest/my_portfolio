@@ -22,5 +22,5 @@
     /* Node + fetch/Request/Response globals */
     "types": ["node"]
   },
-  "include": ["netlify/functions/**/*.ts"]
+  "include": ["netlify/functions/**/*.ts", "shared"]
 }

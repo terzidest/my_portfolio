@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 type FormErrors<T> = Partial<Record<keyof T, string | null>>;
 
-const useForm = <T extends Record<string, unknown>>(
+const useForm = <T extends object>(
   initialValues: T,
   validate?: (values: T) => Partial<Record<keyof T, string>>
 ) => {
@@ -16,23 +16,21 @@ const useForm = <T extends Record<string, unknown>>(
   ) => {
     const { name, value } = e.target;
 
-    setValues({
-      ...values,
+    setValues((currentValues) => ({
+      ...currentValues,
       [name]: value
-    });
+    }));
 
-    // Clear error for this field when user types
-    if (errors[name as keyof T]) {
-      setErrors({
-        ...errors,
-        [name]: null
-      });
-    }
+    // Clear the field's error as soon as the user edits it.
+    setErrors((currentErrors) => currentErrors[name as keyof T]
+      ? { ...currentErrors, [name]: null }
+      : currentErrors);
   };
 
   const handleSubmit = async (
     e: React.FormEvent,
-    onSubmit: (values: T) => void | Promise<unknown>
+    onSubmit: (values: T) => void | Promise<unknown>,
+    onInvalid?: (errors: Partial<Record<keyof T, string>>) => void
   ) => {
     e.preventDefault();
 
@@ -41,6 +39,7 @@ const useForm = <T extends Record<string, unknown>>(
       setErrors(validationErrors);
 
       if (Object.keys(validationErrors).length > 0) {
+        onInvalid?.(validationErrors);
         return;
       }
     }

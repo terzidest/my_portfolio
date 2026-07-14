@@ -4,33 +4,13 @@ import FeatureCard from "../components/home/FeatureCard";
 import Button from "../components/common/Button";
 import Reveal from "../components/common/Reveal";
 import usePageMeta from "../hooks/usePageMeta";
+import { homeFeatures } from "../data/home";
 
 const Home = () => {
   usePageMeta({
     description:
       "Portfolio of Triantaphilos Terzides — frontend engineer based in Athens, building production React applications for web and mobile.",
   });
-
-  const features = [
-    {
-      title: "React Ecosystem Architecture",
-      description:
-        "Designing scalable frontend systems with React — feature-based module structure, performant state management, and clean separation between UI and domain logic.",
-      icon: "architecture",
-    },
-    {
-      title: "Complex UI & Dashboard Development",
-      description:
-        "Building data-heavy interfaces, real-time dashboards, and admin platforms that handle scale — with a focus on performance, accessibility, and maintainability.",
-      icon: "web",
-    },
-    {
-      title: "Cross-Platform Mobile Development",
-      description:
-        "Delivering native-feeling iOS and Android apps with React Native and Expo, sharing logic with web codebases where it makes sense.",
-      icon: "mobile",
-    },
-  ];
 
   return (
     <div>
@@ -50,8 +30,8 @@ const Home = () => {
           </Reveal>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
-              <Reveal key={index} delay={index * 120} className="h-full">
+            {homeFeatures.map((feature, index) => (
+              <Reveal key={feature.title} delay={index * 120} className="h-full">
                 <FeatureCard
                   title={feature.title}
                   description={feature.description}

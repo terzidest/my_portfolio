@@ -1,15 +1,24 @@
 export type ProjectCategory = 'mobile' | 'web';
+export type ProjectFilter = 'all' | ProjectCategory;
+
+export interface ResponsiveImageSource {
+  src: string;
+  webpSrcSet: string;
+  width: number;
+  height: number;
+  alt: string;
+  sizes: string;
+}
 
 export interface Project {
   id: string;
   title: string;
   description: string;
-  image: string;
-  additionalImages: string[];
+  image: ResponsiveImageSource;
+  additionalImages: ResponsiveImageSource[];
   techStack: string[];
   categories: ProjectCategory[];
   github: string;
-  featured: boolean;
   /** What this project addressed (1–2 paragraphs; use \n\n for paragraph breaks). */
   problem: string;
   /** Your role on the project (typically one or two sentences). */
@@ -18,12 +27,7 @@ export interface Project {
   outcome: string;
 }
 
-export type ContactFormValues = {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-};
+export type { ContactValues as ContactFormValues } from '../shared/contact';
 
 export interface Experience {
   /** Job title, e.g. "Frontend Engineer" */
