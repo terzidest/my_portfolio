@@ -37,7 +37,6 @@ const ResponsiveImage = ({
           alt={source.alt}
           width={source.width}
           height={source.height}
-          sizes={sizes}
           loading={loading}
           decoding="async"
           className={`block transition-all duration-500 ${loaded ? 'opacity-100' : 'opacity-0'} ${imageClassName}`}

@@ -223,7 +223,6 @@ const ContactForm = () => {
               size="lg"
               disabled={isSubmitting}
               aria-busy={isSubmitting}
-              aria-live="polite"
             >
               {isSubmitting ? (
                 <>
@@ -235,6 +234,9 @@ const ContactForm = () => {
                 </>
               ) : 'Send Message'}
             </Button>
+            <span className="sr-only" role="status" aria-live="polite">
+              {isSubmitting ? 'Sending message' : ''}
+            </span>
           </div>
         </form>
       )}

@@ -47,7 +47,7 @@ const Projects = () => {
                   key={filter.value}
                   type="button"
                   aria-pressed={selected}
-                  onClick={() => setSelectedFilter(() => filter.value)}
+                  onClick={() => setSelectedFilter(filter.value)}
                   className={`px-3 sm:px-4 py-2 text-sm font-medium rounded-md transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-800 ${
                     selected
                       ? 'bg-primary text-white shadow-sm'

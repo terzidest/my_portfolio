@@ -9,8 +9,6 @@ class IntersectionObserverMock implements IntersectionObserver {
   readonly rootMargin = '0px';
   readonly thresholds = [0];
 
-  constructor() {}
-
   disconnect = vi.fn();
   observe = vi.fn();
   takeRecords = vi.fn(() => []);

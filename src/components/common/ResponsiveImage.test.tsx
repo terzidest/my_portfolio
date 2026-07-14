@@ -19,6 +19,7 @@ describe('ResponsiveImage', () => {
     expect(image).toHaveAttribute('width', '640');
     expect(image).toHaveAttribute('height', '320');
     expect(image).toHaveAttribute('loading', 'eager');
+    expect(image).not.toHaveAttribute('sizes');
     expect(document.querySelector('source')).toHaveAttribute('srcset', source.webpSrcSet);
     expect(screen.getByTestId('image-placeholder')).toBeInTheDocument();
 
