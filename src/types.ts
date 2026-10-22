@@ -10,6 +10,11 @@ export interface ResponsiveImageSource {
   sizes: string;
 }
 
+export interface ProjectLink {
+  label: string;
+  href: string;
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -19,6 +24,8 @@ export interface Project {
   techStack: string[];
   categories: ProjectCategory[];
   github: string;
+  /** Optional live links (demo, npm, APK…); the first one is surfaced on the card. */
+  links?: ProjectLink[];
   /** What this project addressed (1–2 paragraphs; use \n\n for paragraph breaks). */
   problem: string;
   /** Your role on the project (typically one or two sentences). */

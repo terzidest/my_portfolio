@@ -20,8 +20,76 @@ const projectImage = (
   sizes,
 });
 
-// src/data/projects.ts
+// Order matters: the first entry leads the list (see CLAUDE.md).
 export const projects: Project[] = [
+  {
+    id: 'blockprint',
+    title: 'blockprint',
+    description: 'An open-source, type-safe CMS renderer for React: a compile-time-checked component registry, Standard Schema validation and safe fallbacks for malformed blocks.',
+    image: projectImage('blockprint.png', 1600, 1000, [320, 640, 1280], 'blockprint demo: JSON config beside the page it renders, with the hero block highlighted in both', CARD_SIZES),
+    additionalImages: [
+      projectImage('blockprint.png', 1600, 1000, [320, 640, 1280], 'blockprint demo split view: config and rendered page with hover-sync'),
+      projectImage('blockprint-2.png', 1600, 1000, [320, 640, 1280], 'blockprint broken-config demo: invalid blocks render fallback cards while the rest of the page renders'),
+    ],
+    techStack: ['React', 'TypeScript', 'Vitest', 'npm', 'Standard Schema'],
+    categories: ['web'],
+    github: 'https://github.com/terzidest/blockprint',
+    links: [
+      { label: 'Live demo', href: 'https://blockprint.terzidest.com' },
+      { label: 'npm', href: 'https://www.npmjs.com/package/blockprint' },
+    ],
+    problem:
+      "Content teams compose pages from a fixed set of block types without touching code. Consuming those configs in React usually collapses into a switch on block.type: every block imported into every page, props typed as any, and unknown types either crashing the page or silently vanishing.\n\nblockprint generalises the Page Builder pattern I use in production into a library: you define the blocks and their prop types, register them once, and render any config, including configs that contain block types you've never seen.",
+    role: 'Author and maintainer — API design, type-level guarantees, runtime validation, tests, docs and the live demo.',
+    outcome:
+      'Published on npm as a dependency-light React library. A registered component whose props do not match its schema is a compile error on that registry key, not a runtime crash; unknown block types and schema-rejected props render a configurable fallback, so a page never breaks because the CMS shipped something unexpected.\n\nThe live demo renders three very different pages (commerce, SaaS, editorial) from one renderer and one registry, plus a deliberately broken config you can edit live to watch the fallbacks catch it. Runtime and type-level behaviour are both covered by tests.',
+  },
+  {
+    id: 'ethereal-nature',
+    title: 'EtherealNature',
+    description: 'A full-stack e-commerce platform: an SSR TanStack Start storefront and admin dashboard over a modular Kotlin/Ktor + PostgreSQL backend, tied together by generated OpenAPI clients.',
+    image: projectImage('ethnature.png', 600, 324, [320, 640], 'EtherealNature storefront home page', CARD_SIZES),
+    additionalImages: [
+      projectImage('ethnature.png', 600, 324, [320, 640], 'EtherealNature storefront home page'),
+      projectImage('ethnature2.png', 602, 324, [320, 640], 'EtherealNature product catalog'),
+      projectImage('ethnature3.png', 608, 324, [320, 640], 'EtherealNature shopping cart'),
+    ],
+    techStack: ['TanStack Start', 'React', 'TypeScript', 'Kotlin', 'Ktor', 'PostgreSQL', 'Turborepo', 'OpenAPI'],
+    categories: ['web'],
+    github: 'https://github.com/terzidest/ethereal_nature',
+    links: [
+      { label: 'Storefront', href: 'https://eth-nature.terzidest.com' },
+      { label: 'Admin demo', href: 'https://eth-nature-admin.terzidest.com' },
+    ],
+    problem:
+      "A deliberately minimal e-shop domain — catalog, cart, ordering, identity — used as a vehicle for the hard part: structural integrity at scale. The guiding rule is that the server never trusts a client-supplied price, total, or stock; client carts are intents only, and the backend stays the authoritative source for money and inventory, recomputed at every cart merge and checkout.",
+    role: 'Solo developer across a polyglot monorepo — TanStack storefront and admin (TypeScript), Kotlin/Ktor backend, and the OpenAPI contract that ties them together.',
+    outcome:
+      'A contract-first architecture where an OpenAPI spec generates the typed API client shared by a server-rendered storefront and an authenticated admin SPA, backed by Ktor + Exposed on PostgreSQL. Built as a reference codebase — bounded contexts, Architecture Decision Records, and a phased roadmap (read paths before writes) documented in the repo — to demonstrate scalable, well-separated full-stack design rather than feature breadth.',
+  },
+  {
+    id: 'infovault',
+    title: 'InfoVault',
+    description: 'A local-first encrypted mobile vault: AES-256-GCM encryption, biometric unlock, protected key storage, auto-lock and screen-capture protection.',
+    image: projectImage('info-vault.png', 1419, 2796, [480, 960], 'InfoVault password list', CARD_SIZES),
+    additionalImages: [
+      projectImage('info-vault-2.png', 1419, 2796, [480, 960], 'InfoVault authentication screen'),
+      projectImage('info-vault.png', 1419, 2796, [480, 960], 'InfoVault password list'),
+      projectImage('info-vault-3.png', 1419, 2796, [480, 960], 'InfoVault credential detail screen'),
+    ],
+    techStack: ['React Native', 'Expo', 'TypeScript', 'Secure Store', 'Biometric Authentication', 'AES-256-GCM'],
+    categories: ['mobile'],
+    github: 'https://github.com/terzidest/InfoVault',
+    links: [
+      { label: 'Live Android demo', href: 'https://appetize.io/app/b_po4aou3mjf27ojws3ogxk5iytq' },
+      { label: 'Android APK', href: 'https://github.com/terzidest/InfoVault/releases/latest/download/InfoVault.apk' },
+    ],
+    problem:
+      "I wanted a password manager that never leaves the device — no cloud sync, no third-party server — backed by OS-level biometrics and encryption at rest. An exercise in handling genuinely sensitive data inside a React Native app.",
+    role: 'Solo developer — architecture, encryption layer, UI, and biometric integration.',
+    outcome:
+      'An offline-only vault: entries encrypted at rest with AES-256-GCM, keys held in protected platform storage via Expo SecureStore, biometric unlock, automatic locking and screen-capture protection. Runnable in the browser through the Appetize demo, or installable from the released APK.',
+  },
   {
     id: 'stack-game',
     title: 'Stack Game',
@@ -40,82 +108,6 @@ export const projects: Project[] = [
     outcome:
       "A playable game on Expo + RN 0.85 with the New Architecture (Fabric), driving the entire animation loop from Reanimated worklets on the UI thread and rendering via Skia. Core gameplay complete with combo / perfect-drop detection, haptics, and sound; thread model and data flow documented in the repo's ARCHITECTURE.md. Demonstrates handling worklet/JS state coordination and shipping a 60 fps gameplay loop without a game engine.",
   },
-  {
-    id: 'infovault',
-    title: 'InfoVault',
-    description: 'A password manager with secure local authentication.',
-    image: projectImage('info-vault.png', 1419, 2796, [480, 960], 'InfoVault password list', CARD_SIZES),
-    additionalImages: [
-      projectImage('info-vault-2.png', 1419, 2796, [480, 960], 'InfoVault authentication screen'),
-      projectImage('info-vault.png', 1419, 2796, [480, 960], 'InfoVault password list'),
-      projectImage('info-vault-3.png', 1419, 2796, [480, 960], 'InfoVault credential detail screen'),
-    ],
-    techStack: ['React Native', 'Expo', 'Secure Store', 'Biometric Authentication', 'Encryption'],
-    categories: ['mobile'],
-    github: 'https://github.com/terzidest/InfoVault',
-    problem:
-      "I wanted a password manager that never leaves the device — no cloud sync, no third-party server — backed by OS-level biometrics and encryption at rest. An exercise in handling genuinely sensitive data inside a React Native app.",
-    role: 'Solo developer — architecture, encryption layer, UI, and biometric integration.',
-    outcome:
-      'A functional offline-only vault built on Expo SecureStore and platform biometrics. Demonstrates safe handling of sensitive data and use of platform-specific security APIs from a React Native codebase.',
-  },
-  {
-    id: 'ethereal-nature',
-    title: 'EtherealNature',
-    description: 'A contract-first e-commerce reference architecture: a TanStack storefront and admin over a Kotlin/Ktor + PostgreSQL backend in a polyglot monorepo.',
-    image: projectImage('ethnature.png', 600, 324, [320, 640], 'EtherealNature storefront home page', CARD_SIZES),
-    additionalImages: [
-      projectImage('ethnature.png', 600, 324, [320, 640], 'EtherealNature storefront home page'),
-      projectImage('ethnature2.png', 602, 324, [320, 640], 'EtherealNature product catalog'),
-      projectImage('ethnature3.png', 608, 324, [320, 640], 'EtherealNature shopping cart'),
-    ],
-    techStack: ['TanStack Start', 'React', 'TypeScript', 'Kotlin', 'Ktor', 'PostgreSQL', 'Turborepo', 'OpenAPI'],
-    categories: ['web'],
-    github: 'https://github.com/terzidest/ethereal_nature',
-    problem:
-      "A deliberately minimal e-shop domain — catalog, cart, ordering, identity — used as a vehicle for the hard part: structural integrity at scale. The guiding rule is that the server never trusts a client-supplied price, total, or stock; client carts are intents only, and the backend stays the authoritative source for money and inventory, recomputed at every cart merge and checkout.",
-    role: 'Solo developer across a polyglot monorepo — TanStack storefront and admin (TypeScript), Kotlin/Ktor backend, and the OpenAPI contract that ties them together.',
-    outcome:
-      'A contract-first architecture where an OpenAPI spec generates the typed API client shared by a server-rendered storefront and an authenticated admin SPA, backed by Ktor + Exposed on PostgreSQL. Built as a reference codebase — bounded contexts, Architecture Decision Records, and a phased roadmap (read paths before writes) documented in the repo — to demonstrate scalable, well-separated full-stack design rather than feature breadth.',
-  },
-  {
-    id: 'portfolio',
-    title: 'Personal Portfolio',
-    description: 'This responsive portfolio website showcasing my projects and skills as a developer.',
-    image: projectImage('portfolio.png', 559, 324, [320, 640], 'Portfolio home page', CARD_SIZES),
-    additionalImages: [
-      projectImage('portfolio-mobile-1.png', 1419, 2796, [480, 960], 'Portfolio mobile home page'),
-      projectImage('portfolio-mobile-2.png', 1419, 2796, [480, 960], 'Portfolio mobile projects page'),
-      projectImage('portfolio-mobile-3.png', 1419, 2796, [480, 960], 'Portfolio mobile project detail page'),
-    ],
-    techStack: ['React', 'TypeScript', 'Vite', 'TailwindCSS', 'React Router', 'Netlify Functions', 'Resend'],
-    categories: ['web'],
-    github: 'https://github.com/terzidest/my_portfolio',
-    problem:
-      "The existing portfolio framed me as a 'React & React Native developer' and was drifting from how I actually work today. I needed a site that reflects my current Frontend Engineer positioning — architecture, scalability, testability — and that I'd actually maintain over time.",
-    role: 'Solo — design, implementation, and deployment of a TypeScript-strict React app with a serverless contact-form backend.',
-    outcome:
-      "Live at terzidest.netlify.app from a single `main` branch that deploys to both Netlify (primary) and GitHub Pages, end-to-end TypeScript under strict mode, and a Netlify Function for the contact form using Resend — with honeypot spam protection, length caps, and an opt-in auto-reply.",
-  },
-  {
-    id: 'little-lemon',
-    title: 'Little Lemon',
-    description: 'A mobile app fetching data from firebase and filtering effectively.',
-    image: projectImage('little-lemon.png', 1419, 2796, [480, 960], 'Little Lemon restaurant home screen', CARD_SIZES),
-    additionalImages: [
-      projectImage('little-lemon-2.png', 1419, 2796, [480, 960], 'Little Lemon onboarding screen'),
-      projectImage('little-lemon.png', 1419, 2796, [480, 960], 'Little Lemon restaurant home screen'),
-      projectImage('little-lemon-3.png', 1419, 2796, [480, 960], 'Little Lemon menu filters'),
-    ],
-    techStack: ['React Native', 'JavaScript', 'Firebase', 'Nativewind', 'React Navigation', 'Zustand'],
-    categories: ['mobile'],
-    github: 'https://github.com/terzidest/little-lemon',
-    problem:
-      "Course-derived brief from Meta's React Native Specialization: build a complete restaurant menu mobile experience covering onboarding, authentication, browsable menu items, and search/filter — exercising end-to-end React Native fundamentals against a realistic domain rather than a toy app.",
-    role: 'Solo developer — UI, state, navigation, persistence, and Firebase integration.',
-    outcome:
-      'A working app covering the full brief: auth, menu browsing with search and filter, and a clean component layer with shared primitives. Used to consolidate the Meta React Native Specialization material and as a reference codebase for later React Native work.',
-  }
 ];
 
 // Helper function to get project by ID

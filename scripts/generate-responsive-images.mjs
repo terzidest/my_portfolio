@@ -31,5 +31,8 @@ for (const file of projectFiles) {
   const input = path.join(projectDirectory, file);
   const metadata = await sharp(input).metadata();
   const portrait = (metadata.height ?? 0) > (metadata.width ?? 0);
-  await createVariants(input, portrait ? [480, 960] : [320, 640]);
+  // Wide originals (e.g. desktop screenshots) also get a 1280w variant so
+  // the project detail hero stays sharp.
+  const landscape = (metadata.width ?? 0) >= 1280 ? [320, 640, 1280] : [320, 640];
+  await createVariants(input, portrait ? [480, 960] : landscape);
 }
