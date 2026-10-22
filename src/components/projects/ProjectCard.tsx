@@ -42,7 +42,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
           <Button
             to={`/projects/${id}`}
             variant="text"
-            className="text-primary font-medium"
+            className="text-primary font-medium whitespace-nowrap"
           >
             View Details
             <svg
@@ -67,7 +67,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
                 href={primaryLink.href}
                 aria-label={`${title}: ${primaryLink.label}`}
                 variant="text"
-                className="text-sm font-medium text-gray-500 hover:text-gray-800 dark:text-slate-400 dark:hover:text-slate-200"
+                className="text-sm font-medium whitespace-nowrap text-gray-500 hover:text-gray-800 dark:text-slate-400 dark:hover:text-slate-200"
               >
                 {primaryLink.label} ↗
               </Button>

@@ -81,7 +81,7 @@ export const projects: Project[] = [
     categories: ['mobile'],
     github: 'https://github.com/terzidest/InfoVault',
     links: [
-      { label: 'Live Android demo', href: 'https://appetize.io/app/b_po4aou3mjf27ojws3ogxk5iytq' },
+      { label: 'Android demo', href: 'https://appetize.io/app/b_po4aou3mjf27ojws3ogxk5iytq' },
       { label: 'Android APK', href: 'https://github.com/terzidest/InfoVault/releases/latest/download/InfoVault.apk' },
     ],
     problem:
