@@ -81,6 +81,8 @@ const FeatureCard = ({ title, description, icon }: FeatureCardProps) => {
             <rect x="11" y="11" width="7" height="7" rx="1.2" />
           </svg>
         );
+      // Lightning bolt — doubles as the "automation" icon.
+      case "automation":
       default:
         return (
           <svg

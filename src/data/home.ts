@@ -1,4 +1,4 @@
-export type FeatureIcon = 'architecture' | 'web' | 'mobile' | 'firebase';
+export type FeatureIcon = 'architecture' | 'web' | 'mobile' | 'firebase' | 'automation';
 
 export interface HomeFeature {
   title: string;
@@ -8,21 +8,21 @@ export interface HomeFeature {
 
 export const homeFeatures: HomeFeature[] = [
   {
-    title: 'React Ecosystem Architecture',
+    title: 'Frontend Architecture & CMS',
     description:
-      'Designing scalable frontend systems with React — feature-based module structure, performant state management, and clean separation between UI and domain logic.',
+      'Designing React/Next.js systems that scale with the team — reusable components, shared conventions, and type-safe, CMS-driven page builders with a single validation boundary.',
     icon: 'architecture',
   },
   {
-    title: 'Complex UI & Dashboard Development',
+    title: 'End-to-End Delivery & Releases',
     description:
-      'Building data-heavy interfaces, real-time dashboards, and admin platforms that handle scale — with a focus on performance, accessibility, and maintainability.',
+      'Shipping complete product flows across storefront, backoffice and APIs — then owning the production release: readiness checks, targeted cherry-picks and verifying what actually deployed.',
     icon: 'web',
   },
   {
-    title: 'Cross-Platform Mobile Development',
+    title: 'Automation & Backend',
     description:
-      'Delivering native-feeling iOS and Android apps with React Native and Expo, sharing logic with web codebases where it makes sense.',
-    icon: 'mobile',
+      'Building the tooling that keeps a platform healthy — scheduled flow checks that open and close their own issues, translation sync, deploy verification — plus production backend work in Go.',
+    icon: 'automation',
   },
 ];

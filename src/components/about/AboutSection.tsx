@@ -31,11 +31,11 @@ const AboutSection = () => {
             <div className="w-16 h-1 bg-primary mb-6"></div>
 
             <p className="text-gray-600 dark:text-slate-300 text-lg mb-6">
-              I'm a frontend engineer based in Athens with several years of experience building production React applications — from mobile apps to large-scale web platforms. I specialize in React and its ecosystem, with a focus on architecture that scales: modular codebases, clean state management, and maintainable component design.
+              I'm a senior frontend engineer based in Athens with 7+ years of software development experience, specializing in React, TypeScript and Next.js. I build and maintain production customer-facing applications and CMS backoffice tools, with ownership spanning frontend architecture, complex feature delivery, engineering automation and production releases.
             </p>
 
             <p className="text-gray-600 dark:text-slate-300 text-lg mb-6">
-              I care about the craft — not just making things work, but making them work well. I'm comfortable owning frontend decisions end-to-end, collaborating closely with backend teams, and navigating complex domains like iGaming, fintech, or data-heavy B2B products.
+              I'm at home with SSR, API integration and type-safe data modeling, and I don't stop at the frontend boundary — my recent work includes production backend contributions in Go. I'm open to remote roles across Europe.
             </p>
 
             <div className="mb-10">

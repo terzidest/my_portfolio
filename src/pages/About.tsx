@@ -2,7 +2,7 @@ import AboutSection from '../components/about/AboutSection';
 import ExperienceSection from '../components/about/ExperienceSection';
 import Reveal from '../components/common/Reveal';
 import usePageMeta from '../hooks/usePageMeta';
-import { certifications, education } from '../data/about';
+import { certifications, education, languages } from '../data/about';
 
 const About = () => {
   usePageMeta({
@@ -22,7 +22,16 @@ const About = () => {
           <div className="bg-white dark:bg-slate-800 dark:ring-1 dark:ring-slate-700 rounded-xl shadow-md p-8">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Education</h2>
             <div className="mb-2">
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white">{education.degree}</h3>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                <a
+                  href={education.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
+                >
+                  {education.degree}
+                </a>
+              </h3>
               <p className="text-gray-600 dark:text-slate-300 italic">{education.institution}</p>
               <p className="text-gray-500 dark:text-slate-400 text-sm mb-4">Graduated: {education.graduationDate}</p>
 
@@ -75,6 +84,13 @@ const About = () => {
                 </div>
               ))}
             </div>
+
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mt-10 mb-4">Languages</h2>
+            <ul className="space-y-1 text-gray-600 dark:text-slate-300">
+              {languages.map((language) => (
+                <li key={language}>{language}</li>
+              ))}
+            </ul>
           </div>
         </Reveal>
       </div>

@@ -1,7 +1,7 @@
 import Button from '../common/Button';
 import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion';
 
-const technologies = ['React', 'TypeScript', 'Next.js', 'React Native', 'React Query', 'Zustand', 'MUI', 'TailwindCSS', 'Node.js'];
+const technologies = ['React', 'TypeScript', 'Next.js', 'TanStack Query', 'React Native', 'Tailwind CSS', 'Zustand', 'Go', 'Node.js', 'PostgreSQL'];
 
 const Hero = () => {
   const reducedMotion = usePrefersReducedMotion();
@@ -12,12 +12,12 @@ const Hero = () => {
         <div className="flex flex-col md:flex-row items-center">
           <div className="md:w-1/2 flex flex-col mb-16 md:mb-0 md:items-start items-center text-center md:text-left">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-fade-in-up">
-              Frontend
+              Senior Frontend
               <br />
               <span className="text-blue-200">Engineer</span>
             </h1>
             <p className="text-lg text-blue-100 mb-8 max-w-md animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-              Building production-grade web and mobile experiences with React ecosystems — from component architecture to scalable state management and cross-platform delivery.
+              7+ years building production React, TypeScript and Next.js applications — from frontend architecture and CMS tooling to releases and the backend behind them. Based in Athens, open to remote roles across Europe.
             </p>
             <div className="flex flex-col sm:flex-row animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
               <Button
