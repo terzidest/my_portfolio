@@ -41,12 +41,12 @@ The Netlify Function only exists on Netlify; on the Pages mirror the contact for
 ```
 src/
 ├── components/
-│   ├── about/       AboutSection, ExperienceSection (timeline)
+│   ├── about/       AboutSection, SkillsSection, ExperienceSection (timeline)
 │   ├── common/      Navbar, Footer, Button, Reveal, BackToTop
 │   ├── contact/     ContactForm (posts to the Netlify Function)
-│   ├── home/        Hero, FeatureCard
+│   ├── home/        Hero
 │   └── projects/    ProjectCard
-├── data/            projects.ts, experience.ts   (content lives here, not in JSX)
+├── data/            projects.ts, experience.ts, skills.ts, about.ts   (content lives here, not in JSX)
 ├── hooks/           useForm, useInView, usePrefersReducedMotion, usePageMeta
 ├── pages/           Home, Projects, ProjectDetail, About, Contact
 ├── utils/           validation, ScrollToTop (route-change scroll reset)

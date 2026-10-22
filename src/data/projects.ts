@@ -115,6 +115,9 @@ export const getProjectById = (id: string): Project | undefined => {
   return projects.find(project => project.id === id);
 };
 
+// The leading projects, shown on the home page.
+export const getFeaturedProjects = (count = 3): Project[] => projects.slice(0, count);
+
 // Helper function to get all project IDs
 export const getAllProjectIds = (): string[] => {
   return projects.map(project => project.id);

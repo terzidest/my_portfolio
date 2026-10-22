@@ -17,7 +17,7 @@ const Hero = () => {
               <span className="text-blue-200">Engineer</span>
             </h1>
             <p className="text-lg text-blue-100 mb-8 max-w-md animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-              7+ years building production React, TypeScript and Next.js applications — from frontend architecture and CMS tooling to releases and the backend behind them. Based in Athens, open to remote roles across Europe.
+              I build fast, maintainable web applications with React, TypeScript and Next.js, from the component layer through to the APIs behind it.
             </p>
             <div className="flex flex-col sm:flex-row animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
               <Button
