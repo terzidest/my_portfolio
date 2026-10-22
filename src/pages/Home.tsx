@@ -9,7 +9,7 @@ import { homeFeatures } from "../data/home";
 const Home = () => {
   usePageMeta({
     description:
-      "Portfolio of Triantaphilos Terzides — frontend engineer based in Athens, building production React applications for web and mobile.",
+      "Portfolio of Triantaphilos Terzides — senior frontend engineer in Athens with 7+ years building production React, TypeScript and Next.js applications. Open to remote roles across Europe.",
   });
 
   return (

@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 // treat the GitHub Pages mirror as a duplicate of Netlify, not a competitor.
 const SITE_URL = 'https://terzidest.com';
 const SITE_NAME = 'Triantaphilos Terzides';
-const DEFAULT_TITLE = 'Triantaphilos Terzides | Frontend Engineer';
+const DEFAULT_TITLE = 'Triantaphilos Terzides | Senior Frontend Engineer';
 
 interface PageMeta {
   /** Page-specific title part; omit for the site-wide default. */

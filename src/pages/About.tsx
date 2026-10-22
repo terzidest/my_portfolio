@@ -8,7 +8,7 @@ const About = () => {
   usePageMeta({
     title: 'About',
     description:
-      'Background, work experience, education, and certifications of Triantaphilos Terzides, frontend engineer.',
+      'Background, work experience, education, certifications and languages of Triantaphilos Terzides, senior frontend engineer.',
   });
 
   return (

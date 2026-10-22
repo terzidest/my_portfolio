@@ -34,10 +34,16 @@ export interface Experience {
   title: string;
   /** Company / organization name */
   company: string;
-  /** Date range as displayed, e.g. "2025 – present" */
+  /** Date range (and optional location) as displayed, e.g. "Nov 2025 – Present · Athens, Greece" */
   dates: string;
   /** Optional intro paragraph above the bullets */
   description?: string;
   /** Achievement / responsibility bullets */
-  bullets: string[];
+  bullets: ExperienceBullet[];
+}
+
+export interface ExperienceBullet {
+  /** Optional bold lead-in, e.g. "CMS & Page Builder" */
+  label?: string;
+  text: string;
 }

@@ -41,7 +41,12 @@ const ExperienceSection = () => {
                       className="flex items-start text-gray-600 dark:text-slate-300 leading-relaxed"
                     >
                       <span className="text-primary mr-3 mt-1 flex-shrink-0">•</span>
-                      <span>{bullet}</span>
+                      <span>
+                        {bullet.label && (
+                          <strong className="font-semibold text-gray-900 dark:text-white">{bullet.label}: </strong>
+                        )}
+                        {bullet.text}
+                      </span>
                     </li>
                   ))}
                 </ul>
