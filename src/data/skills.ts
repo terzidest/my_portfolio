@@ -26,3 +26,4 @@ export const skillGroups: SkillGroup[] = [
     skills: ['SSR', 'CMS-driven architecture', 'i18n', 'CI/CD', 'GitHub Actions', 'Docker', 'Git', 'pnpm', 'Turborepo', 'Vitest', 'Jest'],
   },
 ];
+

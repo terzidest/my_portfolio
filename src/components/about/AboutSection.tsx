@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import ResponsiveImage from '../common/ResponsiveImage';
-import { profileImage } from '../../data/about';
+import { approach, profileImage } from '../../data/about';
 
 const AboutSection = () => {
   return (
@@ -31,47 +31,27 @@ const AboutSection = () => {
             <div className="w-16 h-1 bg-primary mb-6"></div>
 
             <p className="text-gray-600 dark:text-slate-300 text-lg mb-6">
-              I'm a senior frontend engineer based in Athens with 7+ years of software development experience, specializing in React, TypeScript and Next.js. I build and maintain production customer-facing applications and CMS backoffice tools, with ownership spanning frontend architecture, complex feature delivery, engineering automation and production releases.
+              I'm a software engineer in Athens with 7+ years across enterprise SAP development, independent client work, and production web platforms. My focus is frontend engineering with React and TypeScript, but I like understanding how the whole system fits together, and I'm comfortable working on the backend when a feature needs it.
             </p>
 
             <p className="text-gray-600 dark:text-slate-300 text-lg mb-6">
-              I'm at home with SSR, API integration and type-safe data modeling, and I don't stop at the frontend boundary — my recent work includes production backend contributions in Go. I'm open to remote roles across Europe.
+              I value straightforward solutions, clear responsibilities, and code the next developer can pick up. I'm open to remote roles across Europe.
             </p>
 
             <div className="mb-10">
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">My Approach</h3>
 
               <ul className="space-y-3">
-                <li className="flex items-start">
-                  <svg className="w-6 h-6 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span className="text-gray-600 dark:text-slate-300">Architecture-first thinking — clear boundaries between domain, state, and UI</span>
-                </li>
-                <li className="flex items-start">
-                  <svg className="w-6 h-6 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span className="text-gray-600 dark:text-slate-300">Component design that scales: composable, testable, and easy to reason about</span>
-                </li>
-                <li className="flex items-start">
-                  <svg className="w-6 h-6 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span className="text-gray-600 dark:text-slate-300">Pragmatic state management — the right tool for the job, not the trendiest one</span>
-                </li>
-                <li className="flex items-start">
-                  <svg className="w-6 h-6 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span className="text-gray-600 dark:text-slate-300">Performance and accessibility as defaults, not afterthoughts</span>
-                </li>
-                <li className="flex items-start">
-                  <svg className="w-6 h-6 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span className="text-gray-600 dark:text-slate-300">Comfortable owning features end-to-end, from API contract to deployed UI</span>
-                </li>
+                {approach.map((principle) => (
+                  <li key={principle.title} className="flex items-start">
+                    <svg className="w-6 h-6 text-primary mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span className="text-gray-600 dark:text-slate-300">
+                      <strong className="font-semibold text-gray-900 dark:text-white">{principle.title}:</strong> {principle.text}
+                    </span>
+                  </li>
+                ))}
               </ul>
             </div>
 

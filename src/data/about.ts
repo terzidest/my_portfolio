@@ -37,6 +37,12 @@ export const education: Education = {
   ],
 };
 
+export const approach: { title: string; text: string }[] = [
+  { title: 'Clarity over cleverness', text: 'simple structures, clear boundaries, code that is easy to reason about.' },
+  { title: 'Practical decisions', text: 'the right tool for the problem, not the trendiest one.' },
+  { title: 'Ownership through delivery', text: 'from implementation to a verified release.' },
+];
+
 export const languages: string[] = ['Greek (native)', 'English (professional working proficiency)'];
 
 export const certifications: Certification[] = [

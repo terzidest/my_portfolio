@@ -1,5 +1,6 @@
 import AboutSection from '../components/about/AboutSection';
 import ExperienceSection from '../components/about/ExperienceSection';
+import SkillsSection from '../components/about/SkillsSection';
 import Reveal from '../components/common/Reveal';
 import usePageMeta from '../hooks/usePageMeta';
 import { certifications, education, languages } from '../data/about';
@@ -8,13 +9,15 @@ const About = () => {
   usePageMeta({
     title: 'About',
     description:
-      'Background, work experience, education, certifications and languages of Triantaphilos Terzides, senior frontend engineer.',
+      'Background, skills, work experience, education, certifications and languages of Triantaphilos Terzides, senior frontend engineer.',
   });
 
   return (
     <div className="pt-28 pb-20 bg-gray-50 dark:bg-slate-900">
       <div className="container mx-auto px-6">
         <AboutSection />
+
+        <SkillsSection />
 
         <ExperienceSection />
 
