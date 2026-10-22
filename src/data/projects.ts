@@ -65,7 +65,7 @@ export const projects: Project[] = [
       "A deliberately minimal e-shop domain — catalog, cart, ordering, identity — used as a vehicle for the hard part: structural integrity at scale. The guiding rule is that the server never trusts a client-supplied price, total, or stock; client carts are intents only, and the backend stays the authoritative source for money and inventory, recomputed at every cart merge and checkout.",
     role: 'Solo developer across a polyglot monorepo — TanStack storefront and admin (TypeScript), Kotlin/Ktor backend, and the OpenAPI contract that ties them together.',
     outcome:
-      'A contract-first architecture where an OpenAPI spec generates the typed API client shared by a server-rendered storefront and an authenticated admin SPA, backed by Ktor + Exposed on PostgreSQL. Built as a reference codebase — bounded contexts, Architecture Decision Records, and a phased roadmap (read paths before writes) documented in the repo — to demonstrate scalable, well-separated full-stack design rather than feature breadth.',
+      'A working shop you can try: a server-rendered storefront for browsing the catalog, cart and checkout, and an authenticated admin dashboard for managing products and orders, both live. They share a typed API client generated from an OpenAPI spec and run on a Ktor + Exposed backend over PostgreSQL.\n\nUnder the hood it is organised into bounded contexts, with Architecture Decision Records and a phased roadmap documented in the repo.',
   },
   {
     id: 'infovault',

@@ -15,8 +15,8 @@ const Contact = () => {
           <h1 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-4">Get in Touch</h1>
           <div className="w-16 h-1 bg-primary mx-auto mb-6"></div>
           <p className="text-center text-gray-600 dark:text-slate-300 mb-10 max-w-2xl mx-auto">
-            Have a project in mind or want to discuss potential opportunities?
-            Feel free to reach out and I'll get back to you as soon as possible.
+            Whether it's a role, a project, or a question about something I've
+            built, send me a message and I'll get back to you as soon as possible.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
