@@ -283,12 +283,14 @@ body {
     opacity: 0;
     animation: drift ease-in-out infinite;
   }
-  /* Light mode: the trace's palest cyan (#a5f3fc) with a stronger #22d3ee
-     glow, so a pale dot still reads on the pale ground. */
+  /* Light mode: an indigo core inside a pale-cyan ring with a cyan glow, so
+     the dots keep their sparkle but have contrast on the pale ground. A touch
+     larger (`scale` composes with the drift transform). */
   html:not(.dark) .ambient-dots > i {
     --dot-opacity: 1;
-    background: #a5f3fc;
-    box-shadow: 0 0 8px 3px rgb(34 211 238 / 0.75);
+    scale: 1.25;
+    background: #4352c9;
+    box-shadow: 0 0 0 2px rgb(165 243 252 / 0.9), 0 0 10px 3px rgb(34 211 238 / 0.55);
   }
 
   /* Rotating conic ring around a rounded element (the portrait). */
