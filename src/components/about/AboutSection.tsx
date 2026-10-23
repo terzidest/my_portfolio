@@ -31,11 +31,15 @@ const AboutSection = () => {
             <div className="w-16 h-1 bg-primary mb-6"></div>
 
             <p className="text-gray-600 dark:text-slate-300 text-lg mb-6">
-              I'm a software engineer in Athens with 7+ years across enterprise SAP development, independent client work, and production web platforms. My focus is frontend engineering with React and TypeScript, but I like understanding how the whole system fits together, and I'm comfortable working on the backend when a feature needs it.
+              I'm a software engineer based in Athens, Greece, with a background spanning enterprise development, independent client projects, and production web platforms.
             </p>
 
             <p className="text-gray-600 dark:text-slate-300 text-lg mb-6">
-              I value straightforward solutions, clear responsibilities, and code the next developer can pick up. I'm open to remote roles across Europe.
+              My work is primarily focused on frontend engineering, particularly React and TypeScript, but I enjoy understanding how the entire system fits together. Over the years, I've worked on everything from mobile applications and e-commerce platforms to complex web applications and internal tools.
+            </p>
+
+            <p className="text-gray-600 dark:text-slate-300 text-lg mb-6">
+              I value straightforward solutions, clear responsibilities, and code that other developers can understand and maintain. I'm comfortable working independently, collaborating across teams, and taking responsibility for features from implementation through delivery.
             </p>
 
             <div className="mb-10">
