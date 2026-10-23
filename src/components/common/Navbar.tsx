@@ -2,39 +2,30 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
 
+const navLinks = [
+  { path: '/', label: 'Home' },
+  { path: '/about', label: 'About' },
+  { path: '/projects', label: 'Projects' },
+  { path: '/contact', label: 'Contact' },
+];
+
+const linkStyles = (active: boolean) =>
+  `rounded-[10px] px-3.5 py-2.5 text-[15px] font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-neon ${
+    active ? 'bg-neon/20 text-ink' : 'text-ink-soft hover:text-ink hover:bg-neon/10'
+  }`;
+
+const iconButton =
+  'flex h-11 w-11 items-center justify-center rounded-xl border border-line/25 text-ink-soft hover:text-ink hover:border-line/50';
+
+// Floating frosted-glass bar, the same on every route.
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
   const isActive = (path: string) =>
     path === '/projects'
       ? location.pathname === path || location.pathname.startsWith('/projects/')
       : location.pathname === path;
-
-  // The bar is transparent only over the home hero; everywhere else (and on
-  // home once scrolled) it's the same frosted-glass treatment.
-  const transparent = location.pathname === '/' && !isScrolled;
-
-  const navLinks = [
-    { path: '/', label: 'Home' },
-    { path: '/projects', label: 'Projects' },
-    { path: '/about', label: 'About' },
-    { path: '/contact', label: 'Contact' }
-  ];
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   useEffect(() => {
     setIsMenuOpen(false);
@@ -50,83 +41,54 @@ const Navbar = () => {
   }, [isMenuOpen]);
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${
-      transparent ? 'bg-transparent py-4' : 'bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-md py-2'
-    }`}>
-      <div className="container mx-auto px-6 flex justify-between items-center">
-        <Link to="/" className="flex items-center">
-          <span className={`text-xl font-bold transition-colors duration-300 ${
-            transparent ? 'text-white' : 'text-primary dark:text-primary-light'
-          }`}>
-            Triantaphilos Terzides
-          </span>
+    <nav aria-label="Main" className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6 sm:pt-5">
+      <div className="glass mx-auto flex max-w-[1200px] items-center justify-between gap-4 rounded-[18px] border border-line/20 py-2.5 pl-5 pr-2.5 shadow-[0_8px_30px_rgb(0_0_0/0.12)] sm:pr-3">
+        <Link
+          to="/"
+          className="font-display text-xl font-bold tracking-tight text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-neon rounded-md"
+        >
+          terzidest<span className="text-signal">.</span>
         </Link>
 
-        <div className="flex items-center gap-4 md:gap-8">
-        {/* Desktop Menu */}
-        <div className="hidden md:flex space-x-10">
-          {navLinks.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              aria-current={isActive(link.path) ? 'page' : undefined}
-              className={`transition-colors duration-300 ${
-                transparent
-                  ? (isActive(link.path)
-                      ? 'text-white font-semibold'
-                      : 'text-blue-100 hover:text-white')
-                  : (isActive(link.path)
-                      ? 'text-primary dark:text-primary-light font-medium'
-                      : 'text-gray-600 hover:text-primary dark:text-slate-300 dark:hover:text-primary-light')
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </div>
+        <div className="flex items-center gap-1">
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center gap-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                aria-current={isActive(link.path) ? 'page' : undefined}
+                className={linkStyles(isActive(link.path))}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
 
-        <ThemeToggle
-          className={
-            transparent
-              ? 'text-white hover:text-gray-200'
-              : 'text-gray-500 hover:text-primary dark:text-slate-400 dark:hover:text-primary-light'
-          }
-        />
+          <ThemeToggle className={`ml-1.5 ${iconButton}`} />
 
-        {/* Mobile Menu Button */}
-        <div className="md:hidden">
+          {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className={`rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-current transition-colors duration-300 ${
-              transparent ? 'text-white hover:text-gray-200' : 'text-gray-500 hover:text-primary dark:text-slate-400 dark:hover:text-primary-light'
-            }`}
+            className={`md:hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-neon transition-colors duration-200 ${iconButton}`}
             aria-label="Toggle menu"
             aria-expanded={isMenuOpen}
             aria-controls="mobile-navigation"
           >
-            <svg className="h-6 w-6 fill-current" viewBox="0 0 24 24">
-              {isMenuOpen ? (
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M18.278 16.864a1 1 0 01-1.414 1.414l-4.829-4.828-4.828 4.828a1 1 0 01-1.414-1.414l4.828-4.829-4.828-4.828a1 1 0 011.414-1.414l4.829 4.828 4.828-4.828a1 1 0 111.414 1.414l-4.828 4.829 4.828 4.828z"
-                />
-              ) : (
-                <path
-                  fillRule="evenodd"
-                  d="M4 5h16a1 1 0 010 2H4a1 1 0 110-2zm0 6h16a1 1 0 010 2H4a1 1 0 010-2zm0 6h16a1 1 0 010 2H4a1 1 0 010-2z"
-                />
-              )}
+            <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" viewBox="0 0 24 24" aria-hidden="true">
+              {isMenuOpen ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
             </svg>
           </button>
-        </div>
         </div>
       </div>
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div id="mobile-navigation" className="md:hidden animate-slide-down border-t border-gray-200 dark:border-slate-700 py-2 shadow-md fixed top-[60px] inset-x-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md">
-          <div className="container mx-auto px-6 flex flex-col space-y-3 pt-1">
+        <div
+          id="mobile-navigation"
+          className="glass md:hidden animate-slide-down mx-auto mt-2 max-w-[1200px] rounded-[18px] border border-line/20 p-2 shadow-[0_12px_40px_rgb(0_0_0/0.25)]"
+        >
+          <div className="flex flex-col gap-1">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
@@ -136,11 +98,7 @@ const Navbar = () => {
                   setIsMenuOpen(false);
                   window.scrollTo(0, 0);
                 }}
-                className={`${
-                  isActive(link.path)
-                    ? 'text-primary dark:text-primary-light font-medium'
-                    : 'text-gray-700 hover:text-primary dark:text-slate-300 dark:hover:text-primary-light'
-                } py-3 block w-full text-base`}
+                className={`${linkStyles(isActive(link.path))} block w-full px-4 py-3 text-base`}
               >
                 {link.label}
               </Link>

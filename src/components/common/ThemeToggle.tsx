@@ -5,8 +5,7 @@ interface ThemeToggleProps {
 }
 
 // Icon-only toggle: moon in light mode ("switch to dark"), sun in dark mode.
-// Colors come from the caller so the Navbar can match its transparent/frosted
-// states; icons inherit via currentColor.
+// Size, shape and colors come from the caller; icons inherit via currentColor.
 const ThemeToggle = ({ className = '' }: ThemeToggleProps) => {
   const { theme, toggleTheme } = useTheme();
 
@@ -15,7 +14,7 @@ const ThemeToggle = ({ className = '' }: ThemeToggleProps) => {
       type="button"
       onClick={toggleTheme}
       aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
-      className={`rounded-md p-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-current transition-colors duration-300 ${className}`}
+      className={`focus:outline-none focus-visible:ring-2 focus-visible:ring-neon transition-colors duration-200 ${className}`}
     >
       {theme === 'dark' ? (
         <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
