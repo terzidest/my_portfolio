@@ -1,7 +1,7 @@
 import { useState, type CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
 import Reveal from '../common/Reveal';
-import { logoColors, skillGroups, type Skill } from '../../data/skills';
+import { logoVars, skillGroups, type Skill } from '../../data/skills';
 
 const ALL = 'all';
 
@@ -16,15 +16,7 @@ const pillOff =
 
 const TechTile = ({ skill }: { skill: Skill }) => {
   const label = skill.tileLabel ?? skill.name;
-  const colors = skill.icon
-    ? logoColors(skill.icon)
-    : { light: 'var(--neon)', dark: 'var(--line)', glowLight: 'var(--neon)', glowDark: 'var(--line)' };
-  const style = {
-    '--tile-light': colors.light,
-    '--tile-dark': colors.dark,
-    '--glow-light': colors.glowLight,
-    '--glow-dark': colors.glowDark,
-  } as CSSProperties;
+  const style = logoVars(skill) as CSSProperties;
 
   return (
     <li className="tech-tile flex h-[116px] flex-col items-center justify-center gap-2.5 px-1.5" style={style}>
