@@ -266,6 +266,23 @@ body {
   .sparks > i:nth-child(5) { left: 78%; animation-delay: 0.4s; }
   .sparks > i:nth-child(6) { left: 93%; animation-delay: 1.05s; width: 3px; height: 3px; --dx: -8px; }
 
+  /* Ambient dots (AmbientDots): the sparks' look, drifting slowly up behind
+     content. Per-dot position, size, timing and --dx come from inline styles.
+     They end transparent, so the reduced-motion guard leaves them invisible. */
+  .ambient-dots > i {
+    position: absolute;
+    border-radius: 50%;
+    background: #dff6ff;
+    box-shadow: 0 0 6px 2px rgb(34 211 238 / 0.6);
+    opacity: 0;
+    animation: drift ease-in-out infinite;
+  }
+  html:not(.dark) .ambient-dots > i {
+    --dot-opacity: 0.45;
+    background: rgb(var(--neon));
+    box-shadow: 0 0 6px 1px rgb(var(--neon) / 0.45);
+  }
+
   /* Rotating conic ring around a rounded element (the portrait). */
   .conic-ring {
     position: relative;
@@ -409,6 +426,13 @@ body {
   0% { opacity: 0; transform: translate(0, 0) scale(0.5); }
   15% { opacity: 1; }
   100% { opacity: 0; transform: translate(var(--dx, 6px), -150px) scale(1); }
+}
+
+@keyframes drift {
+  0% { opacity: 0; transform: translate(0, 0) scale(0.6); }
+  20% { opacity: var(--dot-opacity, 0.75); }
+  80% { opacity: var(--dot-opacity, 0.75); }
+  100% { opacity: 0; transform: translate(var(--dx, 6px), -220px) scale(1); }
 }
 
 @keyframes rise {
