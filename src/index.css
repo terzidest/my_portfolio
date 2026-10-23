@@ -5,6 +5,36 @@
 /* Custom global styles */
 :root {
   scroll-behavior: smooth;
+
+  /* Theme tokens (RGB channels; consumed via tailwind.config.js). Light first,
+     dark overrides below. Every text/ground pairing here passes WCAG AA. */
+  --ground: 245 247 252;        /* page background */
+  --surface: 255 255 255;       /* cards, panels, glass tint */
+  --surface-raised: 223 229 251;
+  --ink: 11 19 36;              /* headings */
+  --ink-soft: 69 80 109;        /* body copy */
+  --ink-muted: 74 86 114;       /* captions, meta */
+  --line: 67 82 201;            /* borders — use at /15–/30 */
+  --neon: 67 82 201;            /* glow + accent */
+  --signal: 14 116 144;         /* mono eyebrow labels */
+  --link: 52 66 184;
+  --link-hover: 30 42 138;
+
+  --neon-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html.dark {
+  --ground: 7 13 24;
+  --surface: 14 26 52;
+  --surface-raised: 22 37 75;
+  --ink: 255 255 255;
+  --ink-soft: 180 191 220;
+  --ink-muted: 143 155 189;
+  --line: 165 180 252;
+  --neon: 84 99 215;
+  --signal: 103 232 249;
+  --link: 165 180 252;
+  --link-hover: 224 231 255;
 }
 
 /* Native form controls and scrollbars follow the active theme. */
@@ -17,7 +47,372 @@ html.dark {
 }
 
 body {
-  @apply bg-white text-gray-800 font-sans dark:bg-slate-900 dark:text-slate-300;
+  @apply bg-ground text-ink-soft font-sans;
+}
+
+/* ==========================================================================
+   Effects layer — ported from the Dreamzino prototype's motion layer (same
+   glow stops, conic ramp and timings). Additive: a component opts in by
+   adding a class; nothing here changes layout. All of it collapses under
+   prefers-reduced-motion via the guard at the bottom of this file.
+   ========================================================================== */
+
+@property --neon-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@property --spin {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@layer components {
+  /* Frosted glass: navbar, panels, floating cards. */
+  .glass {
+    background: rgb(var(--surface) / 0.6);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+  }
+
+  /* Neon ring on hover. Box-shadow only, so it never crops in overflow parents. */
+  .hover-neon {
+    transition: box-shadow 0.22s, border-color 0.22s;
+  }
+  .hover-neon:hover {
+    border-color: rgb(var(--neon) / 0.7);
+    box-shadow:
+      0 0 0 1px rgb(var(--neon) / 0.7),
+      0 0 14px rgb(var(--neon) / 0.55),
+      0 0 38px rgb(var(--neon) / 0.3),
+      0 10px 28px rgb(0 0 0 / 0.25);
+  }
+
+  /* Orbiting conic trace drawn on the border only (content-box mask). Also
+     shows on keyboard focus, so it can stand in for the focus ring. */
+  .hover-trace {
+    position: relative;
+    transition: box-shadow 0.26s;
+  }
+  .hover-trace::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    padding: var(--trace-ring, 3px);
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.26s;
+    background: conic-gradient(
+      from var(--neon-angle),
+      #1e3a8a 0deg, #2563eb 30deg, #22d3ee 62deg, #a5f3fc 82deg, #fff 92deg,
+      #a5f3fc 102deg, #22d3ee 122deg, #2563eb 160deg, #1e3a8a 220deg,
+      #172554 300deg, #1e3a8a 360deg
+    );
+    filter: drop-shadow(0 0 4px #67e8f9f2) drop-shadow(0 0 12px #2563ebbf);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  }
+  .hover-trace:hover::before,
+  .hover-trace:focus-visible::before {
+    opacity: 1;
+    animation: neon-orbit 2.4s linear infinite;
+  }
+  .hover-trace:hover {
+    box-shadow: 0 0 10px #2563eb8c, 0 0 28px #2563eb59;
+  }
+  .hover-trace-sm {
+    --trace-ring: 2px;
+  }
+
+  /* Cursor-following radial light. --mx/--my are set by the pointer handler. */
+  .hover-sheen {
+    position: relative;
+  }
+  .hover-sheen::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.22s;
+    background: radial-gradient(
+      220px circle at var(--mx, 50%) var(--my, 50%),
+      rgb(var(--neon) / 0.3),
+      transparent 65%
+    );
+  }
+  .hover-sheen:hover::after {
+    opacity: 1;
+  }
+
+  /* Energy CTA: breathing glow + drifting streaks + a light sweep that
+     speeds up on hover. Markup: .cta-energy > .cta-energy__rim + .cta-energy__fx + label. */
+  .cta-energy {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    border-radius: 9999px;
+    color: #fff;
+    background-image: linear-gradient(90deg, #4559f0, #6e86ff);
+    box-shadow: 0 0 0 1px #a0c8ff59, 0 0 18px rgb(var(--neon) / 0.4);
+    animation: cta-breathe 3.4s ease-in-out infinite;
+    transition: box-shadow 0.22s;
+  }
+  .cta-energy:hover {
+    box-shadow:
+      0 0 0 1px #d2ebffbf,
+      0 0 22px rgb(var(--neon) / 0.75),
+      0 0 46px rgb(var(--neon) / 0.45);
+  }
+  .cta-energy__rim {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    box-shadow:
+      inset 0 5px 12px rgb(73 181 245 / 0.7),
+      inset 0 -5px 12px rgb(73 181 245 / 0.7);
+  }
+  .cta-energy__fx {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: inherit;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    overflow: hidden;
+  }
+  .cta-energy__fx::before {
+    content: '';
+    position: absolute;
+    inset: -45%;
+    filter: blur(7px);
+    mix-blend-mode: screen;
+    opacity: 0.6;
+    background:
+      repeating-linear-gradient(74deg, transparent 0 15px, rgb(158 232 255 / 0.34) 15px 17px, transparent 17px 36px),
+      repeating-linear-gradient(-56deg, transparent 0 23px, rgb(120 190 255 / 0.24) 23px 25px, transparent 25px 50px);
+    animation: cta-flow 7.5s ease-in-out infinite;
+  }
+  .cta-energy__fx::after {
+    content: '';
+    position: absolute;
+    top: -25%;
+    bottom: -25%;
+    width: 34%;
+    mix-blend-mode: screen;
+    filter: blur(2px);
+    background: linear-gradient(100deg, transparent, rgb(255 255 255 / 0.45), transparent);
+    transform: translate(-170%) skew(-18deg);
+    animation: cta-sweep 4.6s var(--neon-ease) infinite;
+  }
+  .cta-energy:hover .cta-energy__fx::before {
+    opacity: 0.85;
+    animation-duration: 3.4s;
+  }
+  .cta-energy:hover .cta-energy__fx::after {
+    animation-duration: 1.9s;
+  }
+
+  /* Portrait glow: a breathing radial core plus a slowly turning ray ring. Markup: .aura > i */
+  .aura {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    aspect-ratio: 1;
+    translate: -50% -50%;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(closest-side, rgb(var(--neon) / 0.6), rgb(var(--neon) / 0.18) 52%, transparent 74%);
+    animation: aura 3.6s ease-in-out infinite;
+  }
+  .aura > i {
+    position: absolute;
+    inset: -8%;
+    border-radius: 50%;
+    background: repeating-conic-gradient(
+      from var(--spin),
+      rgb(var(--neon) / 0) 0deg 9deg,
+      rgb(var(--neon) / 0.5) 13deg,
+      rgb(var(--neon) / 0) 17deg 30deg
+    );
+    -webkit-mask: radial-gradient(closest-side, #000 16%, transparent 72%);
+    mask: radial-gradient(closest-side, #000 16%, transparent 72%);
+    animation: ring-spin 16s linear infinite;
+  }
+
+  /* Rising sparks. Markup: .sparks > i × 6 */
+  .sparks > i {
+    position: absolute;
+    bottom: 0;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #dff6ff;
+    opacity: 0;
+    box-shadow: 0 0 6px 2px rgb(34 211 238 / 0.75);
+    animation: spark 1.7s ease-out infinite;
+  }
+  .sparks > i:nth-child(1) { left: 6%; }
+  .sparks > i:nth-child(2) { left: 22%; animation-delay: 0.55s; width: 3px; height: 3px; --dx: -8px; }
+  .sparks > i:nth-child(3) { left: 41%; animation-delay: 0.25s; }
+  .sparks > i:nth-child(4) { left: 60%; animation-delay: 0.85s; width: 3px; height: 3px; --dx: -8px; }
+  .sparks > i:nth-child(5) { left: 78%; animation-delay: 0.4s; }
+  .sparks > i:nth-child(6) { left: 93%; animation-delay: 1.05s; width: 3px; height: 3px; --dx: -8px; }
+
+  /* Rotating conic ring around a rounded element (the portrait). */
+  .conic-ring {
+    position: relative;
+  }
+  .conic-ring::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: inherit;
+    padding: 3px;
+    background: conic-gradient(
+      from var(--neon-angle),
+      #1e3a8a, #2563eb 30deg, #22d3ee 62deg, #a5f3fc 82deg, #fff 92deg,
+      #a5f3fc 102deg, #22d3ee 122deg, #2563eb 160deg, #1e3a8a 220deg,
+      #172554 300deg, #1e3a8a
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+    filter: drop-shadow(0 0 6px #67e8f9cc) drop-shadow(0 0 18px #2563eb99);
+    animation: neon-orbit 6s linear infinite;
+  }
+
+  /* Faint starfield behind dark heroes; hidden in light mode. */
+  .starfield {
+    background-image:
+      radial-gradient(1.5px 1.5px at 8% 22%, #c7d2fe99, transparent),
+      radial-gradient(1px 1px at 23% 64%, #ffffff80, transparent),
+      radial-gradient(1.5px 1.5px at 41% 12%, #a5f3fc80, transparent),
+      radial-gradient(1px 1px at 57% 81%, #ffffff66, transparent),
+      radial-gradient(1.5px 1.5px at 74% 34%, #c7d2fe80, transparent),
+      radial-gradient(1px 1px at 91% 70%, #ffffff80, transparent),
+      radial-gradient(1px 1px at 33% 92%, #a5f3fc66, transparent);
+  }
+  html:not(.dark) .starfield {
+    background-image: none;
+  }
+
+  /* Soft light from the top of a hero, in both themes. */
+  .spotlight {
+    background: radial-gradient(
+      ellipse 70% 55% at 70% 0%,
+      rgb(var(--surface-raised)) 0%,
+      rgb(var(--ground) / 0) 100%
+    );
+  }
+
+  /* Tech tile (casino provider-tile style). Set --tile-light / --tile-dark
+     (logo fill) and --glow-light / --glow-dark (halo) as RGB channels per
+     tile; both follow the active theme. */
+  .tech-tile {
+    --tile: var(--tile-light);
+    --glow: var(--glow-light);
+    position: relative;
+    border-radius: 16px;
+    background:
+      radial-gradient(56% 40% at 50% 31%, rgb(var(--glow) / 0.28), transparent 72%),
+      linear-gradient(180deg, rgb(var(--surface-raised) / 0.55), rgb(var(--surface) / 0.92));
+    box-shadow: inset 0 0 0 1px rgb(var(--line) / 0.22), inset 0 1px 0 rgb(255 255 255 / 0.08);
+    transition: box-shadow 0.22s;
+    animation: rise 0.42s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+  }
+  html.dark .tech-tile {
+    --tile: var(--tile-dark);
+    --glow: var(--glow-dark);
+  }
+  .tech-tile:hover {
+    box-shadow:
+      inset 0 0 0 1px rgb(var(--line) / 0.22),
+      0 0 0 1px rgb(var(--neon) / 0.7),
+      0 0 14px rgb(var(--neon) / 0.45),
+      0 0 30px rgb(var(--glow) / 0.3),
+      0 10px 28px rgb(0 0 0 / 0.25);
+  }
+  .tech-tile__logo {
+    fill: rgb(var(--tile));
+    filter: drop-shadow(0 0 10px rgb(var(--glow) / 0.5));
+    transition: transform 0.3s var(--neon-ease);
+  }
+  .tech-tile:hover .tech-tile__logo {
+    transform: translateY(-2px) scale(1.06);
+  }
+
+  /* Skill chip with a small brand logo (About). Same --tile/--glow vars as .tech-tile. */
+  .skill-chip {
+    --tile: var(--tile-light);
+    --glow: var(--glow-light);
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+  html.dark .skill-chip {
+    --tile: var(--tile-dark);
+    --glow: var(--glow-dark);
+  }
+  .skill-chip:hover {
+    border-color: rgb(var(--glow) / 0.6);
+    box-shadow: 0 0 14px rgb(var(--glow) / 0.35);
+  }
+  .skill-chip__logo {
+    fill: rgb(var(--tile));
+  }
+
+  /* Staggered rise for a group's direct children. */
+  .rise-stagger > * {
+    animation: rise 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+  }
+  .rise-stagger > :nth-child(2) { animation-delay: 0.08s; }
+  .rise-stagger > :nth-child(3) { animation-delay: 0.16s; }
+  .rise-stagger > :nth-child(4) { animation-delay: 0.24s; }
+  .rise-stagger > :nth-child(5) { animation-delay: 0.32s; }
+}
+
+@keyframes neon-orbit {
+  to { --neon-angle: 360deg; }
+}
+
+@keyframes ring-spin {
+  to { --spin: 360deg; }
+}
+
+@keyframes cta-breathe {
+  0%, 100% { box-shadow: 0 0 0 1px #a0c8ff52, 0 0 16px rgb(var(--neon) / 0.34); }
+  50% { box-shadow: 0 0 0 1px #bee1ff8c, 0 0 30px rgb(var(--neon) / 0.62); }
+}
+
+@keyframes cta-flow {
+  0%, 100% { transform: translate(-7%, -5%) rotate(-2deg); }
+  50% { transform: translate(7%, 5%) rotate(2deg); }
+}
+
+@keyframes cta-sweep {
+  0% { transform: translate(-170%) skew(-18deg); }
+  42%, 100% { transform: translate(340%) skew(-18deg); }
+}
+
+@keyframes aura {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.3); }
+}
+
+@keyframes spark {
+  0% { opacity: 0; transform: translate(0, 0) scale(0.5); }
+  15% { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--dx, 6px), -150px) scale(1); }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(8px); }
 }
 
 .container {

@@ -41,12 +41,12 @@ The Netlify Function only exists on Netlify; on the Pages mirror the contact for
 ```
 src/
 ├── components/
-│   ├── about/       AboutSection, SkillsSection, ExperienceSection (timeline)
-│   ├── common/      Navbar, Footer, Button, Reveal, BackToTop
+│   ├── about/       AboutSection (intro + approach), SkillsSection (grouped logo chips), ExperienceSection (expandable timeline), EducationSection
+│   ├── common/      Navbar (desktop links + theme), MobileDock (phone nav, below md), Footer, Button, Reveal, BackToTop (desktop only), SkillChip
 │   ├── contact/     ContactForm (posts to the Netlify Function)
-│   ├── home/        Hero
-│   └── projects/    ProjectCard
-├── data/            projects.ts, experience.ts, skills.ts, about.ts   (content lives here, not in JSX)
+│   ├── home/        Hero, WhatIDo, TechStack (logo tiles + category pills)
+│   └── projects/    ProjectCard (whole card links to the case study), ProjectShot (phone shots get a device frame)
+├── data/            projects.ts, experience.ts, skills.ts, about.ts, home.ts, contact.ts (email, location, socials)   (content lives here, not in JSX)
 ├── hooks/           useForm, useInView, usePrefersReducedMotion, usePageMeta
 ├── pages/           Home, Projects, ProjectDetail, About, Contact
 ├── utils/           validation, ScrollToTop (route-change scroll reset)
@@ -59,16 +59,19 @@ TypeScript is split into project references: `tsconfig.app.json` (src), `tsconfi
 
 ## Conventions & patterns
 
+- **Skills** (`src/data/skills.ts`) are `{ name, icon?, concept?, tileLabel? }`. Logos come from the `simple-icons` package (CC0) — import only the named icons you use (`siReact`); `logoColors()` swaps brand colors that would vanish on a theme's ground. A tool without a Simple Icons logo gets a lettered tile; `concept: true` marks practices (SSR, i18n…) that are listed as text, never tiled.
 - **Content is data, not markup.** Projects and work history live in `src/data/*.ts` as typed arrays. To add/edit a project or role, edit the data file — the pages render whatever's there. New projects are picked up automatically (helpers in `projects.ts` are array-position-driven; the first entry leads the list). When adding a project, also add its `/projects/<id>` URL to `public/sitemap.xml`.
 - **SEO**: every page calls `usePageMeta` (title, meta description, canonical, optional `noindex`) at the top of the component. Canonicals always point at the production domain (terzidest.com) so the Pages mirror isn't treated as duplicate content. Site-wide Open Graph tags are static in `index.html` — social crawlers don't run JS, so per-route OG values are pointless without prerendering.
-- **Project case studies** use structured fields — `problem`, `role`, `outcome` (plus the shared `techStack` for "Stack"). There is no `longDescription`.
+- **Project case studies** use structured fields — `problem`, `role`, `outcome` (plus the shared `techStack` for "Stack"), and a short `label` ("web · open source") shown above the title. There is no `longDescription`. Stack entries that match a skill in `skills.ts` (by name or `tileLabel`, via `findSkill`) show its logo; others get a dot.
 - **Images**: drop originals in `public/assets/images/projects/` (convention: `name.png`, `name-2.png`, …), run `npm run images:generate`, and describe them with `createResponsiveImage()`. A project with no screenshots uses the placeholder descriptor and `additionalImages: []` (the gallery is hidden when empty).
 - **Motion always respects `prefers-reduced-motion`.** Three mechanisms, use the right one:
   - Global CSS guard in `src/index.css` collapses CSS animations/transitions.
-  - `useInView` (scroll reveals) returns visible immediately under reduced motion; wrap sections in `<Reveal>`.
+  - `useInView` (scroll reveals) returns visible immediately under reduced motion; wrap sections in `<Reveal>`. It fires at 15% visibility, so don't wrap a block that can be much taller than the viewport (it may never appear on short screens) — reveal its heading instead.
   - `usePrefersReducedMotion` for JS-driven cases the CSS guard can't reach (marquee, framer-motion page transitions).
 - **framer-motion** is used for the `/projects` filter animation and route cross-fades (`App.tsx`); both gated for reduced motion.
 - **Styling** is Tailwind utility classes inline. Custom keyframes (fade-in-up, float, slide-down, shimmer, marquee) live in `src/index.css`. Primary brand color is the `primary` token in `tailwind.config.js`.
+- **Redesign theme tokens** (navy "neon" look, in progress page by page): `ground`, `surface`/`surface-raised`, `ink`/`ink-soft`/`ink-muted`, `line`, `neon`, `signal`, `link`/`link-hover` are RGB-channel CSS variables set in `src/index.css` (`:root` light, `html.dark` dark) and exposed as Tailwind colors, so one class themes itself with no `dark:` pair (`bg-ground`, `text-ink`, `border-line/20`). Fonts: `font-display` (Space Grotesk) for headings and the logo, `font-sans` (Inter) body, `font-mono` (JetBrains Mono) for small eyebrow labels in `text-signal`. Redesigned components use tokens; the slate pairings below stay valid for pages not yet migrated.
+- **Effects layer** (`src/index.css`, ported from the Dreamzino prototype): `.glass`, `.hover-neon`, `.hover-trace` (+ `-sm`), `.hover-sheen` (needs `--mx/--my`), `.cta-energy` (use `<Button variant="energy">`, which adds the rim/fx layers), `.aura`, `.sparks`, `.conic-ring`, `.starfield` (dark only), `.rise-stagger`. Opt in by class; all are covered by the reduced-motion guard.
 - **Dark mode** uses Tailwind's class strategy (`darkMode: 'class'`) with additive `dark:` variants — never remove a light class, append the dark one. Dark palette is slate (surfaces `slate-800/900`, text `slate-300/400`); cards keep their shadow and add `dark:ring-1 dark:ring-slate-700`. Theme state lives in `src/hooks/useTheme.ts` (toggle in the Navbar): no `theme` key in localStorage → follow the OS live; a stored `'light' | 'dark'` pins the choice. An inline anti-FOUC script in `index.html` sets the `dark` class before first paint, and `color-scheme` in `index.css` keeps native controls/scrollbars in sync.
   Standard pairings — reuse these, don't invent new ones:
   - cards/panels: `bg-white` → `dark:bg-slate-800 dark:ring-1 dark:ring-slate-700` (keep the shadow)

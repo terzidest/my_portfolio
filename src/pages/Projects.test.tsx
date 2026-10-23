@@ -9,13 +9,16 @@ describe('Projects filters', () => {
     const user = userEvent.setup();
     render(<MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}><Projects /></MemoryRouter>);
 
-    const all = screen.getByRole('button', { name: 'All Projects' });
-    const mobile = screen.getByRole('button', { name: 'Mobile Apps' });
-    const web = screen.getByRole('button', { name: 'Web Apps' });
+    const all = screen.getByRole('button', { name: 'All' });
+    const mobile = screen.getByRole('button', { name: 'Mobile' });
+    const web = screen.getByRole('button', { name: 'Web' });
 
     expect(all).toHaveAttribute('aria-pressed', 'true');
     expect(screen.getByText('Showing 4 projects')).toBeInTheDocument();
-    expect(screen.getAllByRole('link', { name: /on GitHub/ })).toHaveLength(4);
+    // One link per card, straight to the case study; blockprint leads.
+    const cards = screen.getAllByRole('link', { name: /read the case study/ });
+    expect(cards).toHaveLength(4);
+    expect(cards[0]).toHaveAttribute('href', '/projects/blockprint');
 
     await user.click(mobile);
     expect(all).toHaveAttribute('aria-pressed', 'false');

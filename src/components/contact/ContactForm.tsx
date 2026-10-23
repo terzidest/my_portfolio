@@ -4,9 +4,15 @@ import { validateContactForm } from '../../utils/validation';
 import Button from '../common/Button';
 import type { ContactFormValues } from '../../types';
 import { CONTACT_LIMITS } from '../../../shared/contact';
+import { EMAIL } from '../../data/contact';
 import type { ContactErrors } from '../../../shared/contact';
 
 const SUBMIT_ERROR = 'Sorry, something went wrong sending your message.';
+
+const labelClass = 'mb-2 block text-sm font-medium text-ink-soft';
+const fieldBase =
+  'block w-full rounded-[14px] border border-line/20 bg-ground/60 px-4 py-3.5 text-base text-ink placeholder:text-ink-muted outline-none transition-[border-color,box-shadow] duration-200 focus:border-neon/90 focus:shadow-[0_0_0_1px_rgb(var(--neon)/0.7),0_0_18px_rgb(var(--neon)/0.4)]';
+const fieldError = 'border-red-500 dark:border-red-400';
 
 const ContactForm = () => {
   const initialValues: ContactFormValues = {
@@ -55,7 +61,7 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="bg-white dark:bg-slate-800 dark:ring-1 dark:ring-slate-700 rounded-xl shadow-md p-8">
+    <div className="glass rounded-[26px] border border-line/20 p-7 shadow-[0_30px_80px_rgb(0_0_0/0.25)] sm:p-9">
       {submitted ? (
         <div role="status" className="rounded-md p-4 mb-6 bg-green-50 text-green-800 dark:bg-green-900/30 dark:text-green-300">
           <div className="flex">
@@ -70,7 +76,7 @@ const ContactForm = () => {
           </div>
           <div className="mt-4">
             <Button
-              variant="outline"
+              variant="ghost"
               size="sm"
               onClick={() => setSubmitted(false)}
             >
@@ -106,16 +112,16 @@ const ContactForm = () => {
                 </div>
                 <p className="ml-3 text-sm font-medium">
                   {submitError}{' '}
-                  <a href="mailto:terzidest@gmail.com" className="underline hover:no-underline">
+                  <a href={`mailto:${EMAIL}`} className="underline hover:no-underline">
                     Email me directly instead.
                   </a>
                 </p>
               </div>
             </div>
           )}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+          <div className="mb-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">
+              <label htmlFor="name" className={labelClass}>
                 Name <span className="text-red-500 dark:text-red-400">*</span>
               </label>
               <input
@@ -130,8 +136,8 @@ const ContactForm = () => {
                 autoComplete="name"
                 aria-invalid={Boolean(errors.name)}
                 aria-describedby={errors.name ? 'name-error' : undefined}
-                className={`block w-full rounded-md border-gray-300 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:placeholder-slate-500 shadow-sm focus:border-primary focus:ring-primary ${
-                  errors.name ? 'border-red-500' : ''
+                className={`${fieldBase} ${
+                  errors.name ? fieldError : ''
                 }`}
                 placeholder="Your name"
               />
@@ -141,7 +147,7 @@ const ContactForm = () => {
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">
+              <label htmlFor="email" className={labelClass}>
                 Email <span className="text-red-500 dark:text-red-400">*</span>
               </label>
               <input
@@ -156,8 +162,8 @@ const ContactForm = () => {
                 autoComplete="email"
                 aria-invalid={Boolean(errors.email)}
                 aria-describedby={errors.email ? 'email-error' : undefined}
-                className={`block w-full rounded-md border-gray-300 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:placeholder-slate-500 shadow-sm focus:border-primary focus:ring-primary ${
-                  errors.email ? 'border-red-500' : ''
+                className={`${fieldBase} ${
+                  errors.email ? fieldError : ''
                 }`}
                 placeholder="your.email@example.com"
               />
@@ -167,8 +173,8 @@ const ContactForm = () => {
             </div>
           </div>
 
-          <div className="mb-6">
-            <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">
+          <div className="mb-5">
+            <label htmlFor="subject" className={labelClass}>
               Subject
             </label>
             <input
@@ -181,8 +187,8 @@ const ContactForm = () => {
               maxLength={CONTACT_LIMITS.subject}
               aria-invalid={Boolean(errors.subject)}
               aria-describedby={errors.subject ? 'subject-error' : undefined}
-              className={`block w-full rounded-md border-gray-300 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:placeholder-slate-500 shadow-sm focus:border-primary focus:ring-primary ${
-                errors.subject ? 'border-red-500' : ''
+              className={`${fieldBase} ${
+                errors.subject ? fieldError : ''
               }`}
               placeholder="What is this about?"
             />
@@ -192,7 +198,7 @@ const ContactForm = () => {
           </div>
 
           <div className="mb-6">
-            <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">
+            <label htmlFor="message" className={labelClass}>
               Message <span className="text-red-500 dark:text-red-400">*</span>
             </label>
             <textarea
@@ -206,8 +212,8 @@ const ContactForm = () => {
               maxLength={CONTACT_LIMITS.messageMax}
               aria-invalid={Boolean(errors.message)}
               aria-describedby={errors.message ? 'message-error' : undefined}
-              className={`block w-full rounded-md border-gray-300 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:placeholder-slate-500 shadow-sm focus:border-primary focus:ring-primary ${
-                errors.message ? 'border-red-500' : ''
+              className={`${fieldBase} ${
+                errors.message ? fieldError : ''
               }`}
               placeholder="Your message here..."
             ></textarea>
@@ -216,10 +222,14 @@ const ContactForm = () => {
             )}
           </div>
 
-          <div className="text-right">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <p className="text-sm text-ink-muted">
+              Or email me directly at{' '}
+              <a href={`mailto:${EMAIL}`} className="text-link hover:text-link-hover">{EMAIL}</a>
+            </p>
             <Button
               type="submit"
-              variant="primary"
+              variant="energy"
               size="lg"
               disabled={isSubmitting}
               aria-busy={isSubmitting}
@@ -232,7 +242,7 @@ const ContactForm = () => {
                   </svg>
                   Sending...
                 </>
-              ) : 'Send Message'}
+              ) : 'Send message'}
             </Button>
             <span className="sr-only" role="status" aria-live="polite">
               {isSubmitting ? 'Sending message' : ''}
