@@ -25,6 +25,7 @@ export const projects: Project[] = [
   {
     id: 'blockprint',
     title: 'blockprint',
+    label: 'web · open source',
     description: 'An open-source, type-safe CMS renderer for React: a compile-time-checked component registry, Standard Schema validation and safe fallbacks for malformed blocks.',
     image: projectImage('blockprint.png', 1600, 1000, [320, 640, 1280], 'blockprint demo: JSON config beside the page it renders, with the hero block highlighted in both', CARD_SIZES),
     additionalImages: [
@@ -47,6 +48,7 @@ export const projects: Project[] = [
   {
     id: 'ethereal-nature',
     title: 'EtherealNature',
+    label: 'web · full-stack',
     description: 'A full-stack e-commerce platform: an SSR TanStack Start storefront and admin dashboard over a modular Kotlin/Ktor + PostgreSQL backend, tied together by generated OpenAPI clients.',
     image: projectImage('ethnature.png', 600, 324, [320, 640], 'EtherealNature storefront home page', CARD_SIZES),
     additionalImages: [
@@ -70,6 +72,7 @@ export const projects: Project[] = [
   {
     id: 'infovault',
     title: 'InfoVault',
+    label: 'mobile · security',
     description: 'A local-first encrypted mobile vault: AES-256-GCM encryption, biometric unlock, protected key storage, auto-lock and screen-capture protection.',
     image: projectImage('info-vault.png', 1419, 2796, [480, 960], 'InfoVault password list', CARD_SIZES),
     additionalImages: [
@@ -93,6 +96,7 @@ export const projects: Project[] = [
   {
     id: 'stack-game',
     title: 'Stack Game',
+    label: 'mobile · game',
     description: 'A from-scratch mobile stack game built with Expo, Skia, and Reanimated worklets.',
     image: projectImage('stack-game.png', 1206, 2622, [480, 960], 'Stack Game gameplay screen', CARD_SIZES),
     additionalImages: [

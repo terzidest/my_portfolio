@@ -153,3 +153,9 @@ export const logoVars = (skill: Skill): Record<string, string> => {
     '--glow-dark': colors.glowDark,
   };
 };
+
+/** The skill entry for a tech-stack name (by name or tile label), if it has one. */
+export const findSkill = (name: string): Skill | undefined =>
+  skillGroups
+    .flatMap((group) => group.skills)
+    .find((skill) => skill.name === name || skill.tileLabel === name);

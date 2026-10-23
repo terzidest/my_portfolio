@@ -1,5 +1,5 @@
-import Button from '../common/Button';
-import ResponsiveImage from '../common/ResponsiveImage';
+import { Link } from 'react-router-dom';
+import ProjectShot from './ProjectShot';
 import TechBadge from '../common/TechBadge';
 import type { Project } from '../../types';
 
@@ -7,87 +7,33 @@ interface ProjectCardProps {
   project: Project;
 }
 
+// The whole card opens the case study; demo and source links live there.
 const ProjectCard = ({ project }: ProjectCardProps) => {
-  const { id, title, description, image, techStack, github, links } = project;
-  const primaryLink = links?.[0];
-  const imageIsPortrait = image.height > image.width;
+  const { id, title, label, description, image, techStack } = project;
 
   return (
-    <div className="group h-full flex flex-col bg-white dark:bg-slate-800 dark:ring-1 dark:ring-slate-700 rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:translate-y-[-5px]">
-      <div className="relative h-64 overflow-hidden bg-gray-100 dark:bg-slate-700">
-        <div className={`w-full h-full ${imageIsPortrait ? 'bg-gradient-to-r from-blue-600 to-indigo-800 dark:from-blue-800 dark:to-indigo-950 flex justify-center items-center' : ''}`}>
-          <ResponsiveImage
-            source={image}
-            containerClassName="w-full h-full"
-            imageClassName={`group-hover:scale-105 ${imageIsPortrait ? 'h-full w-auto mx-auto object-contain' : 'w-full h-full object-cover'}`}
-          />
+    <Link
+      to={`/projects/${id}`}
+      aria-label={`${title}: read the case study`}
+      className="hover-neon group flex h-full flex-col overflow-hidden rounded-[20px] border border-line/15 bg-surface/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-neon focus-visible:ring-offset-2 focus-visible:ring-offset-ground"
+    >
+      <ProjectShot image={image} zoomOnHover className="h-[300px]" />
+      <div className="flex flex-grow flex-col gap-3 p-6">
+        <div className="flex items-center justify-between gap-2">
+          <h2 className="font-display text-[22px] font-bold text-ink">{title}</h2>
+          <span className="font-mono text-xs text-signal">{label}</span>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
-          <div className="p-6">
-            <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
-          </div>
-        </div>
-      </div>
-
-      <div className="p-6 pt-3 flex flex-col flex-grow">
-        <p className="text-gray-600 dark:text-slate-300 mb-4 line-clamp-3">{description}</p>
-
-        <div className="flex flex-wrap gap-2 mb-4">
-          {techStack && techStack.map((tech) => (
+        <p className="line-clamp-3 text-[15px] leading-relaxed text-ink-soft">{description}</p>
+        <div className="flex flex-wrap gap-1.5">
+          {techStack.slice(0, 5).map((tech) => (
             <TechBadge key={tech} label={tech} />
           ))}
         </div>
-
-        <div className="flex justify-between items-center mt-auto">
-          <Button
-            to={`/projects/${id}`}
-            variant="text"
-            className="text-primary font-medium whitespace-nowrap"
-          >
-            View Details
-            <svg
-              className="w-4 h-4 inline-block ml-1 transition-transform duration-300 group-hover:translate-x-1"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M14 5l7 7m0 0l-7 7m7-7H3"
-              />
-            </svg>
-          </Button>
-
-          <div className="flex items-center gap-3">
-            {primaryLink && (
-              <Button
-                href={primaryLink.href}
-                aria-label={`${title}: ${primaryLink.label}`}
-                variant="text"
-                className="text-sm font-medium whitespace-nowrap text-gray-500 hover:text-gray-800 dark:text-slate-400 dark:hover:text-slate-200"
-              >
-                {primaryLink.label} ↗
-              </Button>
-            )}
-            {github && (
-              <Button
-                href={github}
-                aria-label={`View ${title} on GitHub`}
-                variant="text"
-                className="text-gray-500 hover:text-gray-800 dark:text-slate-400 dark:hover:text-slate-200 p-1"
-              >
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
-              </Button>
-            )}
-          </div>
-        </div>
+        <span className="mt-auto pt-1 text-[15px] font-semibold text-link group-hover:text-link-hover">
+          Read the case study <span aria-hidden="true">→</span>
+        </span>
       </div>
-    </div>
+    </Link>
   );
 };
 
