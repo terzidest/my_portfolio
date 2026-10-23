@@ -16,6 +16,13 @@ describe('Button', () => {
     expect(link).toHaveAttribute('rel', 'noopener noreferrer');
   });
 
+  it('keeps the energy variant layers out of the accessible name', () => {
+    render(<MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}><Button to="/projects" variant="energy">View my projects</Button></MemoryRouter>);
+    const link = screen.getByRole('link', { name: 'View my projects' });
+    expect(link).toHaveClass('cta-energy');
+    expect(link.querySelectorAll('[aria-hidden="true"]')).toHaveLength(2);
+  });
+
   it('forwards native button attributes', () => {
     render(<Button type="submit" disabled>Submit</Button>);
     const button = screen.getByRole('button', { name: 'Submit' });
