@@ -349,6 +349,24 @@ body {
     transform: translateY(-2px) scale(1.06);
   }
 
+  /* Skill chip with a small brand logo (About). Same --tile/--glow vars as .tech-tile. */
+  .skill-chip {
+    --tile: var(--tile-light);
+    --glow: var(--glow-light);
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+  html.dark .skill-chip {
+    --tile: var(--tile-dark);
+    --glow: var(--glow-dark);
+  }
+  .skill-chip:hover {
+    border-color: rgb(var(--glow) / 0.6);
+    box-shadow: 0 0 14px rgb(var(--glow) / 0.35);
+  }
+  .skill-chip__logo {
+    fill: rgb(var(--tile));
+  }
+
   /* Staggered rise for a group's direct children. */
   .rise-stagger > * {
     animation: rise 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;

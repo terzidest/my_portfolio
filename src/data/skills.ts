@@ -140,3 +140,16 @@ export const logoColors = (icon: SimpleIcon) => {
     glowDark: darkFallback ? 'var(--line)' : brand,
   };
 };
+
+/** CSS custom properties for a skill's logo tint (see `.tech-tile`, `.skill-chip`). */
+export const logoVars = (skill: Skill): Record<string, string> => {
+  const colors = skill.icon
+    ? logoColors(skill.icon)
+    : { light: 'var(--neon)', dark: 'var(--line)', glowLight: 'var(--neon)', glowDark: 'var(--line)' };
+  return {
+    '--tile-light': colors.light,
+    '--tile-dark': colors.dark,
+    '--glow-light': colors.glowLight,
+    '--glow-dark': colors.glowDark,
+  };
+};

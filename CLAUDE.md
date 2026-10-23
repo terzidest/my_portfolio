@@ -41,7 +41,7 @@ The Netlify Function only exists on Netlify; on the Pages mirror the contact for
 ```
 src/
 ├── components/
-│   ├── about/       AboutSection, SkillsSection, ExperienceSection (timeline)
+│   ├── about/       AboutSection (intro + approach), SkillsSection (grouped logo chips), ExperienceSection (expandable timeline), EducationSection
 │   ├── common/      Navbar, Footer, Button, Reveal, BackToTop
 │   ├── contact/     ContactForm (posts to the Netlify Function)
 │   ├── home/        Hero, WhatIDo, TechStack (logo tiles + category pills)
@@ -66,7 +66,7 @@ TypeScript is split into project references: `tsconfig.app.json` (src), `tsconfi
 - **Images**: drop originals in `public/assets/images/projects/` (convention: `name.png`, `name-2.png`, …), run `npm run images:generate`, and describe them with `createResponsiveImage()`. A project with no screenshots uses the placeholder descriptor and `additionalImages: []` (the gallery is hidden when empty).
 - **Motion always respects `prefers-reduced-motion`.** Three mechanisms, use the right one:
   - Global CSS guard in `src/index.css` collapses CSS animations/transitions.
-  - `useInView` (scroll reveals) returns visible immediately under reduced motion; wrap sections in `<Reveal>`.
+  - `useInView` (scroll reveals) returns visible immediately under reduced motion; wrap sections in `<Reveal>`. It fires at 15% visibility, so don't wrap a block that can be much taller than the viewport (it may never appear on short screens) — reveal its heading instead.
   - `usePrefersReducedMotion` for JS-driven cases the CSS guard can't reach (marquee, framer-motion page transitions).
 - **framer-motion** is used for the `/projects` filter animation and route cross-fades (`App.tsx`); both gated for reduced motion.
 - **Styling** is Tailwind utility classes inline. Custom keyframes (fade-in-up, float, slide-down, shimmer, marquee) live in `src/index.css`. Primary brand color is the `primary` token in `tailwind.config.js`.
