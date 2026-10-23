@@ -10,6 +10,7 @@ import Contact from './pages/Contact'
 import NotFound from './pages/NotFound'
 import ScrollToTop from './utils/ScrollToTop'
 import BackToTop from './components/common/BackToTop'
+import MobileDock from './components/common/MobileDock'
 import usePrefersReducedMotion from './hooks/usePrefersReducedMotion'
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
   )
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen pb-[calc(76px+env(safe-area-inset-bottom))] md:pb-0">
       <ScrollToTop />
       <Navbar />
       <main className="flex-grow">
@@ -52,6 +53,7 @@ function App() {
       </main>
       <Footer />
       <BackToTop />
+      <MobileDock />
     </div>
   )
 }
