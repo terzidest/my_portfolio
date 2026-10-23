@@ -4,7 +4,7 @@ import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion';
 /**
  * Floating button that fades in after the user scrolls down and smoothly
  * returns them to the top. Hidden until ~500px of scroll, and again at the
- * footer.
+ * footer. Desktop only: on phones the dock's "Top" button does this.
  */
 const BackToTop = () => {
   const [visible, setVisible] = useState(false);
@@ -30,7 +30,7 @@ const BackToTop = () => {
       type="button"
       onClick={scrollToTop}
       aria-label="Back to top"
-      className={`glass hover-neon fixed bottom-6 right-6 z-50 w-11 h-11 rounded-full border border-line/25 text-ink shadow-lg flex items-center justify-center transition-all duration-300 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-neon focus-visible:ring-offset-2 focus-visible:ring-offset-ground ${
+      className={`glass hover-neon fixed bottom-6 right-6 z-50 w-11 h-11 rounded-full border border-line/25 text-ink shadow-lg hidden md:flex items-center justify-center transition-all duration-300 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-neon focus-visible:ring-offset-2 focus-visible:ring-offset-ground ${
         visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
       }`}
     >

@@ -42,11 +42,11 @@ The Netlify Function only exists on Netlify; on the Pages mirror the contact for
 src/
 ├── components/
 │   ├── about/       AboutSection (intro + approach), SkillsSection (grouped logo chips), ExperienceSection (expandable timeline), EducationSection
-│   ├── common/      Navbar, Footer, Button, Reveal, BackToTop
+│   ├── common/      Navbar (desktop links + theme), MobileDock (phone nav, below md), Footer, Button, Reveal, BackToTop (desktop only), SkillChip
 │   ├── contact/     ContactForm (posts to the Netlify Function)
 │   ├── home/        Hero, WhatIDo, TechStack (logo tiles + category pills)
 │   └── projects/    ProjectCard (whole card links to the case study), ProjectShot (phone shots get a device frame)
-├── data/            projects.ts, experience.ts, skills.ts, about.ts, home.ts   (content lives here, not in JSX)
+├── data/            projects.ts, experience.ts, skills.ts, about.ts, home.ts, contact.ts (email, location, socials)   (content lives here, not in JSX)
 ├── hooks/           useForm, useInView, usePrefersReducedMotion, usePageMeta
 ├── pages/           Home, Projects, ProjectDetail, About, Contact
 ├── utils/           validation, ScrollToTop (route-change scroll reset)

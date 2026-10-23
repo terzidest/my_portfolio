@@ -34,7 +34,7 @@ describe('ContactForm', () => {
     expect(subject).toHaveAttribute('maxlength', String(CONTACT_LIMITS.subject));
     expect(message).toHaveAttribute('maxlength', String(CONTACT_LIMITS.messageMax));
 
-    await user.click(screen.getByRole('button', { name: 'Send Message' }));
+    await user.click(screen.getByRole('button', { name: 'Send message' }));
     expect(name).toHaveFocus();
     expect(name).toHaveAttribute('aria-invalid', 'true');
     expect(name).toHaveAccessibleDescription('Name is required');
@@ -52,7 +52,7 @@ describe('ContactForm', () => {
     render(<ContactForm />);
     await fillValidForm(user);
 
-    await user.click(screen.getByRole('button', { name: 'Send Message' }));
+    await user.click(screen.getByRole('button', { name: 'Send message' }));
 
     const alert = await screen.findByRole('alert');
     expect(alert).toHaveTextContent('something went wrong');
@@ -66,7 +66,7 @@ describe('ContactForm', () => {
     render(<ContactForm />);
     await fillValidForm(user);
 
-    await user.click(screen.getByRole('button', { name: 'Send Message' }));
+    await user.click(screen.getByRole('button', { name: 'Send message' }));
 
     expect(await screen.findByRole('status')).toHaveTextContent('sent successfully');
   });

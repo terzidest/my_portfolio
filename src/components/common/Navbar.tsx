@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
 
@@ -17,28 +16,15 @@ const linkStyles = (active: boolean) =>
 const iconButton =
   'flex h-11 w-11 items-center justify-center rounded-xl border border-line/25 text-ink-soft hover:text-ink hover:border-line/50';
 
-// Floating frosted-glass bar, the same on every route.
+// Floating frosted-glass bar, the same on every route. Below md the page
+// links move to MobileDock at the bottom; this bar keeps logo + theme.
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
 
   const isActive = (path: string) =>
     path === '/projects'
       ? location.pathname === path || location.pathname.startsWith('/projects/')
       : location.pathname === path;
-
-  useEffect(() => {
-    setIsMenuOpen(false);
-  }, [location.pathname]);
-
-  useEffect(() => {
-    if (!isMenuOpen) return;
-    const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setIsMenuOpen(false);
-    };
-    window.addEventListener('keydown', closeOnEscape);
-    return () => window.removeEventListener('keydown', closeOnEscape);
-  }, [isMenuOpen]);
 
   return (
     <nav aria-label="Main" className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6 sm:pt-5">
@@ -66,46 +52,8 @@ const Navbar = () => {
           </div>
 
           <ThemeToggle className={`ml-1.5 ${iconButton}`} />
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className={`md:hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-neon transition-colors duration-200 ${iconButton}`}
-            aria-label="Toggle menu"
-            aria-expanded={isMenuOpen}
-            aria-controls="mobile-navigation"
-          >
-            <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" viewBox="0 0 24 24" aria-hidden="true">
-              {isMenuOpen ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
-            </svg>
-          </button>
         </div>
       </div>
-
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div
-          id="mobile-navigation"
-          className="glass md:hidden animate-slide-down mx-auto mt-2 max-w-[1200px] rounded-[18px] border border-line/20 p-2 shadow-[0_12px_40px_rgb(0_0_0/0.25)]"
-        >
-          <div className="flex flex-col gap-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                aria-current={isActive(link.path) ? 'page' : undefined}
-                onClick={() => {
-                  setIsMenuOpen(false);
-                  window.scrollTo(0, 0);
-                }}
-                className={`${linkStyles(isActive(link.path))} block w-full px-4 py-3 text-base`}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
     </nav>
   );
 };
