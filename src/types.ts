@@ -18,6 +18,8 @@ export interface ProjectLink {
 export interface Project {
   id: string;
   title: string;
+  /** Short kind label shown above the title, e.g. "web · open source". */
+  label: string;
   description: string;
   image: ResponsiveImageSource;
   additionalImages: ResponsiveImageSource[];
