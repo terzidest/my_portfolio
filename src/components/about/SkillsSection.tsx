@@ -17,7 +17,7 @@ const SkillsSection = () => {
               <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">{group.title}</h3>
               <div className="flex flex-wrap gap-2">
                 {group.skills.map((skill) => (
-                  <TechBadge key={skill} label={skill} />
+                  <TechBadge key={skill.name} label={skill.name} />
                 ))}
               </div>
             </div>
