@@ -1,11 +1,13 @@
+import AmbientDots from '../common/AmbientDots';
 import Button from '../common/Button';
 import ResponsiveImage from '../common/ResponsiveImage';
 import { hero } from '../../data/home';
 import { profileImage } from '../../data/about';
 
 const Hero = () => (
-  <section className="spotlight overflow-hidden">
-    <div className="starfield mx-auto flex max-w-[1200px] flex-wrap items-center gap-14 px-6 pb-20 pt-36 md:pt-40">
+  <section className="spotlight relative overflow-hidden">
+    <AmbientDots />
+    <div className="starfield relative mx-auto flex max-w-[1200px] flex-wrap items-center gap-14 px-6 pb-20 pt-36 md:pt-40">
       <div className="rise-stagger flex min-w-0 flex-[999_1_520px] flex-col gap-6">
         <p className="font-mono text-sm uppercase tracking-[0.08em] text-signal">{hero.eyebrow}</p>
         <h1 className="font-display text-[clamp(2.75rem,6vw,4.75rem)] font-bold leading-[1.02] tracking-[-0.03em] text-ink">
@@ -22,14 +24,8 @@ const Hero = () => (
         </div>
       </div>
 
-      {/* Portrait: breathing glow + turning rays, rising sparks, conic ring. */}
+      {/* Portrait in the rotating conic ring. */}
       <div className="relative flex h-[340px] min-w-0 flex-[1_1_340px] items-center justify-center sm:h-[460px]">
-        <div className="aura w-[360px] sm:w-[470px]" aria-hidden="true">
-          <i />
-        </div>
-        <div className="sparks absolute inset-x-[28%] bottom-12 z-[3] h-1 sm:bottom-24" aria-hidden="true">
-          <i /><i /><i /><i /><i /><i />
-        </div>
         <div className="conic-ring h-[220px] w-[220px] rounded-full sm:h-[280px] sm:w-[280px]">
           <ResponsiveImage
             source={profileImage}
