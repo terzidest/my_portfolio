@@ -304,6 +304,51 @@ body {
     background-image: none;
   }
 
+  /* Soft light from the top of a hero, in both themes. */
+  .spotlight {
+    background: radial-gradient(
+      ellipse 70% 55% at 70% 0%,
+      rgb(var(--surface-raised)) 0%,
+      rgb(var(--ground) / 0) 100%
+    );
+  }
+
+  /* Tech tile (casino provider-tile style). Set --tile-light / --tile-dark
+     (logo fill) and --glow-light / --glow-dark (halo) as RGB channels per
+     tile; both follow the active theme. */
+  .tech-tile {
+    --tile: var(--tile-light);
+    --glow: var(--glow-light);
+    position: relative;
+    border-radius: 16px;
+    background:
+      radial-gradient(56% 40% at 50% 31%, rgb(var(--glow) / 0.28), transparent 72%),
+      linear-gradient(180deg, rgb(var(--surface-raised) / 0.55), rgb(var(--surface) / 0.92));
+    box-shadow: inset 0 0 0 1px rgb(var(--line) / 0.22), inset 0 1px 0 rgb(255 255 255 / 0.08);
+    transition: box-shadow 0.22s;
+    animation: rise 0.42s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+  }
+  html.dark .tech-tile {
+    --tile: var(--tile-dark);
+    --glow: var(--glow-dark);
+  }
+  .tech-tile:hover {
+    box-shadow:
+      inset 0 0 0 1px rgb(var(--line) / 0.22),
+      0 0 0 1px rgb(var(--neon) / 0.7),
+      0 0 14px rgb(var(--neon) / 0.45),
+      0 0 30px rgb(var(--glow) / 0.3),
+      0 10px 28px rgb(0 0 0 / 0.25);
+  }
+  .tech-tile__logo {
+    fill: rgb(var(--tile));
+    filter: drop-shadow(0 0 10px rgb(var(--glow) / 0.5));
+    transition: transform 0.3s var(--neon-ease);
+  }
+  .tech-tile:hover .tech-tile__logo {
+    transform: translateY(-2px) scale(1.06);
+  }
+
   /* Staggered rise for a group's direct children. */
   .rise-stagger > * {
     animation: rise 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;

@@ -44,9 +44,9 @@ src/
 │   ├── about/       AboutSection, SkillsSection, ExperienceSection (timeline)
 │   ├── common/      Navbar, Footer, Button, Reveal, BackToTop
 │   ├── contact/     ContactForm (posts to the Netlify Function)
-│   ├── home/        Hero
+│   ├── home/        Hero, WhatIDo, TechStack (logo tiles + category pills)
 │   └── projects/    ProjectCard
-├── data/            projects.ts, experience.ts, skills.ts, about.ts   (content lives here, not in JSX)
+├── data/            projects.ts, experience.ts, skills.ts, about.ts, home.ts   (content lives here, not in JSX)
 ├── hooks/           useForm, useInView, usePrefersReducedMotion, usePageMeta
 ├── pages/           Home, Projects, ProjectDetail, About, Contact
 ├── utils/           validation, ScrollToTop (route-change scroll reset)
@@ -59,6 +59,7 @@ TypeScript is split into project references: `tsconfig.app.json` (src), `tsconfi
 
 ## Conventions & patterns
 
+- **Skills** (`src/data/skills.ts`) are `{ name, icon?, concept?, tileLabel? }`. Logos come from the `simple-icons` package (CC0) — import only the named icons you use (`siReact`); `logoColors()` swaps brand colors that would vanish on a theme's ground. A tool without a Simple Icons logo gets a lettered tile; `concept: true` marks practices (SSR, i18n…) that are listed as text, never tiled.
 - **Content is data, not markup.** Projects and work history live in `src/data/*.ts` as typed arrays. To add/edit a project or role, edit the data file — the pages render whatever's there. New projects are picked up automatically (helpers in `projects.ts` are array-position-driven; the first entry leads the list). When adding a project, also add its `/projects/<id>` URL to `public/sitemap.xml`.
 - **SEO**: every page calls `usePageMeta` (title, meta description, canonical, optional `noindex`) at the top of the component. Canonicals always point at the production domain (terzidest.com) so the Pages mirror isn't treated as duplicate content. Site-wide Open Graph tags are static in `index.html` — social crawlers don't run JS, so per-route OG values are pointless without prerendering.
 - **Project case studies** use structured fields — `problem`, `role`, `outcome` (plus the shared `techStack` for "Stack"). There is no `longDescription`.
