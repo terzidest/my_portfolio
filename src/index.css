@@ -273,10 +273,12 @@ body {
      leaves them invisible. */
   .ambient-dots {
     container-type: size;
-    /* Dissolve before the fixed glass navbar (~90px tall), whose blur would
-       otherwise swallow each dot mid-flight. */
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0, transparent 96px, #000 240px);
-    mask-image: linear-gradient(to bottom, transparent 0, transparent 96px, #000 240px);
+    /* Dissolve before the fixed glass navbar (~90px tall, floating below the
+       viewport top), whose blur would otherwise swallow each dot mid-flight.
+       --fade-top (set by AmbientDots on scroll) keeps the fade pinned to the
+       viewport top rather than the section top. */
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, transparent calc(var(--fade-top, 0px) + 96px), #000 calc(var(--fade-top, 0px) + 240px));
+    mask-image: linear-gradient(to bottom, transparent 0, transparent calc(var(--fade-top, 0px) + 96px), #000 calc(var(--fade-top, 0px) + 240px));
   }
   .ambient-dots > i {
     position: absolute;
