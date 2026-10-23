@@ -283,11 +283,12 @@ body {
     opacity: 0;
     animation: drift ease-in-out infinite;
   }
-  /* Light mode: the energy-button blue, so the dots read on the pale ground. */
+  /* Light mode: the trace's palest cyan (#a5f3fc) with a stronger #22d3ee
+     glow, so a pale dot still reads on the pale ground. */
   html:not(.dark) .ambient-dots > i {
-    --dot-opacity: 0.85;
-    background: #6e86ff;
-    box-shadow: 0 0 6px 2px rgb(69 89 240 / 0.55);
+    --dot-opacity: 1;
+    background: #a5f3fc;
+    box-shadow: 0 0 8px 3px rgb(34 211 238 / 0.75);
   }
 
   /* Rotating conic ring around a rounded element (the portrait). */

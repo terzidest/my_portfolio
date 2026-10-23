@@ -6,7 +6,7 @@ const COUNT = 28;
 // looks the same on every visit and in tests. Every dot starts at the bottom
 // edge and rises a share of the section's height (`rise`, in % of it).
 const dots = Array.from({ length: COUNT }, (_, i) => {
-  const duration = 9 + ((i * 37) % 8); // 9–16s
+  const duration = 16 + ((i * 37) % 11); // 16–26s: a slow drift
   return {
     x: ((i * 0.618034) % 1) * 100,
     size: 2 + (i % 3), // 2–4px
