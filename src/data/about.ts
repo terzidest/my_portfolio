@@ -2,6 +2,8 @@ import { createResponsiveImage } from './images';
 
 interface Education {
   degree: string;
+  /** Verifiable degree badge (AUEB alumni) */
+  link: string;
   institution: string;
   graduationDate: string;
   specializations: string[];
@@ -14,7 +16,8 @@ interface Certification {
 }
 
 export const education: Education = {
-  degree: 'Bachelor of Science: Informatics',
+  degree: 'BSc in Informatics',
+  link: 'https://alumni.aueb.gr/el/aueb-alumni-mybadge/1162/1026332541',
   institution: 'Athens University of Economics and Business, Athens, Greece',
   graduationDate: 'September 2018',
   specializations: [
@@ -22,18 +25,25 @@ export const education: Education = {
     'Operational Research & Economics of Information Technology',
   ],
   courses: [
-    'Computer Programming with C++',
-    'Computer Programming with Java',
     'Data Structures',
     'Algorithms',
     'Databases',
     'Computer Networks',
     'Distributed Systems',
-    'Web Technologies and Programming',
+    'Web Technologies',
     'Software Engineering',
-    'Technological Innovation and Entrepreneurship',
+    'C++',
+    'Java',
   ],
 };
+
+export const approach: { title: string; text: string }[] = [
+  { title: 'Clarity over cleverness', text: 'simple structures, clear boundaries, code that is easy to reason about.' },
+  { title: 'Practical decisions', text: 'the right tool for the problem, not the trendiest one.' },
+  { title: 'Ownership through delivery', text: 'from implementation to a verified release.' },
+];
+
+export const languages: string[] = ['Greek (native)', 'English (professional working proficiency)'];
 
 export const certifications: Certification[] = [
   {

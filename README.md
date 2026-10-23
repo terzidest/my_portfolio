@@ -4,7 +4,7 @@ A professional portfolio website built with React, Vite, TypeScript and Tailwind
 
 **Live**:
 
-- Netlify (production): https://terzidest.netlify.app
+- Netlify (production): https://terzidest.com
 - GitHub Pages mirror: https://terzidest.github.io/my_portfolio/
 
 ## Tech stack

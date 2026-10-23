@@ -14,14 +14,14 @@ describe('Projects filters', () => {
     const web = screen.getByRole('button', { name: 'Web Apps' });
 
     expect(all).toHaveAttribute('aria-pressed', 'true');
-    expect(screen.getByText('Showing 5 projects')).toBeInTheDocument();
-    expect(screen.getAllByRole('link', { name: /on GitHub/ })).toHaveLength(5);
+    expect(screen.getByText('Showing 4 projects')).toBeInTheDocument();
+    expect(screen.getAllByRole('link', { name: /on GitHub/ })).toHaveLength(4);
 
     await user.click(mobile);
     expect(all).toHaveAttribute('aria-pressed', 'false');
     expect(mobile).toHaveAttribute('aria-pressed', 'true');
     expect(web).toHaveAttribute('aria-pressed', 'false');
-    expect(screen.getByText('Showing 3 projects')).toBeInTheDocument();
+    expect(screen.getByText('Showing 2 projects')).toBeInTheDocument();
 
     await user.click(web);
     expect(mobile).toHaveAttribute('aria-pressed', 'false');
