@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
 import ProjectShot from './ProjectShot';
 import TechBadge from '../common/TechBadge';
@@ -24,9 +25,12 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
           <span className="whitespace-nowrap font-mono text-[11px] text-signal md:text-xs">{label}</span>
         </div>
         <p className="line-clamp-2 text-[14px] leading-[1.55] text-ink-soft md:line-clamp-3 md:text-[15px] md:leading-relaxed">{description}</p>
-        <div className="hidden flex-wrap gap-1.5 md:flex">
-          {techStack.slice(0, 5).map((tech) => (
-            <TechBadge key={tech} label={tech} />
+        {/* Badges bob in a staggered wave while the card is hovered (.float-wave). */}
+        <div className="float-wave hidden flex-wrap gap-1.5 md:flex">
+          {techStack.slice(0, 5).map((tech, index) => (
+            <span key={tech} className="flex" style={{ '--i': index } as CSSProperties}>
+              <TechBadge label={tech} />
+            </span>
           ))}
         </div>
         <span className="mt-auto pt-0.5 text-[14px] font-semibold md:pt-1 md:text-[15px] text-link group-hover:text-link-hover">

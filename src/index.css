@@ -588,6 +588,24 @@ body {
   animation: float 6s ease-in-out infinite;
 }
 
+/* Project card tech badges: a small staggered float while the card (.group)
+   is hovered. Transform only; --i is each badge's position in the row. */
+@keyframes float-sm {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@media (hover: hover) {
+  .group:hover .float-wave > * {
+    animation: float-sm 2.4s ease-in-out calc(var(--i, 0) * 120ms) infinite;
+  }
+}
+
 @keyframes slide-down {
   from {
     opacity: 0;
