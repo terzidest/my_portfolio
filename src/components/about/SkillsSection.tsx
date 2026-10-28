@@ -24,7 +24,7 @@ const SkillTabs = ({ selected, onSelect }: { selected: string; onSelect: (id: st
 
   return (
     <>
-      <div role="tablist" aria-label="Skill groups" className="no-scrollbar rail-fade -mx-5 flex gap-2 overflow-x-auto px-5">
+      <div role="tablist" aria-label="Skill groups" className="no-scrollbar rail-fade glow-room -mx-5 flex gap-2 overflow-x-auto px-5 [--glow-room:16px]">
         {skillGroups.map((g, index) => {
           const active = g.id === group.id;
           return (

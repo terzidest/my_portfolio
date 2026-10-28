@@ -67,7 +67,7 @@ const TechStack = () => {
       <div
         role="group"
         aria-label="Filter technologies"
-        className="no-scrollbar rail-fade flex gap-2 overflow-x-auto px-5 md:flex-wrap md:overflow-visible md:px-0"
+        className="no-scrollbar rail-fade glow-room flex gap-2 overflow-x-auto px-5 [--glow-room:16px] md:flex-wrap md:overflow-visible md:px-0"
       >
         {pills.map((pill) => {
           const active = filter === pill.id;
@@ -94,7 +94,7 @@ const TechStack = () => {
       <ul
         key={filter}
         aria-label="Technologies"
-        className="no-scrollbar grid snap-x snap-mandatory scroll-px-5 auto-cols-[96px] grid-flow-col grid-rows-[repeat(2,96px)] gap-2.5 overflow-x-auto px-5 md:auto-cols-auto md:grid-flow-row md:grid-cols-[repeat(auto-fill,minmax(116px,1fr))] md:grid-rows-none md:gap-3 md:overflow-visible md:px-0"
+        className="no-scrollbar glow-room grid snap-x snap-mandatory scroll-px-5 auto-cols-[96px] grid-flow-col grid-rows-[repeat(2,96px)] gap-2.5 overflow-x-auto px-5 [--glow-room:28px] md:auto-cols-auto md:grid-flow-row md:grid-cols-[repeat(auto-fill,minmax(116px,1fr))] md:grid-rows-none md:gap-3 md:overflow-visible md:px-0"
       >
         {visible.map((skill) => (
           <TechTile key={skill.name} skill={skill} />

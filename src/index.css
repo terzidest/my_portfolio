@@ -443,6 +443,22 @@ body {
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
+  /* A row that scrolls sideways also clips vertically (overflow-x forces
+     overflow-y), which crops hover glows on its items. On phones, pad the row
+     by the glow's reach (--glow-room) and pull it back with negative margins
+     so layout doesn't move; the padding lets taps through to whatever it
+     overlaps, and the items stay tappable and swipeable. */
+  @media (max-width: 767px) {
+    .glow-room {
+      --glow-room: 36px;
+      padding-block: var(--glow-room);
+      margin-block: calc(var(--glow-room) * -1);
+      pointer-events: none;
+    }
+    .glow-room > * {
+      pointer-events: auto;
+    }
+  }
   /* Fade a rail's right edge to hint there's more to swipe. */
   .rail-fade {
     -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent);
