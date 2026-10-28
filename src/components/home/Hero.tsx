@@ -1,6 +1,5 @@
 import AmbientDots from '../common/AmbientDots';
 import Button from '../common/Button';
-import ConicRing from '../common/ConicRing';
 import ResponsiveImage from '../common/ResponsiveImage';
 import { hero } from '../../data/home';
 import { profileImage } from '../../data/about';
@@ -31,14 +30,14 @@ const Hero = () => {
 
         {/* Portrait in the rotating conic ring. */}
         <div className="relative flex h-[340px] min-w-0 flex-[1_1_340px] items-center justify-center sm:h-[460px]">
-          <ConicRing className="h-[220px] w-[220px] rounded-full sm:h-[280px] sm:w-[280px]">
+          <div className="conic-ring h-[220px] w-[220px] rounded-full sm:h-[280px] sm:w-[280px]">
             <ResponsiveImage
               source={profileImage}
               loading="eager"
               containerClassName="h-full w-full rounded-full"
               imageClassName="h-full w-full object-cover object-[50%_12%]"
             />
-          </ConicRing>
+          </div>
         </div>
       </div>
     </section>

@@ -1,4 +1,3 @@
-import ConicRing from '../common/ConicRing';
 import ResponsiveImage from '../common/ResponsiveImage';
 import Reveal from '../common/Reveal';
 import { approach, intro, profileImage } from '../../data/about';
@@ -11,7 +10,7 @@ const AboutSection = () => {
     // Layout-neutral: the About page owns the outer padding/background.
     <>
       <section ref={introRef} className="flex flex-wrap items-start gap-16 pb-20">
-        <ConicRing className="mx-auto h-[380px] w-[300px] flex-none rounded-[28px] lg:mx-0">
+        <div className="conic-ring mx-auto h-[380px] w-[300px] flex-none rounded-[28px] lg:mx-0">
           <ResponsiveImage
             source={profileImage}
             loading="eager"
@@ -19,7 +18,7 @@ const AboutSection = () => {
             containerClassName="h-full w-full rounded-[28px]"
             imageClassName="h-full w-full object-cover object-[50%_15%]"
           />
-        </ConicRing>
+        </div>
         <div className="rise-stagger flex min-w-0 flex-[999_1_480px] flex-col gap-5">
           <p className="font-mono text-sm uppercase tracking-[0.08em] text-signal">About me</p>
           <h1 className="font-display text-[clamp(2.25rem,4.6vw,3.5rem)] font-bold leading-[1.08] tracking-[-0.025em] text-ink">
