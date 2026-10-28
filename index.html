@@ -14,6 +14,22 @@
         } catch (e) {}
       })();
     </script>
+    <!-- TEMPORARY (PR #34): ?fx=no-dots,no-glass,no-ring,no-cta,no-mask or
+         ?fx=none switches hero effects off to find what lags in Firefox for
+         Android. Remove before merge. -->
+    <script>
+      (function () {
+        var fx = new URLSearchParams(location.search).get('fx');
+        if (!fx) return;
+        var all = ['no-dots', 'no-glass', 'no-ring', 'no-cta', 'no-mask'];
+        var on = fx === 'none' ? all : fx.split(',');
+        on.forEach(function (name) {
+          if (all.indexOf(name) !== -1) document.documentElement.classList.add('fx-' + name);
+        });
+        document.documentElement.setAttribute('data-fx', '');
+        document.documentElement.style.setProperty('--fx-label', JSON.stringify('fx off: ' + on.join(' ')));
+      })();
+    </script>
     <meta name="theme-color" content="#f5f7fc" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#070d18" media="(prefers-color-scheme: dark)" />
     <link rel="icon" type="image/svg+xml" href="%BASE_URL%favicon.svg" />
