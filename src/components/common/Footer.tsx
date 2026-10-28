@@ -20,8 +20,8 @@ const Footer = () => {
 
   return (
     <footer className="mt-6 border-t border-line/15 bg-gradient-to-b from-surface/0 to-surface/70">
-      <div className="mx-auto flex max-w-[1200px] flex-col gap-10 px-6 pb-6 pt-14">
-        <div className="flex flex-wrap justify-between gap-10">
+      <div className="mx-auto flex max-w-[1200px] flex-col gap-6 px-5 pb-6 pt-8 md:gap-10 md:px-6 md:pt-14">
+        <div className="flex flex-wrap justify-between gap-5 md:gap-10">
           <div className="flex flex-[1_1_300px] flex-col gap-3">
             <Link
               to="/"
@@ -34,7 +34,8 @@ const Footer = () => {
             </p>
           </div>
 
-          <nav aria-label="Footer" className="flex flex-[0_1_160px] flex-col">
+          {/* Phones navigate with MobileDock, so the pages column is desktop-only. */}
+          <nav aria-label="Footer" className="hidden flex-[0_1_160px] flex-col md:flex">
             <h2 className={label}>Pages</h2>
             {pages.map((page) => (
               <Link
@@ -48,7 +49,7 @@ const Footer = () => {
           </nav>
 
           <div className="flex flex-[0_1_220px] flex-col gap-2.5">
-            <h2 className={label}>Elsewhere</h2>
+            <h2 className={`${label} hidden md:block`}>Elsewhere</h2>
             <div className="flex gap-2.5">
               {socials.map((social) => (
                 <a
@@ -71,7 +72,7 @@ const Footer = () => {
                 </svg>
               </a>
             </div>
-            <a href={`mailto:${EMAIL}`} className="text-sm text-link hover:text-link-hover">
+            <a href={`mailto:${EMAIL}`} className="hidden text-sm text-link hover:text-link-hover md:inline">
               {EMAIL}
             </a>
           </div>
@@ -82,8 +83,9 @@ const Footer = () => {
           <button
             type="button"
             onClick={() => window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' })}
-            className="inline-flex min-h-[44px] items-center gap-1.5 rounded-md text-ink-soft hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-neon"
+            className="hidden min-h-[44px] items-center gap-1.5 rounded-md text-ink-soft hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-neon md:inline-flex"
           >
+            {/* Desktop-only: on phones MobileDock's "Top" does this. */}
             Back to top
             <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M12 19V5M5 12l7-7 7 7" />
