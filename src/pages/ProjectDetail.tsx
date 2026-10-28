@@ -291,7 +291,7 @@ const ProjectDetail = () => {
             >
               {project.additionalImages.map((image) => (
                 <figure key={image.src} className="hover-neon w-[300px] overflow-hidden rounded-2xl border border-line/15 bg-surface/60 md:w-full md:rounded-[18px]">
-                  <ProjectShot image={image} className="h-[188px] md:h-72" />
+                  <ProjectShot image={image} sheen className="h-[188px] md:h-72" />
                   <figcaption className="px-3.5 py-2.5 text-[13px] text-ink-soft md:px-[18px] md:py-3.5 md:text-sm">{image.alt}</figcaption>
                 </figure>
               ))}

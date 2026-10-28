@@ -1,3 +1,4 @@
+import type { PointerEvent } from 'react';
 import ResponsiveImage from '../common/ResponsiveImage';
 import type { ResponsiveImageSource } from '../../types';
 
@@ -11,14 +12,34 @@ interface ProjectShotProps {
   zoomOnHover?: boolean;
   /** Landscape shots size to their own aspect ratio instead of a set height. */
   natural?: boolean;
+  /** A soft light that follows the mouse over the shot (`.hover-sheen`). */
+  sheen?: boolean;
 }
+
+// Moves the .hover-sheen light to the pointer. Written straight to the
+// element's style, so a mouse move never re-renders React.
+const trackSheen = (e: PointerEvent<HTMLElement>) => {
+  if (e.pointerType !== 'mouse') return;
+  const box = e.currentTarget.getBoundingClientRect();
+  e.currentTarget.style.setProperty('--mx', `${e.clientX - box.left}px`);
+  e.currentTarget.style.setProperty('--my', `${e.clientY - box.top}px`);
+};
 
 /**
  * A project screenshot sized to its box. Landscape shots fill it; portrait
  * (phone) shots sit in a slim device frame on a soft glow, so a wide box
  * never crops an app screen.
  */
-const ProjectShot = ({ image, className = '', loading, sizes, zoomOnHover = false, natural = false }: ProjectShotProps) => {
+const ProjectShot = ({ sheen = false, ...props }: ProjectShotProps) =>
+  sheen ? (
+    <div className="hover-sheen overflow-hidden" onPointerMove={trackSheen}>
+      <Shot {...props} />
+    </div>
+  ) : (
+    <Shot {...props} />
+  );
+
+const Shot = ({ image, className = '', loading, sizes, zoomOnHover = false, natural = false }: Omit<ProjectShotProps, 'sheen'>) => {
   const zoom = zoomOnHover ? 'transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-[1.03]' : '';
 
   if (image.height <= image.width) {

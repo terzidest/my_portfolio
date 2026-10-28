@@ -17,7 +17,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
       aria-label={`${title}: read the case study`}
       className="hover-neon group flex h-full flex-col overflow-hidden rounded-[20px] border border-line/15 bg-surface/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-neon focus-visible:ring-offset-2 focus-visible:ring-offset-ground"
     >
-      <ProjectShot image={image} zoomOnHover className="h-[180px] md:h-[300px]" />
+      <ProjectShot image={image} zoomOnHover sheen className="h-[180px] md:h-[300px]" />
       <div className="flex flex-grow flex-col gap-2 px-[18px] pb-[18px] pt-4 md:gap-3 md:p-6">
         <div className="flex items-baseline justify-between gap-2 md:items-center">
           <h2 className="font-display text-[20px] font-bold text-ink md:text-[22px]">{title}</h2>
