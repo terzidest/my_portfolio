@@ -65,7 +65,7 @@ body {
 
 /* Set per frame on .ambient-dots while scrolling; non-inheriting so the 28
    dots inside aren't restyled every time it changes. */
-@property --fade-top {
+@property --clip-top {
   syntax: '<length>';
   inherits: false;
   initial-value: 0px;
@@ -206,19 +206,19 @@ body {
     z-index: 2;
     border-radius: inherit;
     pointer-events: none;
-    mix-blend-mode: screen;
     overflow: hidden;
   }
+  /* No blend modes or live blur on these moving layers: Firefox redraws those
+     off-screen every frame and the hero lagged there. The streaks are drawn
+     pre-softened instead (wide soft stops in place of 2px lines blurred 7px). */
   .cta-energy__fx::before {
     content: '';
     position: absolute;
     inset: -45%;
-    filter: blur(7px);
-    mix-blend-mode: screen;
     opacity: 0.6;
     background:
-      repeating-linear-gradient(74deg, transparent 0 15px, rgb(158 232 255 / 0.34) 15px 17px, transparent 17px 36px),
-      repeating-linear-gradient(-56deg, transparent 0 23px, rgb(120 190 255 / 0.24) 23px 25px, transparent 25px 50px);
+      repeating-linear-gradient(74deg, transparent 0 4px, rgb(158 232 255 / 0.07) 16px, transparent 28px 36px),
+      repeating-linear-gradient(-56deg, transparent 0 10px, rgb(120 190 255 / 0.05) 24px, transparent 38px 50px);
     will-change: transform;
     animation: cta-flow 7.5s ease-in-out infinite;
   }
@@ -228,9 +228,7 @@ body {
     top: -25%;
     bottom: -25%;
     width: 34%;
-    mix-blend-mode: screen;
-    filter: blur(2px);
-    background: linear-gradient(100deg, transparent, rgb(255 255 255 / 0.45), transparent);
+    background: linear-gradient(100deg, transparent 8%, rgb(255 255 255 / 0.4), transparent 92%);
     transform: translate(-170%) skew(-18deg);
     will-change: transform;
     animation: cta-sweep 4.6s var(--neon-ease) infinite;
@@ -290,33 +288,32 @@ body {
   .sparks > i:nth-child(6) { left: 93%; animation-delay: 1.05s; width: 3px; height: 3px; --dx: -8px; }
 
   /* Ambient dots (AmbientDots): the sparks' look, rising from the bottom edge
-     behind content. The layer is a size container so each dot's --rise can be
-     a share of its height (cqh). Per-dot x, size, timing, --dx and --rise come
-     from inline styles. They end transparent, so the reduced-motion guard
-     leaves them invisible. */
+     behind content. Motion runs through the Web Animations API with pixel
+     values (see AmbientDots), so both Chrome and Firefox keep it on the
+     compositor. Dots rest transparent, so with no animation (reduced motion,
+     no WAAPI) they stay invisible. */
   .ambient-dots {
-    container-type: size;
-    /* Dissolve before the fixed glass navbar (~90px tall, floating below the
-       viewport top), whose blur would otherwise swallow each dot mid-flight.
-       --fade-top (set by AmbientDots on scroll) keeps the fade pinned to the
-       viewport top rather than the section top. */
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0, transparent calc(var(--fade-top, 0px) + 96px), #000 calc(var(--fade-top, 0px) + 240px));
-    mask-image: linear-gradient(to bottom, transparent 0, transparent calc(var(--fade-top, 0px) + 96px), #000 calc(var(--fade-top, 0px) + 240px));
+    /* Cut the dots off just below the fixed glass navbar (bottom edge ~82–86px
+       from the viewport top), whose blur would otherwise swallow them mid-
+       flight. A rectangular clip, unlike a gradient mask, is cheap in every
+       engine; --clip-top (set by AmbientDots on scroll) pins it to the
+       viewport top. */
+    clip-path: inset(calc(var(--clip-top, 0px) + 90px) 0 0 0);
   }
   .ambient-dots > i {
     position: absolute;
     bottom: -4px;
     border-radius: 50%;
-    background: #dff6ff;
-    box-shadow: 0 0 6px 2px rgb(34 211 238 / 0.6);
+    /* Dark mode's 75% strength is baked into the colours: dimming the whole
+       layer would composite it as one extra surface every frame. */
+    background: rgb(223 246 255 / 0.75);
+    box-shadow: 0 0 6px 2px rgb(34 211 238 / 0.45);
     opacity: 0;
-    animation: drift ease-in-out infinite;
   }
   /* Light mode: an indigo core inside a pale-cyan ring with a cyan glow, so
      the dots keep their sparkle but have contrast on the pale ground. A touch
      larger (`scale` composes with the drift transform). */
   html:not(.dark) .ambient-dots > i {
-    --dot-opacity: 1;
     scale: 1.25;
     background: #4352c9;
     box-shadow: 0 0 0 2px rgb(165 243 252 / 0.9), 0 0 10px 3px rgb(34 211 238 / 0.55);
@@ -475,13 +472,6 @@ body {
   100% { opacity: 0; transform: translate(var(--dx, 6px), -150px) scale(1); }
 }
 
-@keyframes drift {
-  0% { opacity: 0; transform: translate(0, 0) scale(0.6); }
-  12% { opacity: var(--dot-opacity, 0.75); }
-  75% { opacity: var(--dot-opacity, 0.75); }
-  100% { opacity: 0; transform: translate(var(--dx, 6px), calc(-1 * var(--rise, 80cqh))) scale(1); }
-}
-
 @keyframes rise {
   from { opacity: 0; transform: translateY(8px); }
 }
@@ -606,7 +596,7 @@ body {
 /* TEMPORARY (PR #34): effect switches set by the ?fx= script in index.html,
    plus a label so it's obvious which are off. Remove before merge. */
 html.fx-no-dots .ambient-dots { display: none; }
-html.fx-no-mask .ambient-dots { -webkit-mask-image: none; mask-image: none; }
+html.fx-no-mask .ambient-dots { clip-path: none; }
 html.fx-no-glass .glass {
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
