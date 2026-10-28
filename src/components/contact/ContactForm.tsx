@@ -61,7 +61,7 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="glass rounded-[26px] border border-line/20 p-7 shadow-[0_30px_80px_rgb(0_0_0/0.25)] sm:p-9">
+    <div className="glass rounded-[22px] border border-line/20 px-[18px] py-[22px] shadow-[0_30px_80px_rgb(0_0_0/0.25)] sm:p-9 md:rounded-[26px]">
       {submitted ? (
         <div role="status" className="rounded-md p-4 mb-6 bg-green-50 text-green-800 dark:bg-green-900/30 dark:text-green-300">
           <div className="flex">
@@ -86,6 +86,8 @@ const ContactForm = () => {
         </div>
       ) : (
         <form noValidate onSubmit={(e) => handleSubmit(e, onSubmit, focusFirstInvalidField)}>
+          {/* Phones: the form follows the quick actions, so it gets its own heading. */}
+          <h2 className="mb-4 font-display text-[20px] font-bold text-ink md:hidden">Send a message</h2>
           {/* Honeypot: positioned off-screen so humans never see it.
               tabIndex/autoComplete/aria-hidden keep keyboard, password
               managers and screen readers from touching it either. */}
@@ -119,7 +121,7 @@ const ContactForm = () => {
               </div>
             </div>
           )}
-          <div className="mb-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
+          <div className="mb-5 grid grid-cols-1 gap-5 md:grid-cols-2">
             <div>
               <label htmlFor="name" className={labelClass}>
                 Name <span className="text-red-500 dark:text-red-400">*</span>
@@ -223,7 +225,7 @@ const ContactForm = () => {
           </div>
 
           <div className="flex flex-wrap items-center justify-between gap-4">
-            <p className="text-sm text-ink-muted">
+            <p className="text-sm text-ink-muted max-md:hidden">
               Or email me directly at{' '}
               <a href={`mailto:${EMAIL}`} className="text-link hover:text-link-hover">{EMAIL}</a>
             </p>
@@ -231,6 +233,7 @@ const ContactForm = () => {
               type="submit"
               variant="energy"
               size="lg"
+              className="max-md:w-full"
               disabled={isSubmitting}
               aria-busy={isSubmitting}
             >
