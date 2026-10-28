@@ -42,7 +42,7 @@ The Netlify Function only exists on Netlify; on the Pages mirror the contact for
 src/
 ├── components/
 │   ├── about/       AboutSection (intro + approach), SkillsSection (grouped logo chips), ExperienceSection (expandable timeline), EducationSection
-│   ├── common/      Navbar (desktop links + theme), MobileDock (phone nav, below md), Footer, Button, Reveal, BackToTop (desktop only), SkillChip
+│   ├── common/      Navbar (desktop links + theme), MobileDock (phone nav, below md), Footer, Button, Reveal, BackToTop (desktop only), SkillChip, Rail, BottomSheet
 │   ├── contact/     ContactForm (posts to the Netlify Function)
 │   ├── home/        Hero, WhatIDo, TechStack (logo tiles + category pills)
 │   └── projects/    ProjectCard (whole card links to the case study), ProjectShot (phone shots get a device frame)
@@ -68,6 +68,7 @@ TypeScript is split into project references: `tsconfig.app.json` (src), `tsconfi
   - Global CSS guard in `src/index.css` collapses CSS animations/transitions.
   - `useInView` (scroll reveals) returns visible immediately under reduced motion; wrap sections in `<Reveal>`. It fires at 15% visibility, so don't wrap a block that can be much taller than the viewport (it may never appear on short screens) — reveal its heading instead.
   - `usePrefersReducedMotion` for JS-driven cases the CSS guard can't reach (marquee, framer-motion page transitions).
+- **Phone layouts** (below `md`) read as short screens, not long stacked cards. Use `<Rail>` for horizontal, snap-scrolling rows (optional page `dots` and right-edge `fade`; pass `md:` grid classes so it stops scrolling on desktop) and `<BottomSheet>` (native `<dialog>`, closes on Esc, backdrop tap, close button or dragging the handle down) for details that would otherwise expand in place. Mobile changes stay behind breakpoints: desktop must render unchanged. The footer drops its page links, email and Back to top on phones, since MobileDock covers them.
 - **framer-motion** is used for the `/projects` filter animation and route cross-fades (`App.tsx`); both gated for reduced motion.
 - **Styling** is Tailwind utility classes inline. Custom keyframes (fade-in-up, float, slide-down, shimmer, marquee) live in `src/index.css`. Primary brand color is the `primary` token in `tailwind.config.js`.
 - **Redesign theme tokens** (navy "neon" look, in progress page by page): `ground`, `surface`/`surface-raised`, `ink`/`ink-soft`/`ink-muted`, `line`, `neon`, `signal`, `link`/`link-hover` are RGB-channel CSS variables set in `src/index.css` (`:root` light, `html.dark` dark) and exposed as Tailwind colors, so one class themes itself with no `dark:` pair (`bg-ground`, `text-ink`, `border-line/20`). Fonts: `font-display` (Space Grotesk) for headings and the logo, `font-sans` (Inter) body, `font-mono` (JetBrains Mono) for small eyebrow labels in `text-signal`. Redesigned components use tokens; the slate pairings below stay valid for pages not yet migrated.

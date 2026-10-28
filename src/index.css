@@ -433,6 +433,50 @@ body {
     animation-play-state: paused !important;
   }
 
+  /* Horizontal rails (Rail): hide the scrollbar; the content signals swiping. */
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Fade a rail's right edge to hint there's more to swipe. */
+  .rail-fade {
+    -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent);
+    mask-image: linear-gradient(90deg, #000 85%, transparent);
+  }
+  @media (min-width: 768px) {
+    .rail-fade {
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+  }
+
+  /* BottomSheet: a <dialog> pinned to the bottom edge that slides up. */
+  .bottom-sheet {
+    position: fixed;
+    inset: auto 0 0 0;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0 0 env(safe-area-inset-bottom);
+    border: 0;
+    border-top: 1px solid rgb(var(--line) / 0.2);
+    border-radius: 28px 28px 0 0;
+    outline: none; /* focus moves to the close button; the sheet itself needs no ring */
+    background: linear-gradient(180deg, rgb(var(--surface-raised)) 0%, rgb(var(--surface)) 30%, rgb(var(--ground)) 100%);
+    color: rgb(var(--ink));
+    box-shadow: 0 -20px 60px rgb(0 0 0 / 0.45);
+    transition: transform 0.2s var(--neon-ease);
+  }
+  .bottom-sheet[open] {
+    animation: sheet-up 0.32s var(--neon-ease);
+  }
+  .bottom-sheet::backdrop {
+    background: rgb(4 8 16 / 0.62);
+    animation: sheet-fade 0.2s ease-out;
+  }
+
   /* Staggered rise for a group's direct children. */
   .rise-stagger > * {
     animation: rise 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
@@ -475,6 +519,14 @@ body {
   0% { opacity: 0; transform: translate(0, 0) scale(0.5); }
   15% { opacity: 1; }
   100% { opacity: 0; transform: translate(var(--dx, 6px), -150px) scale(1); }
+}
+
+@keyframes sheet-up {
+  from { transform: translateY(100%); }
+}
+
+@keyframes sheet-fade {
+  from { opacity: 0; }
 }
 
 @keyframes rise {
