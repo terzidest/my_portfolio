@@ -13,7 +13,7 @@ const About = () => {
 
   return (
     <div className="spotlight">
-      <div className="mx-auto max-w-[1200px] px-6 pt-36 md:pt-40">
+      <div className="mx-auto max-w-[1200px] px-5 pt-28 md:px-6 md:pt-40">
         <AboutSection />
         <SkillsSection />
         <ExperienceSection />
