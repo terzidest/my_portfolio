@@ -155,8 +155,11 @@ body {
       transparent 65%
     );
   }
-  .hover-sheen:hover::after {
-    opacity: 1;
+  /* Hover-capable pointers only: on touch the light would stick after a tap. */
+  @media (hover: hover) {
+    .hover-sheen:hover::after {
+      opacity: 1;
+    }
   }
 
   /* Energy CTA: breathing glow + drifting streaks + a light sweep that
