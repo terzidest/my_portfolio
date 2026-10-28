@@ -19,7 +19,7 @@ const TechTile = ({ skill }: { skill: Skill }) => {
   const style = logoVars(skill) as CSSProperties;
 
   return (
-    <li className="tech-tile flex h-[116px] flex-col items-center justify-center gap-2.5 px-1.5" style={style}>
+    <li className="tech-tile hover-trace hover-trace-sm flex h-[116px] flex-col items-center justify-center gap-2.5 px-1.5" style={style}>
       {skill.icon ? (
         <svg className="tech-tile__logo h-9 w-9" viewBox="0 0 24 24" aria-hidden="true">
           <path d={skill.icon.path} />
