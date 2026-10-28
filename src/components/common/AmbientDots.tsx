@@ -1,6 +1,9 @@
 import { useEffect, useRef } from 'react';
 
 const COUNT = 28;
+// Phones (below the md breakpoint) animate every other dot, 40% slower.
+const MOBILE = '(max-width: 767px)';
+const MOBILE_SLOWDOWN = 1.4;
 
 // Deterministic spread (golden-ratio steps, not Math.random) so the layer
 // looks the same on every visit and in tests. Every dot starts at the bottom
@@ -27,7 +30,8 @@ const dots = Array.from({ length: COUNT }, (_, i) => {
  * when the section resizes): CSS keyframes built from custom properties and
  * container units kept Firefox from compositing them, and the dots stuttered.
  * The layer pauses its own animations offscreen, since usePauseOffscreen's
- * CSS rule only reaches CSS animations.
+ * CSS rule only reaches CSS animations. Phones get half the dots, slower, to
+ * keep low-end devices (notably Firefox for Android) smooth.
  *
  * `--clip-top` tracks how far the layer has scrolled under the viewport top,
  * so the clip that hides dots behind the fixed glass navbar follows the
@@ -71,7 +75,11 @@ const AmbientDots = () => {
     const build = () => {
       animations.forEach((a) => a.cancel());
       const height = el.clientHeight;
-      animations = Array.from(el.children).map((child, i) => {
+      const mobile = window.matchMedia(MOBILE).matches;
+      const slow = mobile ? MOBILE_SLOWDOWN : 1;
+      // Unanimated dots rest transparent, so skipping them hides them.
+      animations = Array.from(el.children).flatMap((child, i) => {
+        if (mobile && i % 2) return [];
         const dot = dots[i];
         const end = `translate(${dot.dx}px, ${-(dot.rise / 100) * height}px) scale(1)`;
         const animation = child.animate(
@@ -81,10 +89,10 @@ const AmbientDots = () => {
             { opacity: 1, offset: 0.75 },
             { opacity: 0, transform: end },
           ],
-          { duration: dot.duration * 1000, delay: dot.delay * 1000, iterations: Infinity, easing: 'ease-in-out' },
+          { duration: dot.duration * slow * 1000, delay: dot.delay * slow * 1000, iterations: Infinity, easing: 'ease-in-out' },
         );
         if (!visible) animation.pause();
-        return animation;
+        return [animation];
       });
     };
 
