@@ -385,6 +385,9 @@ body {
     --tile: var(--tile-dark);
     --glow: var(--glow-dark);
   }
+  /* On hover the tile also gets the 2px conic border trace (.hover-trace
+     .hover-trace-sm, as in the design); it only animates on the hovered tile.
+     This rule comes later, so the tile's own glow wins over .hover-trace's. */
   .tech-tile:hover {
     box-shadow:
       inset 0 0 0 1px rgb(var(--line) / 0.22),
