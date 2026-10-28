@@ -23,6 +23,7 @@ const DISMISS_PX = 80;
  */
 const BottomSheet = ({ open, onClose, title, eyebrow, subtitle, children, footer }: BottomSheetProps) => {
   const ref = useRef<HTMLDialogElement>(null);
+  const body = useRef<HTMLDivElement>(null);
   const drag = useRef<{ start: number; dy: number } | null>(null);
   const titleId = useId();
 
@@ -42,6 +43,11 @@ const BottomSheet = ({ open, onClose, title, eyebrow, subtitle, children, footer
       if (open) document.documentElement.style.overflow = '';
     };
   }, [open]);
+
+  // New content (e.g. the next role) starts at the top.
+  useEffect(() => {
+    body.current?.scrollTo?.({ top: 0 });
+  }, [title]);
 
   const onPointerDown = (e: PointerEvent<HTMLDivElement>) => {
     drag.current = { start: e.clientY, dy: 0 };
@@ -105,7 +111,7 @@ const BottomSheet = ({ open, onClose, title, eyebrow, subtitle, children, footer
             </svg>
           </button>
         </div>
-        <div className="flex-1 overflow-y-auto overscroll-contain px-5 pb-6 pt-4">{children}</div>
+        <div ref={body} className="flex-1 overflow-y-auto overscroll-contain px-5 pb-6 pt-4">{children}</div>
         {footer && <div className="border-t border-line/10 px-5 pb-5 pt-3">{footer}</div>}
       </div>
     </dialog>

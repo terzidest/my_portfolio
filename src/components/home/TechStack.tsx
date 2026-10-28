@@ -1,5 +1,6 @@
 import { useState, type CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
+import { pillOff, pillOn } from '../common/pills';
 import Reveal from '../common/Reveal';
 import { logoVars, skillGroups, type Skill } from '../../data/skills';
 
@@ -9,10 +10,6 @@ const tools = (skills: Skill[]) => skills.filter((skill) => !skill.concept);
 
 const pillBase =
   'inline-flex min-h-[44px] items-center gap-2 rounded-full px-[18px] text-[15px] transition-[box-shadow,background-color,color] duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-neon focus-visible:ring-offset-2 focus-visible:ring-offset-ground';
-const pillOn =
-  'bg-gradient-to-r from-[#4559f0] to-[#6e86ff] font-semibold text-white shadow-[inset_0_3px_8px_rgb(73_181_245/0.5),inset_0_-3px_8px_rgb(73_181_245/0.5)]';
-const pillOff =
-  'border border-line/20 bg-surface/70 font-medium text-ink-soft hover:text-ink hover:shadow-[0_0_0_1px_rgb(var(--neon)/0.6),0_0_16px_rgb(var(--neon)/0.4)]';
 
 const TechTile = ({ skill }: { skill: Skill }) => {
   const label = skill.tileLabel ?? skill.name;
