@@ -63,6 +63,14 @@ body {
   initial-value: 0deg;
 }
 
+/* Set per frame on .ambient-dots while scrolling; non-inheriting so the 28
+   dots inside aren't restyled every time it changes. */
+@property --fade-top {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
 @property --spin {
   syntax: '<angle>';
   inherits: false;
@@ -152,17 +160,30 @@ body {
   }
 
   /* Energy CTA: breathing glow + drifting streaks + a light sweep that
-     speeds up on hover. Markup: .cta-energy > .cta-energy__rim + .cta-energy__fx + label. */
+     speeds up on hover. Markup: .cta-energy > .cta-energy__rim + .cta-energy__fx + label.
+     The breathing glow is drawn once on ::before and only its opacity animates
+     (composited); animating box-shadow repainted it every frame. The button
+     itself doesn't clip (__fx clips its own light layers) so the glow can show. */
   .cta-energy {
     position: relative;
-    overflow: hidden;
     isolation: isolate;
     border-radius: 9999px;
     color: #fff;
     background-image: linear-gradient(90deg, #4559f0, #6e86ff);
-    box-shadow: 0 0 0 1px #a0c8ff59, 0 0 18px rgb(var(--neon) / 0.4);
-    animation: cta-breathe 3.4s ease-in-out infinite;
+    box-shadow: 0 0 0 1px #a0c8ff59;
     transition: box-shadow 0.22s;
+  }
+  .cta-energy::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    box-shadow: 0 0 0 1px #bee1ff8c, 0 0 30px rgb(var(--neon) / 0.62);
+    opacity: 0.55;
+    will-change: opacity;
+    animation: cta-glow 3.4s ease-in-out infinite;
   }
   .cta-energy:hover {
     box-shadow:
@@ -198,6 +219,7 @@ body {
     background:
       repeating-linear-gradient(74deg, transparent 0 15px, rgb(158 232 255 / 0.34) 15px 17px, transparent 17px 36px),
       repeating-linear-gradient(-56deg, transparent 0 23px, rgb(120 190 255 / 0.24) 23px 25px, transparent 25px 50px);
+    will-change: transform;
     animation: cta-flow 7.5s ease-in-out infinite;
   }
   .cta-energy__fx::after {
@@ -210,6 +232,7 @@ body {
     filter: blur(2px);
     background: linear-gradient(100deg, transparent, rgb(255 255 255 / 0.45), transparent);
     transform: translate(-170%) skew(-18deg);
+    will-change: transform;
     animation: cta-sweep 4.6s var(--neon-ease) infinite;
   }
   .cta-energy:hover .cta-energy__fx::before {
@@ -299,27 +322,47 @@ body {
     box-shadow: 0 0 0 2px rgb(165 243 252 / 0.9), 0 0 10px 3px rgb(34 211 238 / 0.55);
   }
 
-  /* Rotating conic ring around a rounded element (the portrait). */
+  /* Rotating conic ring around a rounded element (the portrait); markup comes
+     from <ConicRing>. The gradient is drawn once on __spin and turned with a
+     transform, so the GPU rotates a cached layer instead of the browser
+     repainting the gradient every frame. __frame's mask shows only a 3px band
+     and stays still, so any frame shape works (circle or rounded rect). The
+     glow is a static shadow on __glow: a filter on the moving layer would be
+     re-run every frame. */
   .conic-ring {
     position: relative;
   }
-  .conic-ring::before {
-    content: '';
+  .conic-ring__glow,
+  .conic-ring__frame {
     position: absolute;
     inset: -6px;
     border-radius: inherit;
+    pointer-events: none;
+  }
+  .conic-ring__glow {
+    box-shadow: 0 0 6px rgb(103 232 249 / 0.45), 0 0 18px rgb(37 99 235 / 0.6);
+  }
+  .conic-ring__frame {
     padding: 3px;
+    overflow: hidden;
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  }
+  .conic-ring__spin {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 200%; /* covers the frame's diagonal at any rotation */
+    aspect-ratio: 1;
     background: conic-gradient(
-      from var(--neon-angle),
       #1e3a8a, #2563eb 30deg, #22d3ee 62deg, #a5f3fc 82deg, #fff 92deg,
       #a5f3fc 102deg, #22d3ee 122deg, #2563eb 160deg, #1e3a8a 220deg,
       #172554 300deg, #1e3a8a
     );
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
-    filter: drop-shadow(0 0 6px #67e8f9cc) drop-shadow(0 0 18px #2563eb99);
-    animation: neon-orbit 6s linear infinite;
+    transform: translate(-50%, -50%);
+    will-change: transform;
+    animation: ring-turn 6s linear infinite;
   }
 
   /* Faint starfield behind dark heroes; hidden in light mode. */
@@ -400,6 +443,14 @@ body {
     fill: rgb(var(--tile));
   }
 
+  /* usePauseOffscreen sets data-offscreen on a section scrolled out of view:
+     its animations stop costing anything until it's back. */
+  [data-offscreen] *,
+  [data-offscreen] *::before,
+  [data-offscreen] *::after {
+    animation-play-state: paused !important;
+  }
+
   /* Staggered rise for a group's direct children. */
   .rise-stagger > * {
     animation: rise 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
@@ -418,9 +469,13 @@ body {
   to { --spin: 360deg; }
 }
 
-@keyframes cta-breathe {
-  0%, 100% { box-shadow: 0 0 0 1px #a0c8ff52, 0 0 16px rgb(var(--neon) / 0.34); }
-  50% { box-shadow: 0 0 0 1px #bee1ff8c, 0 0 30px rgb(var(--neon) / 0.62); }
+@keyframes cta-glow {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+@keyframes ring-turn {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 @keyframes cta-flow {
