@@ -54,7 +54,7 @@ const Rail = ({ children, label, className = '', dots = false, fade = false, onI
       <ul
         ref={ref}
         aria-label={label}
-        className={`no-scrollbar flex snap-x snap-mandatory scroll-px-5 gap-3 overflow-x-auto px-5 ${
+        className={`no-scrollbar glow-room flex snap-x snap-mandatory scroll-px-5 gap-3 overflow-x-auto px-5 ${
           fade ? 'rail-fade' : ''
         } ${className}`}
       >
