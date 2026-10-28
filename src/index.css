@@ -375,7 +375,7 @@ body {
     position: relative;
     border-radius: 16px;
     background:
-      radial-gradient(56% 40% at 50% 31%, rgb(var(--glow) / 0.28), transparent 72%),
+      radial-gradient(56% 40% at 50% 31%, rgb(var(--glow) / 0.36), transparent 72%),
       linear-gradient(180deg, rgb(var(--surface-raised) / 0.55), rgb(var(--surface) / 0.92));
     box-shadow: inset 0 0 0 1px rgb(var(--line) / 0.22), inset 0 1px 0 rgb(255 255 255 / 0.08);
     transition: box-shadow 0.22s;
@@ -393,9 +393,11 @@ body {
       0 0 30px rgb(var(--glow) / 0.3),
       0 10px 28px rgb(0 0 0 / 0.25);
   }
+  /* No filter on the logo: Safari puts a filtered element that also
+     transforms on hover onto its own layer and clips the glow to the logo's
+     box, showing a square. The tile's radial halo above carries the glow. */
   .tech-tile__logo {
     fill: rgb(var(--tile));
-    filter: drop-shadow(0 0 10px rgb(var(--glow) / 0.5));
     transition: transform 0.3s var(--neon-ease);
   }
   .tech-tile:hover .tech-tile__logo {
