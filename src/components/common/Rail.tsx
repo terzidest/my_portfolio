@@ -10,6 +10,8 @@ interface RailProps {
   dots?: boolean;
   /** Fade the right edge to hint there's more to swipe. */
   fade?: boolean;
+  /** Called with the item snapped to the left edge, e.g. for a "1 / 3" counter. */
+  onIndexChange?: (index: number) => void;
 }
 
 /**
@@ -17,14 +19,17 @@ interface RailProps {
  * that snap to the left edge; the rail bleeds to the screen edge while its
  * first item lines up with the page gutter (px-5 / scroll-px-5).
  */
-const Rail = ({ children, label, className = '', dots = false, fade = false }: RailProps) => {
+const Rail = ({ children, label, className = '', dots = false, fade = false, onIndexChange }: RailProps) => {
   const ref = useRef<HTMLUListElement>(null);
   const [active, setActive] = useState(0);
   const items = Children.toArray(children);
+  const report = useRef(onIndexChange);
+  report.current = onIndexChange;
+  const tracked = dots || Boolean(onIndexChange);
 
   useEffect(() => {
     const el = ref.current;
-    if (!dots || !el) return;
+    if (!tracked || !el) return;
     let frame = 0;
     const onScroll = () => {
       cancelAnimationFrame(frame);
@@ -32,7 +37,9 @@ const Rail = ({ children, label, className = '', dots = false, fade = false }: R
         const first = el.firstElementChild as HTMLElement | null;
         if (!first) return;
         const step = first.offsetWidth + parseFloat(getComputedStyle(el).columnGap || '0');
-        setActive(Math.min(items.length - 1, Math.round(el.scrollLeft / (step || 1))));
+        const index = Math.min(items.length - 1, Math.round(el.scrollLeft / (step || 1)));
+        setActive(index);
+        report.current?.(index);
       });
     };
     el.addEventListener('scroll', onScroll, { passive: true });
@@ -40,7 +47,7 @@ const Rail = ({ children, label, className = '', dots = false, fade = false }: R
       el.removeEventListener('scroll', onScroll);
       cancelAnimationFrame(frame);
     };
-  }, [dots, items.length]);
+  }, [tracked, items.length]);
 
   return (
     <>

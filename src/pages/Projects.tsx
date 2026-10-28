@@ -25,29 +25,30 @@ const Projects = () => {
   });
 
   const [selectedFilter, setSelectedFilter] = useState<ProjectFilter>('all');
-  const filteredProjects = selectedFilter === 'all'
-    ? projects
-    : projects.filter((project) => project.categories.includes(selectedFilter));
+  const inFilter = (filter: ProjectFilter) =>
+    filter === 'all' ? projects : projects.filter((project) => project.categories.includes(filter));
+  const count = (filter: ProjectFilter) => inFilter(filter).length;
+  const filteredProjects = inFilter(selectedFilter);
 
   return (
     <div className="spotlight">
-      <div className="mx-auto flex max-w-[1200px] flex-col gap-10 px-6 pb-24 pt-36 md:pt-40">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <div className="rise-stagger flex max-w-[620px] flex-col gap-3.5">
-            <p className="font-mono text-sm uppercase tracking-[0.08em] text-signal">Projects</p>
-            <h1 className="font-display text-[clamp(2.375rem,5vw,3.75rem)] font-bold leading-[1.04] tracking-[-0.03em] text-ink">
+      <div className="mx-auto flex max-w-[1200px] flex-col gap-5 px-5 pb-10 pt-28 md:gap-10 md:px-6 md:pb-24 md:pt-40">
+        <div className="flex flex-wrap items-end justify-between gap-5 md:gap-6">
+          <div className="rise-stagger flex max-w-[620px] flex-col gap-2.5 md:gap-3.5">
+            <p className="font-mono text-xs uppercase tracking-[0.08em] text-signal md:text-sm">Projects</p>
+            <h1 className="font-display text-[34px] font-bold leading-[1.05] tracking-[-0.03em] text-ink md:text-[clamp(2.375rem,5vw,3.75rem)] md:leading-[1.04]">
               Things I've built
             </h1>
-            <p className="text-lg leading-relaxed text-ink-soft">
+            <p className="text-[15px] leading-[1.6] text-ink-soft md:text-lg md:leading-relaxed">
               Personal and open-source work: the problem each one solves, my role, and how it's put together.
             </p>
           </div>
 
-          <div className="flex flex-col items-end gap-2">
+          <div className="flex w-full flex-col items-stretch gap-2 md:w-auto md:items-end">
             <div
               role="group"
               aria-label="Filter projects by platform"
-              className="flex gap-1.5 rounded-full border border-line/15 bg-surface/70 p-[5px]"
+              className="grid grid-cols-3 gap-1 rounded-full border border-line/15 bg-surface/70 p-1 md:flex md:gap-1.5 md:p-[5px]"
             >
               {filters.map((filter) => {
                 const selected = selectedFilter === filter.value;
@@ -57,14 +58,18 @@ const Projects = () => {
                     type="button"
                     aria-pressed={selected}
                     onClick={() => setSelectedFilter(filter.value)}
-                    className={`${pillBase} ${selected ? pillOn : pillOff}`}
+                    className={`${pillBase} max-md:px-2 max-md:text-sm ${selected ? pillOn : pillOff}`}
                   >
                     {filter.label}
+                    {/* Phones show the count in the switch instead of the line below. */}
+                    <span className="ml-1 font-medium opacity-70 md:hidden" aria-hidden="true">
+                      {count(filter.value)}
+                    </span>
                   </button>
                 );
               })}
             </div>
-            <p aria-live="polite" className="text-sm text-ink-muted">
+            <p aria-live="polite" className="text-sm text-ink-muted max-md:sr-only">
               Showing {filteredProjects.length} {filteredProjects.length === 1 ? 'project' : 'projects'}
             </p>
           </div>
@@ -74,7 +79,7 @@ const Projects = () => {
             transforms for users with prefers-reduced-motion set. */}
         <MotionConfig reducedMotion="user">
           {filteredProjects.length > 0 ? (
-            <motion.div layout className="grid grid-cols-[repeat(auto-fill,minmax(min(100%,440px),1fr))] gap-6">
+            <motion.div layout className="grid grid-cols-[repeat(auto-fill,minmax(min(100%,440px),1fr))] gap-4 md:gap-6">
               <AnimatePresence mode="popLayout">
                 {filteredProjects.map((project) => (
                   <motion.div

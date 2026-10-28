@@ -17,19 +17,19 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
       aria-label={`${title}: read the case study`}
       className="hover-neon group flex h-full flex-col overflow-hidden rounded-[20px] border border-line/15 bg-surface/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-neon focus-visible:ring-offset-2 focus-visible:ring-offset-ground"
     >
-      <ProjectShot image={image} zoomOnHover className="h-[300px]" />
-      <div className="flex flex-grow flex-col gap-3 p-6">
-        <div className="flex items-center justify-between gap-2">
-          <h2 className="font-display text-[22px] font-bold text-ink">{title}</h2>
-          <span className="font-mono text-xs text-signal">{label}</span>
+      <ProjectShot image={image} zoomOnHover className="h-[180px] md:h-[300px]" />
+      <div className="flex flex-grow flex-col gap-2 px-[18px] pb-[18px] pt-4 md:gap-3 md:p-6">
+        <div className="flex items-baseline justify-between gap-2 md:items-center">
+          <h2 className="font-display text-[20px] font-bold text-ink md:text-[22px]">{title}</h2>
+          <span className="whitespace-nowrap font-mono text-[11px] text-signal md:text-xs">{label}</span>
         </div>
-        <p className="line-clamp-3 text-[15px] leading-relaxed text-ink-soft">{description}</p>
-        <div className="flex flex-wrap gap-1.5">
+        <p className="line-clamp-2 text-[14px] leading-[1.55] text-ink-soft md:line-clamp-3 md:text-[15px] md:leading-relaxed">{description}</p>
+        <div className="hidden flex-wrap gap-1.5 md:flex">
           {techStack.slice(0, 5).map((tech) => (
             <TechBadge key={tech} label={tech} />
           ))}
         </div>
-        <span className="mt-auto pt-1 text-[15px] font-semibold text-link group-hover:text-link-hover">
+        <span className="mt-auto pt-0.5 text-[14px] font-semibold md:pt-1 md:text-[15px] text-link group-hover:text-link-hover">
           Read the case study <span aria-hidden="true">→</span>
         </span>
       </div>
